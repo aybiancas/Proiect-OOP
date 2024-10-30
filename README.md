@@ -1,12 +1,34 @@
-# Titlu proiect
+# Texas Hold' em
 
-## Descriere proiect
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+*O variantă de poker, popularizată în anii recenți.*
+*Acum, cu mai puține pariuri!*
+
+### Reguli generale
+
+Jocul are loc în format 1v1, fiecare jucător primind în mână două cărți.
+Pe masa de joc sunt puse cinci cărți, în trei stagii: primul stagiu cu trei cărți, numit *flop*, al doilea stagiu cu o carte, numit *turn*, și al treilea stagiu cu ultima carte, numit *river*.
+
+Jucătorul cu cea mai bună formațiune de cinci cărți, ce le include și pe cele din mâna lui, câștigă.
+
+Rezultatul jocului este determinat într-o manieră de „best of three”, adică cel cu cele mai multe câștiguri în trei runde este învingător.
+
+Formațiuni de cărți câștigătoare, în ordine crescătoare:
+* ___High card___ (un set de cinci cărți oarecare, se ia în considerare cartea cu cea mai mare valoare)
+* ___One Pair___ (două cărți cu aceeași valoare)
+* ___Two Pairs___ (două perechi de cărți cu aceeași valoare)
+* ___Three of a Kind___ (trei cărți cu aceeași valoare)
+* ___Straight___ (valorile tuturor cărților în ordine crescătoare)
+* ___Flush___ (toate cărțile sunt de același tip/culoare)
+* ___Full House___ (trei de un fel și o pereche)
+* ___Four of a Kind___ (patru cărți de aceeași valoare)
+* ___Straight Flush___ (toate cărțile în ordine crescătoare și de același tip/culoare)
+* ___Royal Flush___ (toate cărțile în ordine crescătoare, de același tip/culoare, de la _10_ la _A_)
+
 
 ## Milestone #0
 
-- [ ] Nume proiect (poate fi schimbat ulterior)
-- [ ] Scurtă descriere a temei alese, ce v-ați propus să implementați
+- [x] Nume proiect
+- [x] Scurtă descriere a temei alese
 
 ## Milestone #1
 
