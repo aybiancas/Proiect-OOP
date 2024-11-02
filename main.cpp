@@ -238,6 +238,9 @@ class Game {
 
 
 int main() {
+    // aici vine meniul, alegere optiune meniu ????
+    // il las pe langa deocamdata, se testeaza doar functionalitatea jocului propriu zis
+
     Game game;
     game.play();
     return 0;
