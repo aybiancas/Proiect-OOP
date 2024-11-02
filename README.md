@@ -6,7 +6,7 @@
 ### Reguli generale
 
 Jocul are loc în format 1v1, fiecare jucător primind în mână două cărți.
-Pe masa de joc sunt puse cinci cărți, în trei stagii: primul stagiu cu trei cărți, numit *flop*, al doilea stagiu cu o carte, numit *turn*, și al treilea stagiu cu ultima carte, numit *river*.
+Pe masa de joc sunt puse cinci cărți, în trei reprize: prima repriză cu trei cărți, numit *flop*, a doua repriză cu o carte, numit *turn*, și a treia repriză cu ultima carte, numit *river*.
 
 Jucătorul cu cea mai bună formațiune de cinci cărți, ce le include și pe cele din mâna lui, câștigă.
 

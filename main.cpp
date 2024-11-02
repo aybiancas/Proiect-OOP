@@ -86,19 +86,18 @@ class Card {
 
     // operator cout
     friend std::ostream& operator<<(std::ostream &os, const Card &card) {
-        os << card.rank << " de " << card.suit << std::endl;
+        os << card.rank << " of " << card.suit << std::endl;
         return os;
     }
 };
 
 class Deck {
     std::vector<Card> cards;
-    std::vector<std::string> suits = {"INIMA", "ROMB", "TREFLA", "PICA"};
+    std::vector<std::string> suits = {"HEARTS", "DIAMONDS", "CLUBS", "SPADES"};
     std::vector<std::string> ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
-    // std::string suits[4] = {"INIMA", "ROMB", "TREFLA", "PICA"};
-    // std::string ranks[13] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
     // idee: fa toate cardurile string uri de genul doi, trei, patru just for display purposes
+
     public:
     Deck() {
         for (const auto &suit : suits) {
@@ -118,7 +117,7 @@ class Deck {
     // doar de verificare, nu e apelata propriu zis in joc
     void printCards () {
         for (const auto &card : cards) {
-            std::cout << card.getRank() << " de " << card.getSuit() << std::endl;
+            std::cout << card.getRank() << " of " << card.getSuit() << std::endl;
         }
     }
 
