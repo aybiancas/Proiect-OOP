@@ -7,42 +7,43 @@
 class Menu {
     std::vector<std::string> options = {"Start", "Reguli", "Iesi"};
 
+
+
+    public:
+    Menu() = default;
+    ~Menu() = default;
+
+    void showMenu() {
+        std::cout << "Texas Hold' em" << std::endl;
+        for(int i = 0; i<options.size(); i++) {
+            std::cout << i + 1 << ". " << options[i] << std::endl;
+        }
+    }
+
+    void selectOption() {
+        int choice;
+        std::cout << "Optiune: ";
+        std::cin >> choice;
+
+        // vezi la selectarea de optiuni cum faci if else case urile
+
+        switch (choice) {
+            case 1:
+                std::cout << "Incepe jocul ..." << std::endl;
+            break;
+            case 2:
+                showRules();
+            break;
+            case 3:
+                std::cout << "Se inchide ..." << std::endl;
+            break;
+            default:
+                std::cout << "Invalid ..." << std::endl;
+        }
+    }
     void showRules () {
         // apeleaza fisierul de citit de reguli si le afiseaza
     }
-
-    public:
-        Menu() = default;
-        ~Menu() = default;
-
-        void showMenu() {
-            std::cout << "Texas Hold' em" << std::endl;
-            for(int i = 0; i<options.size(); i++) {
-                std::cout << i + 1 << ". " << options[i] << std::endl;
-            }
-        }
-
-        void selectOption() {
-            int choice;
-            std::cout << "Optiune: ";
-            std::cin >> choice;
-
-            // vezi la selectarea de optiuni cum faci if else case urile
-
-            switch (choice) {
-                case 1:
-                    std::cout << "Incepe jocul ..." << std::endl;
-                break;
-                case 2:
-                    showRules();
-                break;
-                case 3:
-                    std::cout << "Se inchide ..." << std::endl;
-                break;
-                default:
-                    std::cout << "Invalid ..." << std::endl;
-            }
-        }
 
     // operator cout
     friend std::ostream& operator<<(std::ostream& os, const Menu& menu) {
@@ -58,7 +59,7 @@ class Card {
     std::string suit;
     std::string rank;
 
-public:
+    public:
     // constr param cu lista de init
     Card(const std::string &suit, const std::string &rank) : suit(suit), rank(rank) {}
 
@@ -85,15 +86,18 @@ public:
 
     // operator cout
     friend std::ostream& operator<<(std::ostream &os, const Card &card) {
-        os << card.rank << " of " << card.suit << std::endl;
+        os << card.rank << " de " << card.suit << std::endl;
         return os;
     }
 };
 
 class Deck {
     std::vector<Card> cards;
-    std::string suits[4] = {"INIMA", "ROMB", "TREFLA", "PICA"};
-    std::string ranks[13] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+    std::vector<std::string> suits = {"INIMA", "ROMB", "TREFLA", "PICA"};
+    std::vector<std::string> ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+
+    // std::string suits[4] = {"INIMA", "ROMB", "TREFLA", "PICA"};
+    // std::string ranks[13] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
     // idee: fa toate cardurile string uri de genul doi, trei, patru just for display purposes
     public:
     Deck() {
@@ -107,14 +111,14 @@ class Deck {
     // amestecare deck
     // singura varianta de shuffle care imi merge
     void shuffleCards () {
-        std::default_random_engine engine(std::random_device{}());
-        std::shuffle(cards.begin(), cards.end(), engine);
+        std::default_random_engine d(std::random_device{}());
+        std::shuffle(cards.begin(), cards.end(), d);
     }
 
     // doar de verificare, nu e apelata propriu zis in joc
     void printCards () {
         for (const auto &card : cards) {
-            std::cout << card.getRank() << " of " << card.getSuit() << std::endl;
+            std::cout << card.getRank() << " de " << card.getSuit() << std::endl;
         }
     }
 
@@ -137,7 +141,7 @@ class Deck {
 class Hand {
     std::vector<Card> cards;
 
-public:
+    public:
 
     // pune carte in mana
     void addCard (const Card &card) {
@@ -154,40 +158,124 @@ public:
 
 };
 
+class TableCards {
+    std::vector<Card> cards;
+
+    public:
+
+    void addCard (const Card &card) {
+        cards.push_back(card);
+    }
+
+    void clearCards () {
+        cards.clear();
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const TableCards& table) {
+        os << "Carti pe masa: " << std::endl;
+        for (const auto &card : table.cards) {
+            os << card << std::endl;
+        }
+        return os;
+    }
+
+};
+
+class Game {
+    Deck deck;
+    Hand player1Hand;
+    Hand player2Hand;
+    TableCards table;
+
+    public:
+    Game() {
+        // apelare shuffle de 5 ori doar pentru ca o singura data era prea putin distribuit
+        deck.shuffleCards();
+        deck.shuffleCards();
+        deck.shuffleCards();
+        deck.shuffleCards();
+        deck.shuffleCards();
+    }
+
+    void dealHands () {
+        for(int i = 0; i < 2; i++) {
+            player1Hand.addCard(deck.dealCard());
+            player2Hand.addCard(deck.dealCard());
+        }
+    }
+
+    void dealFlop () {
+        for(int i = 0; i < 3; i++) {
+            table.addCard(deck.dealCard());
+        }
+    }
+
+    void dealTurnRiver () {
+        table.addCard(deck.dealCard());
+    }
+
+    void play() {
+        dealHands();
+        std::cout << std::endl << "Jucator 1:" << std::endl;
+        std::cout << player1Hand << std::endl;
+
+        // std::cout << std::endl << "Jucator 2:" << std::endl;
+        // std::cout << player2Hand << std::endl;
+
+        std::cout << "Repriza 1 / Flop" << std::endl;
+        dealFlop();
+        std::cout << table << std::endl;
+
+        std::cout << "Repriza 2 / Turn" << std::endl;
+        dealTurnRiver();
+        std::cout << table << std::endl;
+
+        std::cout << "Repriza 3 / River" << std::endl;
+        dealTurnRiver();
+        std::cout << table << std::endl;
+
+    }
+};
+
 
 int main() {
+    Game game;
+    game.play();
+    return 0;
+}
+
     // Menu menu;
     // menu.showMenu();
     // menu.selectOption();
 
-    Deck deck;
+    // Deck deck;
+    // strict pentru verificare
     // std::cout << "Carti:" << std::endl;
     // deck.printCards();
 
-    // apelare shuffle de 3 ori doar pentru ca o singura data era prea putin distribuit
-    deck.shuffleCards();
-    deck.shuffleCards();
-    deck.shuffleCards();
-    std::cout << std::endl << "Shuffle:" << std::endl;
-    deck.printCards();
+    // apelare shuffle de 4 ori doar pentru ca o singura data era prea putin distribuit
+    // deck.shuffleCards();
+    // deck.shuffleCards();
+    // deck.shuffleCards();
+    // deck.shuffleCards();
+    // std::cout << std::endl << "Shuffle:" << std::endl;
+    // deck.printCards();
+    //
+    // Hand player1Hand;
+    // Hand player2Hand;
+    //
+    // for(int i = 0; i < 2; i++) {
+    //     player1Hand.addCard(deck.dealCard());
+    //     player2Hand.addCard(deck.dealCard());
+    // }
+    //
+    // std::cout << std::endl << "Jucator 1:" << std::endl;
+    // std::cout << player1Hand << std::endl;
+    //
+    // std::cout << std::endl << "Jucator 2:" << std::endl;
+    // std::cout << player2Hand << std::endl;
 
-    Hand player1Hand;
-    Hand player2Hand;
 
-    for(int i = 0; i < 2; i++) {
-        player1Hand.addCard(deck.dealCard());
-        player2Hand.addCard(deck.dealCard());
-    }
-
-    std::cout << std::endl << "Jucator 1:" << std::endl;
-    std::cout << player1Hand << std::endl;
-
-    std::cout << std::endl << "Jucator 2:" << std::endl;
-    std::cout << player2Hand << std::endl;
-
-
-    return 0;
-}
 
     // std::cout << "Hello, world!\n";
     // std::array<int, 100> v{};
