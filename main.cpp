@@ -301,7 +301,6 @@ public:
 
             case 3:
                 std::cout << "Se inchide ..." << std::endl;
-            return;
             // opreste programul
             break;
 
@@ -314,7 +313,7 @@ public:
     }
 
     void startGame() {
-        if(game != nullptr) {
+        if (game != nullptr) {
             delete game;
         }
 
