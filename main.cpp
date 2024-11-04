@@ -277,7 +277,7 @@ public:
 
     void showMenu() const {
         std::cout << "Texas Hold' em" << std::endl;
-        for(int i = 0; i<options.size(); i++) {
+        for(int i = 0; i < options.size(); i++) {
             std::cout << i + 1 << ". " << options[i] << std::endl;
         }
     }
