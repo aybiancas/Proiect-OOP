@@ -90,12 +90,11 @@ class Deck {
 class Player {
     std::vector<Card> cards;
     int sum; // suma playerului, utilizata ulterior in sistemul de betting -- cand suma unui player ajunge la 0 acela pierde
-    int folded;
 
     public:
 
     // constructor cu lista de initializare, suma standard e de 500, playerul incepe in statusul de folded = false
-    Player() : sum(500), folded(0) {
+    Player() : sum(500) {
         std::cout << "Player constructor" << std::endl;
     }
 
