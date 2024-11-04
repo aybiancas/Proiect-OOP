@@ -3,6 +3,7 @@
 #include <string>
 #include <random>
 #include <algorithm>
+#include <fstream>
 
 class Card {
     std::string suit;
@@ -281,10 +282,8 @@ public:
         }
     }
 
-    void selectOption() {
-        int choice;
+    void selectOption(int choice) {
         std::cout << "Optiune: ";
-        std::cin >> choice;
 
         switch (choice) {
             case 1:
@@ -306,8 +305,8 @@ public:
 
             default:
                 std::cout << "Invalid ..." << std::endl;
-            showMenu();
-            selectOption();
+            // showMenu();
+            // selectOption(choice);
             // afiseaza din nou optiunile din meniu
         }
     }
@@ -323,6 +322,12 @@ public:
 
     void showRules () {
         // citeste fisierul de reguli si le afiseaza pe ecran
+        std::ifstream f("reguli.txt");
+        std::string line;
+        while (std::getline(f, line)) {
+            std::cout << line << std::endl;
+        }
+        std::cout << std::endl;
     }
 
     // operator cout
@@ -338,9 +343,15 @@ public:
 
 int main() {
     //test meniu
+
+
+    std::ifstream f("tastatura.txt");
+    int choice;
+    f >> choice;
+
     Menu menu;
     menu.showMenu();
-    menu.selectOption();
+    menu.selectOption(choice);
 
     // test joc
     // Game game;
