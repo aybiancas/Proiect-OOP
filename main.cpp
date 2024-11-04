@@ -13,10 +13,11 @@ class Card {
     // constructor parametrizat cu lista de initializare
     Card(const std::string &suit, const std::string &rank) : suit(suit), rank(rank) {}
 
-
     // constructor de copiere cu lista de initializare
     Card(const Card &other) : suit(other.suit), rank(other.rank) {}
 
+    // destructor
+    ~Card() {}
 
     // getteri pt culoare si valoare
     [[nodiscard]] std::string getSuit() const {
@@ -54,7 +55,35 @@ class Deck {
                 cards.emplace_back(suit, rank);
             }
         }
-        std::cout << "Deck creat" << std::endl;
+        std::cout << "Deck constructor" << std::endl;
+
+        // printDeck();
+    }
+
+    // constructor de copiere
+    Deck (const Deck &other) : cards(other.cards) {}
+
+    // destructor
+    ~Deck() {
+        std::cout << "Deck destructor" << std::endl;
+    }
+
+    // operator =
+    Deck &operator= (const Deck &other) {
+        cards = other.cards;
+        return *this;
+    }
+
+    // doar pentru verificare
+    void printDeck () {
+        for (const auto &card : cards) {
+            std::cout << card << std::endl;
+        }
+    }
+
+    // getter
+    [[nodiscard]] std::vector<Card> getDeckCards() const {
+        return cards;
     }
 
     // amestecare deck
@@ -63,13 +92,6 @@ class Deck {
         std::mt19937 g(rd());
         std::shuffle(cards.begin(), cards.end(), g);
     }
-
-    // doar de verificare precedenta, nu e apelata propriu zis in joc
-    // void printCards () {
-    //     for (const auto &card : cards) {
-    //         std::cout << card.getRank() << " de " << card.getSuit() << std::endl;
-    //     }
-    // }
 
     // operator cout
     friend std::ostream& operator<<(std::ostream &os, const Deck &deck) {
@@ -99,10 +121,22 @@ class Player {
         std::cout << "Player constructor" << std::endl;
     }
 
+    // constructor de copiere
+    Player (const Player &other) : cards(other.cards), sum(other.sum) {}
+
+    // destructor
     ~Player() {
         std::cout << "Player destructor" << std::endl;
     }
 
+    // operator =
+    Player &operator= (const Player &other) {
+        cards = other.cards;
+        sum = other.sum;
+        return *this;
+    }
+
+    // getter
     [[nodiscard]] std::vector<Card> getPlayerCards() const {
         return cards;
     }
@@ -126,14 +160,26 @@ class TableCards {
     std::vector<Card> cards;
 
     public:
+    // constructor
     TableCards() {
         std::cout << "Masa constructor" << std::endl;
     }
 
+    // constructor de copiere
+    TableCards (const TableCards &other) : cards(other.cards) {}
+
+    // destructor
     ~TableCards() {
         std::cout << "Masa destructor" << std::endl;
     }
 
+    // operator =
+    TableCards &operator= (const TableCards &other) {
+        cards = other.cards;
+        return *this;
+    }
+
+    // getter
     [[nodiscard]] std::vector<Card> getTableCards() const {
         return cards;
     }
@@ -175,6 +221,8 @@ class Game {
 
 
     public:
+
+    // constructor joc
     Game() : pot(0), roundBet(0) {
         // deck ul isi da shuffle automat pentru joc, deoarece e construit ordonat
         // apelare shuffle de 5 ori de siguranta
@@ -183,6 +231,25 @@ class Game {
         deck.shuffleCards();
         deck.shuffleCards();
         deck.shuffleCards();
+    }
+
+    // constructor de copiere
+    Game (const Game &other) : deck(other.deck), player1(other.player1), player2(other.player2), roundBet(other.roundBet), pot(other.pot) {}
+
+    // destructor
+    ~Game() {
+        std::cout << "Game destructor" << std::endl;
+    }
+
+    // operator =
+    Game &operator= (const Game &other) {
+        deck = other.deck;
+        player1 = other.player1;
+        player2 = other.player2;
+        roundBet = other.roundBet;
+        table = other.table;
+        pot = other.pot;
+        return *this;
     }
 
     // aici se dau cartile playerilor, in maniera 1-2-1-2
@@ -233,8 +300,20 @@ class Game {
         return -1;
     }
 
+    friend std::ostream& operator<<(std::ostream& os, const Game &game) {
+        os << game.player1 << std::endl;
+        os << game.player2 << std::endl;
+        os << game.table << std::endl;
+        return os;
+    }
+
     // functia jocului propriu zis
     void play() {
+
+        // for(auto &card : deck.getDeckCards()) {
+        //     std::cout << card << std::endl;
+        // }
+
         // se dau cartile jucatorilor
         dealHands();
 
@@ -272,11 +351,21 @@ public:
     Menu() : game(nullptr) {
         std::cout << "Meniu creat." << std::endl;
     }
+
+    Menu (const Menu &other) : options(other.options), game(other.game) {}
+
     ~Menu() {
         delete game;
         std::cout << "Meniu inchis." << std::endl;
     }
 
+    Menu &operator= (const Menu &other) {
+        options = other.options;
+        game = other.game;
+        return *this;
+    }
+
+    // optiuni de meniu
     void showMenu() const {
         std::cout << "Texas Hold' em" << std::endl;
         for(int i = 0; i < options.size(); i++) {
@@ -284,6 +373,7 @@ public:
         }
     }
 
+    // alegerea optiunii de meniu
     void selectOption(int choice) {
         std::cout << "Optiune: ";
 
@@ -307,6 +397,7 @@ public:
 
             default:
                 std::cout << "Invalid ..." << std::endl;
+            // in cazul inputului de la user in consola, urmatoarele doua linii de cod comentat merg
             // showMenu();
             // selectOption(choice);
             // afiseaza din nou optiunile din meniu
@@ -329,12 +420,12 @@ public:
         while (std::getline(f, line)) {
             std::cout << line << std::endl;
         }
+        f.close();
         std::cout << std::endl;
     }
 
     // operator cout
     friend std::ostream& operator<<(std::ostream& os, const Menu& menu) {
-        os << "Options:" << std::endl;
         for (int i = 0; i < menu.options.size(); i++) {
             os << i + 1 << ". " << menu.options[i] << std::endl;
         }
@@ -350,10 +441,13 @@ int main() {
     std::ifstream f("tastatura.txt");
     int choice;
     f >> choice;
+    f.close();
 
     Menu menu;
     menu.showMenu();
     menu.selectOption(choice);
+
+
 
     // test joc
     // Game game;
