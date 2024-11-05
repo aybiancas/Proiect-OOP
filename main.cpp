@@ -210,7 +210,7 @@ class Game {
     }
 
     // constructor de copiere
-    Game (const Game &other) : deck(other.deck), player1(other.player1), player2(other.player2), roundBet(other.roundBet), pot(other.pot) {}
+    Game (const Game &other) : deck(other.deck), player1(other.player1), player2(other.player2), pot(other.pot), roundBet(other.roundBet) {}
 
     // destructor
     ~Game() {
@@ -313,7 +313,7 @@ public:
     // optiuni de meniu
     void showMenu() const {
         std::cout << "Texas Hold' em" << std::endl;
-        for(int i = 0; i < options.size(); i++) {
+        for(int i = 0; i < 3; i++) {
             std::cout << i + 1 << ". " << options[i] << std::endl;
         }
     }
@@ -370,7 +370,7 @@ public:
 
     // operator cout
     friend std::ostream& operator<<(std::ostream& os, const Menu& menu) {
-        for (int i = 0; i < menu.options.size(); i++) {
+        for (int i = 0; i < 3; i++) {
             os << i + 1 << ". " << menu.options[i] << std::endl;
         }
         return os;
