@@ -249,33 +249,6 @@ class Game {
         table.addCard(deck.dealCard());
     }
 
-    // folosita in evaluarea cartilor din mana si de pe masa
-    static int getIndexRank (const std::string &rank) {
-        if(rank == "2") return 0;
-        if(rank == "3") return 1;
-        if(rank == "4") return 2;
-        if(rank == "5") return 3;
-        if(rank == "6") return 4;
-        if(rank == "7") return 5;
-        if(rank == "8") return 6;
-        if(rank == "9") return 7;
-        if(rank == "10") return 8;
-        if(rank == "J") return 9;
-        if(rank == "Q") return 10;
-        if(rank == "K") return 11;
-        if(rank == "A") return 12;
-        return -1;
-    }
-
-    // folosita in evaluarea cartilor si de pe masa
-    static int getIndexSuit (const std::string &suit) {
-        if(suit == "INIMA") return 0;
-        if(suit == "ROMB") return 1;
-        if(suit == "TREFLA") return 2;
-        if(suit == "PICA") return 3;
-        return -1;
-    }
-
     friend std::ostream& operator<<(std::ostream& os, const Game &game) {
         os << game.player1 << std::endl;
         os << game.player2 << std::endl;
