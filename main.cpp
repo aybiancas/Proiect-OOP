@@ -274,7 +274,7 @@ class Game {
     }
 
     // folosita in evaluarea cartilor din mana si de pe masa
-    int getIndexRank (const std::string &rank) const {
+    static int getIndexRank (const std::string &rank) {
         if(rank == "2") return 0;
         if(rank == "3") return 1;
         if(rank == "4") return 2;
@@ -292,7 +292,7 @@ class Game {
     }
 
     // folosita in evaluarea cartilor si de pe masa
-    int getIndexSuit (const std::string &suit) const {
+    static int getIndexSuit (const std::string &suit) {
         if(suit == "INIMA") return 0;
         if(suit == "ROMB") return 1;
         if(suit == "TREFLA") return 2;
@@ -408,12 +408,11 @@ public:
         if (game != nullptr) {
             delete game;
         }
-
         game = new Game();
         game->play();
     }
 
-    void showRules () {
+    static void showRules () {
         // citeste fisierul de reguli si le afiseaza pe ecran
         std::ifstream f("reguli.txt");
         std::string line;
