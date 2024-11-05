@@ -38,7 +38,7 @@ Formațiuni de cărți câștigătoare, în ordine crescătoare:
 - [x] pentru o aceeași (singură) clasă: constructor de copiere, `operator=` de copiere, destructor
 - [x] `operator<<` pentru toate clasele pentru afișare (std::ostream)
 - [x] cât mai multe `const` (unde este cazul)
-- [ ] implementarea a minim 3 funcții membru publice pentru funcționalități specifice temei alese, dintre care cel puțin 1-2 funcții mai complexe
+- [x] implementarea a minim 3 funcții membru publice pentru funcționalități specifice temei alese, dintre care cel puțin 1-2 funcții mai complexe
   - nu doar citiri/afișări sau adăugat/șters elemente într-un/dintr-un vector
 - [x] scenariu de utilizare a claselor definite:
   - preferabil sub formă de teste unitare, mai ales dacă vorbim de aplicații consolă 
