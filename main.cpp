@@ -19,15 +19,6 @@ class Card {
     // destructor
     ~Card() {}
 
-    // getteri pt culoare si valoare
-    [[nodiscard]] std::string getSuit() const {
-        return suit;
-    }
-
-    [[nodiscard]] std::string getRank() const {
-        return rank;
-    }
-
     // operator =
     Card& operator= (const Card &other) {
         suit = other.suit;
@@ -75,16 +66,11 @@ class Deck {
     }
 
     // doar pentru verificare
-    void printDeck () {
-        for (const auto &card : cards) {
-            std::cout << card << std::endl;
-        }
-    }
-
-    // getter
-    [[nodiscard]] std::vector<Card> getDeckCards() const {
-        return cards;
-    }
+    // void printDeck () {
+    //     for (const auto &card : cards) {
+    //         std::cout << card << std::endl;
+    //     }
+    // }
 
     // amestecare deck
     void shuffleCards () {
@@ -136,11 +122,6 @@ class Player {
         return *this;
     }
 
-    // getter
-    [[nodiscard]] std::vector<Card> getPlayerCards() const {
-        return cards;
-    }
-
     // pune carte in cartile din mana
     void addCard (const Card& card) {
         cards.push_back(card);
@@ -177,11 +158,6 @@ class TableCards {
     TableCards &operator= (const TableCards &other) {
         cards = other.cards;
         return *this;
-    }
-
-    // getter
-    [[nodiscard]] std::vector<Card> getTableCards() const {
-        return cards;
     }
 
     // adauga cartea in vectorul de carti de pe masa
@@ -309,10 +285,6 @@ class Game {
 
     // functia jocului propriu zis
     void play() {
-
-        // for(auto &card : deck.getDeckCards()) {
-        //     std::cout << card << std::endl;
-        // }
 
         // se dau cartile jucatorilor
         dealHands();
