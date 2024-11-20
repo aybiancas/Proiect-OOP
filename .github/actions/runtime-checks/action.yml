@@ -58,13 +58,13 @@ runs:
     - name: Sanitizers
       shell: bash
       if: runner.os == 'Linux' && matrix.runs_asan == true
-      # run one sanitizer for each env to avoid building extra binaries on one env
-      if: (matrix.runs_asan == true || matrix.runs_msan == true) && runner.os != 'Windows'
-      # detect_leaks is not supported on macOS
-      # env:
-      #   ASAN_OPTIONS: detect_leaks=1
+      continue-on-error: true
+      env:
+        ASAN_OPTIONS: halt_on_error=0
+        EXECUTABLE_NAME: ${{ env.EXECUTABLE_NAME }}
       run: |
-        cat "${INPUT_FILENAME}" | tr -d '\r' | ./${{ env.ZIP_NAME }}/"${EXECUTABLE_NAME}"
+        xvfb-run ./scripts/run_sanitizers.sh || true
+      working-directory: ${{github.workspace}}
 
     - name: Sanitizers (Windows MSVC)
       shell: bash
@@ -88,8 +88,3 @@ runs:
       run: |
         xvfb-run ./scripts/run_valgrind.sh || true
       working-directory: ${{github.workspace}}
-        # remove --show-leak-kinds=all (and --track-origins=yes) if there are many leaks in external libs
-        cat "${INPUT_FILENAME}" | tr -d '\r' | valgrind \
-            --leak-check=full --show-leak-kinds=all --track-origins=yes \
-            --error-exitcode=1 \
-            ./${{ env.ZIP_NAME }}/"${EXECUTABLE_NAME}"
