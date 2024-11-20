@@ -9,7 +9,6 @@ runs:
       if: runner.os == 'Linux'
       uses: ./.github/actions/install-linux-deps
 
-    - name: More Linux Dependencies
     - name: Install Linux Dependencies
       shell: bash
       if: runner.os == 'Linux'
