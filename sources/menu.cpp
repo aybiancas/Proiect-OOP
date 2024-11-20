@@ -76,7 +76,7 @@
 
     void Menu::showRules () {
         // citeste fisierul de reguli si le afiseaza pe ecran
-        std::ifstream f("../reguli.txt");
+        std::ifstream f("../rules.txt");
         std::string line;
         while (std::getline(f, line)) {
             std::cout << line << std::endl;

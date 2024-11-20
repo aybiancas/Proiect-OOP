@@ -8,6 +8,18 @@
 #include "player.h"
 #include "tableCards.h"
 
+
+// De adaugat logica joc:
+// evaluatorul de carti si definirea unui handValue pentru a decide ce grupare este mai buna
+// + tiebreaker
+// implementarea de ture
+// ideea de call, raise, fold pentru player 1
+// + functie de all in pt raise
+// + caz pt call in care unul din playeri nu are suma necesara pt call -- automat fold
+// automat implementare de suma pentru betting (~500/1000?) si oprirea jocului cand un player are suma = 0
+
+
+
 class Game {
     Deck deck;
     Player player1;
@@ -48,7 +60,11 @@ public:
 
     // verificare straight
     // straight, straight flush
-    bool isStraight (const std::vector<int> &rankCount);
+    bool isStraight(const std::vector<int> &rankCount);
+
+    int getMaxCount(const std::vector<int> &rankCount);
+
+    bool isTwoPair(const std::vector<int> &rankCount);
 
     // folosita in evaluarea cartilor din mana si de pe masa
     static int getIndexRank (const std::string &rank);

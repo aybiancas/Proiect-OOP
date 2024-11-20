@@ -3,7 +3,7 @@
 #include <fstream>
 #include "../headers/card.h"
 
-
+//
     Card::Card(const std::string &suit, const std::string &rank) : suit(suit), rank(rank) {}
 
     Card::Card(const Card &other) : suit(other.suit), rank(other.rank) {}

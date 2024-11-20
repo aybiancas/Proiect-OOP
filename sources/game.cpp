@@ -5,6 +5,18 @@
 #include "../headers/tableCards.h"
 #include "../headers/game.h"
 
+
+// De adaugat logica joc:
+// evaluatorul de carti si definirea unui handValue pentru a decide ce grupare este mai buna
+// + tiebreaker
+// implementarea de ture
+// ideea de call, raise, fold pentru player 1
+// + functie de all in pt raise
+// + caz pt call in care unul din playeri nu are suma necesara pt call -- automat fold
+// automat implementare de suma pentru betting (~500/1000?) si oprirea jocului cand un player are suma = 0
+
+
+
     // constructor joc
     Game::Game() : pot(0), roundBet(0) {
         // deck ul isi da shuffle automat pentru joc, deoarece e construit ordonat
@@ -17,7 +29,8 @@
     }
 
     // constructor de copiere
-    Game::Game(const Game &other) : deck(other.deck), player1(other.player1), player2(other.player2), pot(other.pot), roundBet(other.roundBet) {}
+    Game::Game(const Game &other) :
+    deck(other.deck), player1(other.player1), player2(other.player2), pot(other.pot), roundBet(other.roundBet) {}
 
     // destructor
     Game::~Game() {
@@ -83,6 +96,26 @@
         return false;
     }
 
+    int Game::getMaxCount(const std::vector<int> &rankCount) {
+         int maxCount = 0;
+         for (int i = 0; i < 13; i++) {
+             if(rankCount[i] > maxCount) maxCount = rankCount[i];
+         }
+         return maxCount;
+    }
+
+    bool Game::isTwoPair(const std::vector<int> &rankCount) {
+        int counter = 0;
+            for(int i = 0; i < 13; i++) {
+                if(getMaxCount(rankCount) == 2) {
+                    counter++;
+                }
+            }
+        if (counter == 2) return true;
+        return false;
+    }
+
+
     // folosita in evaluarea cartilor din mana si de pe masa
     int Game::getIndexRank(const std::string &rank) {
         if(rank == "2") return 0;
@@ -112,8 +145,15 @@
 
     int Game::highCardEvaluate(std::vector<Card> &cards, std::vector<int> &rankCount, std::vector<int> &suitCount) {
 
-        int highCard = -1;
+        int highCardVal = -1;
         // in functie de acel high card se va face departajarea intre playeri in cazul in care ambii au high card
+
+        for (int i = 12; i >= 0; i--) {
+            if (rankCount[i]) {
+                highCardVal = i;
+                break;
+            }
+        }
 
         // high card iesirea default, returneaza max de carte din stash
 
@@ -121,7 +161,7 @@
         //     if (rank != 0) highCard =
         // }
 
-        return highCard;
+        return highCardVal;
     }
 
     int Game::cardGroupsEvaluate(const Player& player) {
@@ -146,26 +186,39 @@
 
         // int highCard = highCardEvaluate(allCards, rankCount, suitCount);
 
-        int handValue = -1; // standard, in caz de e doar high card
+        int handValue = 0; // standard, in caz de e doar high card
 
-        // royal flush = straight + flush + verif 1 dintre carti este A rankCount[13]                   value=9
-        // straight flush = straight + flush                                                            value=8
-        // four of a kind = counter de 4                                                                value=7
-        // full house = 3 si 2, caz particular -- trebuie scoasa una dintre grupari si gasita cealalta  value=6
-        // flush = flush true                                                                           value=5
-        // straight = straight true                                                                     value=4
-        // three of a kind = counter de 3                                                               value=3
-        // two pair = 2 si 2, caz particular -- trebuie scoasa una dintre grupari si gasita cealalta    value=2
-        // pair = counter de 2                                                                          value=1
-        // high card = variabila separata retinuta oricum                                               value=0
+        // royal flush = straight + flush + verif 1 dintre carti este A rankCount[13]                   value=9 x
+        // straight flush = straight + flush                                                            value=8 x
+        // four of a kind = counter de 4                                                                value=7 x
+        // full house = 3 si 2, caz particular -- trebuie scoasa una dintre grupari si gasita cealalta  value=6 x
+        // flush = flush true                                                                           value=5 x
+        // straight = straight true                                                                     value=4 x
+        // three of a kind = counter de 3                                                               value=3 x
+        // two pair = 2 si 2, caz particular -- trebuie scoasa una dintre grupari si gasita cealalta    value=2 x
+        // pair = counter de 2                                                                          value=1 x
+        // high card = variabila separata retinuta oricum                                               value=0 x
 
         // idee: fiecare din urmatoarele if case uri poate sa retina si cartile ce intra in componenta gruparii de 5
 
         // pair value 1 // idee: poate include subcazuri pentru two pair si full house dupa eliminarea celor 2 carti din pair
+        if(getMaxCount(rankCount) == 2) {
+            handValue = 1;
+        }
 
         // two pair value 2
+        if(isTwoPair(rankCount) == true) {
+            handValue = 2;
+        }
 
         // three of a kind value 3
+        if(getMaxCount(rankCount) == 3) {
+            // full house 6
+            if(handValue == 1) {
+                handValue = 6;
+            }
+            else handValue = 3;
+        }
 
         if (isStraight(rankCount) == true) {
             handValue = 4; // straight
@@ -175,17 +228,24 @@
             handValue = 5; // flush
         }
 
-        // full house value 6
-
         // four of a kind value 7
+        if (getMaxCount(rankCount) == 4) {
+            handValue = 7;
+        }
+
 
         if (isFlush(suitCount) == true && isStraight(rankCount) == true) {
-            if (rankCount[13] != 0) handValue = 9; // royal flush
+            if (rankCount[13]) handValue = 9; // royal flush
             else handValue = 8; //straight flush
         }
 
-        // std::cout << "High card: " << highCard << std::endl;
+
+
+        int highCard = highCardEvaluate(allCards, rankCount, suitCount);
+        std::cout << "High card: " << highCard << std::endl;
         return handValue;
+
+
 
     }
 
