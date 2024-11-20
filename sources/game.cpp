@@ -23,9 +23,9 @@
         // apelare shuffle de 5 ori de siguranta
         deck.shuffleCards();
         deck.shuffleCards();
-        deck.shuffleCards();
-        deck.shuffleCards();
-        deck.shuffleCards();
+        // deck.shuffleCards();
+        // deck.shuffleCards();
+        // deck.shuffleCards();
     }
 
     // constructor de copiere
