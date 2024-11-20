@@ -8,6 +8,8 @@
 #include "game.h"
 
 class Menu {
+    sf::Font font;
+    sf::Text title;
     std::vector<std::string> options;
     Game* game;
 

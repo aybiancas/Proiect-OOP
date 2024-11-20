@@ -143,7 +143,7 @@
         return -1;
     }
 
-    int Game::highCardEvaluate(std::vector<Card> &cards, std::vector<int> &rankCount, std::vector<int> &suitCount) {
+    int Game::highCardEvaluate(std::vector<int> &rankCount) {
 
         int highCardVal = -1;
         // in functie de acel high card se va face departajarea intre playeri in cazul in care ambii au high card
@@ -241,7 +241,7 @@
 
 
 
-        int highCard = highCardEvaluate(allCards, rankCount, suitCount);
+        int highCard = highCardEvaluate(rankCount);
         std::cout << "High card: " << highCard << std::endl;
         return handValue;
 

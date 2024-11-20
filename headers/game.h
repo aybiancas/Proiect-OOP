@@ -72,7 +72,7 @@ public:
     // folosita in evaluarea cartilor si de pe masa
     static int getIndexSuit (const std::string &suit);
 
-    int highCardEvaluate (std::vector<Card> &cards, std::vector<int> &rankCount, std::vector<int> &suitCount);
+    int highCardEvaluate (std::vector<int> &rankCount);
 
     int cardGroupsEvaluate (const Player& player);
 
