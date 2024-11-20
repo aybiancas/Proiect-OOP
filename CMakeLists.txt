@@ -45,6 +45,18 @@ include(cmake/Options.cmake)
 add_executable(${PROJECT_NAME}
     main.cpp
     generated/src/Helper.cpp
+        headers/card.h
+        sources/card.cpp
+        headers/deck.h
+        sources/deck.cpp
+        headers/player.h
+        sources/player.cpp
+        headers/tableCards.h
+        sources/tableCards.cpp
+        headers/game.h
+        sources/game.cpp
+        headers/menu.h
+        sources/menu.cpp
 )
 
 include(cmake/CompilerFlags.cmake)
