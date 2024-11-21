@@ -65,6 +65,7 @@ add_executable(${PROJECT_NAME}
         sources/game.cpp
         headers/menu.h
         sources/menu.cpp
+        sources/game.cpp
 )
 
 include(cmake/CompilerFlags.cmake)
