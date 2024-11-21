@@ -20,7 +20,7 @@ public:
     // destructor
     ~TableCards();
 
-    [[nodiscard]] std::vector<Card> getTableCards() const;
+    [[nodiscard]] const std::vector<Card>& getTableCards() const;
 
     // operator =
     TableCards& operator=(const TableCards &other);

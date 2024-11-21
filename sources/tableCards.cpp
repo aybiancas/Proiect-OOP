@@ -16,7 +16,7 @@
         std::cout << "Masa destructor" << std::endl;
     }
 
-    std::vector<Card> TableCards::getTableCards() const {
+    const std::vector<Card>& TableCards::getTableCards() const {
         return cards;
     }
 

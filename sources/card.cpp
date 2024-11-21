@@ -10,11 +10,11 @@
 
     Card::~Card() {}
 
-    std::string Card::getSuit() const {
+    const std::string& Card::getSuit() const {
             return suit;
     }
 
-    std::string Card::getRank() const {
+    const std::string& Card::getRank() const {
         return rank;
     }
 
