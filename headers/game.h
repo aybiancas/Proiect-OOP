@@ -53,7 +53,6 @@ public:
     // turn si river puteau fi facute separat, dar e exact aceeasi cerinta
     void dealTurnRiver();
 
-
     // verifica daca sunt 5 sau mai multe de acelasi suit
     // flush, straight flush, royal flush
     bool isFlush(const std::vector<int>& suitCount);
