@@ -17,7 +17,7 @@ public:
 
     ~Player();
 
-    [[nodiscard]] std::vector<Card> getPlayerCards() const;
+    [[nodiscard]] const std::vector<Card> getPlayerCards() const;
 
     Player& operator=(const Player &other);
 

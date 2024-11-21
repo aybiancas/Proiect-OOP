@@ -143,7 +143,7 @@
         return -1;
     }
 
-    int Game::highCardEvaluate(std::vector<int> &rankCount) {
+    int Game::highCardEvaluate(const std::vector<int> &rankCount) {
 
         int highCardVal = -1;
         // in functie de acel high card se va face departajarea intre playeri in cazul in care ambii au high card

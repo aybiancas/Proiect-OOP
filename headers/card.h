@@ -15,9 +15,9 @@ public:
 
     ~Card();
 
-    [[nodiscard]] std::string getSuit() const;
+    [[nodiscard]] const std::string getSuit() const;
 
-    [[nodiscard]] std::string getRank() const;
+    [[nodiscard]] const std::string getRank() const;
 
     Card& operator=(const Card &other);
 
