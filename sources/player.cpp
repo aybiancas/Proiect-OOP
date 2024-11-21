@@ -12,7 +12,7 @@
         std::cout << "Player destructor" << std::endl;
     }
 
-    const std::vector<Card> Player::getPlayerCards() const {
+    std::vector<Card> Player::getPlayerCards() const {
         return cards;
     }
 
