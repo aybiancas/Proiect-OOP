@@ -3,15 +3,21 @@
 #define MENU_H
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include <vector>
 #include "game.h"
 
 class Menu {
-    sf::Font font;
+    sf::RenderWindow* window;
+    sf::Font titleFont;
+    sf::Font textFont;
+    sf::Font ruleFont;
     sf::Text title;
+    sf::Text rulesText;
+    std::vector<sf::Text> menuOptions;
     std::vector<std::string> options;
     Game* game;
+    int selectedOption;
+    int ruleShow;
 
 public:
     Menu();
@@ -26,13 +32,21 @@ public:
     void showMenu() const;
 
     // alegerea optiunii de meniu
-    void selectOption(int choice);
+    // void selectOption(int choice);
 
-    void run(int choice);
+    // void Menu::drawMenu(sf::RenderWindow &window, sf::Text &title, std::vector<sf::Text> &menuOptions, int selectedOption);
+    //
+    // void sfmlMainMenu();
+
+    void drawMenu();
+
+    void drawRules();
+
+    void run();
 
     void startGame();
 
-    static void showRules();
+    // static void showRules();
 
     // operator cout
     friend std::ostream& operator<<(std::ostream& os, const Menu& menu);
