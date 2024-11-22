@@ -1,8 +1,11 @@
 Reguli Texas Hold'em
 
-Jocul are loc in format 1v1, fiecare jucator primind in mana doua carti. Pe masa de joc sunt puse cinci carti, in trei reprize: prima repriza cu trei carti, numita flop, a doua repriza cu o carte, numita turn, si a treia repriza cu ultima carte, numit river.
+Jocul are loc in format 1v1, fiecare jucator primind in mana doua carti.
+Pe masa de joc sunt puse cinci carti, in trei reprize: prima repriza cu trei carti, numita flop,
+a doua repriza cu o carte, numita turn, si a treia repriza cu ultima carte, numit river.
 Jucatorul cu cea mai buna formatiune de cinci carti, ce le include si pe cele din mana lui, castiga.
-Rezultatul jocului este determinat intr-o maniera de best of three, adica cel cu cele mai multe castiguri in trei runde este invingator.
+Rezultatul jocului este determinat intr-o maniera de "best of three",
+adica cel cu cele mai multe castiguri in trei runde este invingator.
 
 Formatiuni de carti castigatoare, in ordine crescatoare:
 -High card (un set de cinci carti oarecare, se ia in considerare cartea cu cea mai mare valoare)
