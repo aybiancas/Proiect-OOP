@@ -11,6 +11,7 @@ class Menu {
     sf::Font titleFont;
     sf::Font textFont;
     sf::Font ruleFont;
+    sf::Texture bgImage;
     sf::Text title;
     sf::Text rulesText;
     std::vector<sf::Text> menuOptions;

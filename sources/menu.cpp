@@ -18,17 +18,20 @@
         window->setFramerateLimit(20);
 
         if (!titleFont.loadFromFile("fonts/Bleeding_Cowboys.ttf")) {
-            std::cout << "Eroare: nu s-a incarcat fontul." << std::endl;
+            std::cout << "Error. Could not load font." << std::endl;
         }
 
         if (!textFont.loadFromFile("fonts/BroncoPersonalUse.ttf")) {
-            std::cout << "Eroare: nu s-a incarcat fontul." << std::endl;
+            std::cout << "Error. Could not load font." << std::endl;
         }
 
         if (!ruleFont.loadFromFile("fonts/BabelSans.ttf")) {
-            std::cout << "Eroare: nu s-a incarcat fontul." << std::endl;
+            std::cout << "Error. Could not load font." << std::endl;
         }
 
+        if(!bgImage.loadFromFile("textures/bgImage.jpg")) {
+            std::cout << "Error. Could not load image." << std::endl;
+        }
 
         title.setFont(titleFont);
         title.setString("Texas Hold' em");
@@ -36,12 +39,12 @@
         title.setFillColor(sf::Color::White);
         title.setPosition(650 - title.getGlobalBounds().width / 2, 150);
 
-        for (size_t i = 0; i < options.size(); ++i) {
+        for (int i = 0; i < options.size(); ++i) {
             sf::Text optionText;
             optionText.setFont(textFont);
             optionText.setString(options[i]);
             optionText.setCharacterSize(50);
-            optionText.setPosition(650 - optionText.getGlobalBounds().width / 2, 350 + i * 150);
+            optionText.setPosition(static_cast<float> (650 - optionText.getGlobalBounds().width / 2), static_cast<float> (350 + i * 150));
             menuOptions.push_back(optionText);
         }
 
@@ -51,7 +54,8 @@
         rulesText.setPosition(50, 150);
     }
 
-    Menu::Menu (const Menu &other) : options(other.options), game(other.game), selectedOption(other.selectedOption) {}
+    Menu::Menu (const Menu &other) : window(other.window), options(other.options),
+    game(other.game), selectedOption(other.selectedOption), ruleShow(other.ruleShow) {}
 
     Menu::~Menu() {
         delete game;
@@ -60,9 +64,11 @@
     }
 
     Menu& Menu::operator=(const Menu &other) {
+        window = other.window;
         options = other.options;
         game = other.game;
         selectedOption = other.selectedOption;
+        ruleShow = other.ruleShow;
         return *this;
     }
 
@@ -104,7 +110,15 @@
 
 
     void Menu::drawMenu() {
+        sf::Sprite sprite;
+        sf::Vector2u sizeBg = bgImage.getSize();
+        sf::Vector2u sizeWd = window->getSize();
+        float scaleX = static_cast<float> (sizeWd.x) / static_cast<float> (sizeBg.x);
+        float scaleY = static_cast<float> (sizeWd.y) / static_cast<float> (sizeBg.y);
+        sprite.setTexture(bgImage);
+        sprite.setScale(scaleX, scaleY);
         window->clear(sf::Color::Black);
+        window->draw(sprite);
         window->draw(title);
 
         for (size_t i = 0; i < menuOptions.size(); ++i) {
@@ -120,25 +134,30 @@
     }
 
     void Menu::drawRules() {
-
-        sf::Text backText;
-
+        sf::Sprite sprite;
+        sf::Vector2u sizeBg = bgImage.getSize();
+        sf::Vector2u sizeWd = window->getSize();
+        float scaleX = static_cast<float> (sizeWd.x) / static_cast<float> (sizeBg.x);
+        float scaleY = static_cast<float> (sizeWd.y) / static_cast<float> (sizeBg.y);
+        sprite.setTexture(bgImage);
+        sprite.setScale(scaleX, scaleY);
         window->clear(sf::Color::Black);
+        window->draw(sprite);
         window->draw(rulesText);
 
+        sf::Text backText;
         backText.setFont(textFont);
         backText.setString("< Meniu (ESC)");
         backText.setCharacterSize(40);
         backText.setPosition(40, 40);
 
         sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-        if (backText.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+        if (backText.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
             backText.setFillColor(sf::Color::Red);
         }
         else {
             backText.setFillColor(sf::Color::White);
         }
-
         window->draw(backText);
         window->display();
     }
@@ -164,8 +183,8 @@
                     if (event.type == sf::Event::MouseMoved) {
                         sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
                         selectedOption = -1;
-                        for (size_t i = 0; i < menuOptions.size(); ++i) {
-                            if (menuOptions[i].getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+                        for (int i = 0; i < menuOptions.size(); ++i) {
+                            if (menuOptions[i].getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float> (mousePos.y))) {
                                 selectedOption = i;
                                 break;
                             }
@@ -174,18 +193,22 @@
                     else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                         if (selectedOption == 0) {
                             startGame();
+                            std::cout << "Joc inceput" << std::endl;
                         }
                         else if (selectedOption == 1) {
                             ruleShow = true;
+                            std::cout << "Reguli afisate pe ecran" << std::endl;
                         }
                         else if (selectedOption == 2) {
                             window->close();
+                            std::cout << "Joc inchis" << std::endl;
                         }
                     }
                 }
                 else {
                     if (event.type == sf::Event::MouseButtonPressed) {
                         ruleShow = false;
+                        std::cout << "Meniu afisat" << std::endl;
                     }
                 }
             }
@@ -206,17 +229,6 @@
         window->close();
         game->play();
     }
-
-    // void Menu::showRules () {
-    //     // citeste fisierul de reguli si le afiseaza pe ecran
-    //     std::ifstream f("../rules.txt");
-    //     std::string line;
-    //     while (std::getline(f, line)) {
-    //         std::cout << line << std::endl;
-    //     }
-    //     f.close();
-    //     std::cout << std::endl;
-    // }
 
     // operator cout
     std::ostream& operator<<(std::ostream& os, const Menu& menu) {
