@@ -13,7 +13,7 @@ public:
 
     Card(const Card &other);
 
-    ~Card();
+    ~Card() = default;
 
     [[nodiscard]] const std::string& getSuit() const;
 

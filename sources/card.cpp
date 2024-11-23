@@ -8,7 +8,7 @@
 
     Card::Card(const Card &other) : suit(other.suit), rank(other.rank) {}
 
-    Card::~Card() {}
+    // Card::~Card();
 
     const std::string& Card::getSuit() const {
             return suit;
