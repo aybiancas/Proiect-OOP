@@ -39,7 +39,7 @@
         title.setFillColor(sf::Color::White);
         title.setPosition(650 - title.getGlobalBounds().width / 2, 150);
 
-        for (int i = 0; i < options.size(); ++i) {
+        for (int i = 0; i < 3; ++i) {
             sf::Text optionText;
             optionText.setFont(textFont);
             optionText.setString(options[i]);
@@ -121,7 +121,7 @@
         window->draw(sprite);
         window->draw(title);
 
-        for (size_t i = 0; i < menuOptions.size(); ++i) {
+        for (int i = 0; i < 3; ++i) {
             if (i == selectedOption) {
                 menuOptions[i].setFillColor(sf::Color::Red);
             } else {
@@ -183,7 +183,7 @@
                     if (event.type == sf::Event::MouseMoved) {
                         sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
                         selectedOption = -1;
-                        for (int i = 0; i < menuOptions.size(); ++i) {
+                        for (int i = 0; i < 3; ++i) {
                             if (menuOptions[i].getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float> (mousePos.y))) {
                                 selectedOption = i;
                                 break;
