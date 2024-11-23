@@ -30,7 +30,7 @@ public:
     Menu& operator=(const Menu &other);
 
     // optiuni de meniu
-    void showMenu() const;
+    // void showMenu() const;
 
     // alegerea optiunii de meniu
     // void selectOption(int choice);

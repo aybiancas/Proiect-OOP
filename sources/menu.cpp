@@ -74,12 +74,12 @@
 
 
     // optiuni de meniu
-    void Menu::showMenu() const {
-        std::cout << "Texas Hold' em" << std::endl;
-        for(int i = 0; i < 3; i++) {
-            std::cout << i + 1 << ". " << options[i] << std::endl;
-        }
-    }
+    // void Menu::showMenu() const {
+    //     std::cout << "Texas Hold' em" << std::endl;
+    //     for(int i = 0; i < 3; i++) {
+    //         std::cout << i + 1 << ". " << options[i] << std::endl;
+    //     }
+    // }
 
     // // alegerea optiunii de meniu
     // void Menu::selectOption(int choice) {
