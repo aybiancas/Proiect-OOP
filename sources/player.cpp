@@ -2,11 +2,11 @@
 #include "../headers/card.h"
 #include <iostream>
 
-    Player::Player() : sum(500) {
+    Player::Player() {
         std::cout << "Player constructor" << std::endl;
     }
 
-    Player::Player(const Player &other) : cards(other.cards), sum(other.sum) {}
+    Player::Player(const Player &other) : cards(other.cards) {}
 
     Player::~Player() {
         std::cout << "Player destructor" << std::endl;
@@ -18,7 +18,6 @@
 
     Player& Player::operator=(const Player &other) {
         cards = other.cards;
-        sum = other.sum;
         return *this;
     }
 

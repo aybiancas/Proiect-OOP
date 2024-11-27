@@ -66,6 +66,10 @@ add_executable(${PROJECT_NAME}
         headers/menu.h
         sources/menu.cpp
         sources/game.cpp
+        headers/humanPlayer.h
+        sources/humanPlayer.cpp
+        headers/botPlayer.h
+        sources/botPlayer.cpp
 )
 
 include(cmake/CompilerFlags.cmake)

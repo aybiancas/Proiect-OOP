@@ -7,7 +7,6 @@
 
 class Player {
     std::vector<Card> cards;
-    int sum;
 
 public:
 
@@ -15,7 +14,7 @@ public:
 
     Player(const Player &other);
 
-    ~Player();
+    virtual ~Player();
 
     [[nodiscard]] const std::vector<Card>& getPlayerCards() const;
 
