@@ -12,7 +12,7 @@ class BotPlayer : public Player {
 
     BotPlayer(const BotPlayer& other);
 
-    ~BotPlayer();
+    virtual ~BotPlayer();
 };
 
 #endif //BOTPLAYER_H
