@@ -12,7 +12,7 @@ class HumanPlayer : public Player {
 
     HumanPlayer(const HumanPlayer &other);
 
-    ~HumanPlayer();
+    ~HumanPlayer() override;
 
 
 

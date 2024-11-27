@@ -14,7 +14,7 @@ public:
 
     Player(const Player &other);
 
-    ~Player();
+    virtual ~Player();
 
     [[nodiscard]] const std::vector<Card>& getPlayerCards() const;
 

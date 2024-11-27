@@ -12,7 +12,7 @@ class BotPlayer : public Player {
 
     BotPlayer(const BotPlayer& other);
 
-    ~BotPlayer();
+    ~BotPlayer() override;
 };
 
 #endif //BOTPLAYER_H
