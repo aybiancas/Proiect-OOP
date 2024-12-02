@@ -6,6 +6,13 @@
 
     HumanPlayer::~HumanPlayer() {}
 
+    HumanPlayer& HumanPlayer::operator=(const HumanPlayer &other) {
+        Player::operator=(other);
+        sum = other.sum;
+        return *this;
+    }
+
+
     int HumanPlayer::getSum() const {
         return sum;
     }

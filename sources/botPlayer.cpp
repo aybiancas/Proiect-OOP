@@ -6,6 +6,12 @@
 
     BotPlayer::~BotPlayer() {}
 
+    BotPlayer& BotPlayer::operator=(const BotPlayer &other) {
+        Player::operator=(other);
+        sum = other.sum;
+        return *this;
+    }
+
     int BotPlayer::getSum() const {
         return sum;
     }

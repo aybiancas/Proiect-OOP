@@ -10,6 +10,13 @@
 
     DealerPlayer::~DealerPlayer() {}
 
+    DealerPlayer& DealerPlayer::operator=(const DealerPlayer &other) {
+        Player::operator=(other);
+        deck = other.deck;
+        pot = other.pot;
+        return *this;
+    }
+
     int DealerPlayer::getPot() const {
         return pot;
     }

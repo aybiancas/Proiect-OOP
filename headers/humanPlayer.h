@@ -17,12 +17,13 @@ class HumanPlayer : public Player {
     ///HumanPlayer destructor
     ~HumanPlayer() override;
 
+    HumanPlayer& operator=(const HumanPlayer &other);
+
     int getSum() const;
 
     void subtractBet(int amount);
 
     void addSum(int amount) override;
-
 
 };
 

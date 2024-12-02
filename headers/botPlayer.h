@@ -14,6 +14,8 @@ class BotPlayer : public Player {
 
     ~BotPlayer() override;
 
+    BotPlayer& operator=(const BotPlayer &other);
+
     int getSum() const;
 
     void subtractBet(int amount);

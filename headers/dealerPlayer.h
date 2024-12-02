@@ -18,6 +18,8 @@ class DealerPlayer : public Player {
 
     ~DealerPlayer() override;
 
+    DealerPlayer& operator=(const DealerPlayer &other);
+
     int getPot() const;
 
     void addPot(int amount);
