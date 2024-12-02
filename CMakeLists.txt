@@ -70,6 +70,14 @@ add_executable(${PROJECT_NAME}
         sources/humanPlayer.cpp
         headers/botPlayer.h
         sources/botPlayer.cpp
+        headers/dealerPlayer.h
+        sources/dealerPlayer.cpp
+        headers/NotEnoughFundsExcept.h
+        sources/NotEnoughFundsExcept.cpp
+        headers/BetInputInvalidExcept.h
+        sources/BetInputInvalidExcept.cpp
+        headers/FileLoadFailureExcept.h
+        sources/FileLoadFailureExcept.cpp
 )
 
 include(cmake/CompilerFlags.cmake)
