@@ -21,6 +21,8 @@ class HumanPlayer : public Player {
 
     void subtractBet(int amount);
 
+    void addSum(int amount) override;
+
 
 };
 

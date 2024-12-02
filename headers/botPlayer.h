@@ -17,6 +17,9 @@ class BotPlayer : public Player {
     int getSum() const;
 
     void subtractBet(int amount);
+
+    void addSum(int amount) override;
+
 };
 
 #endif //BOTPLAYER_H

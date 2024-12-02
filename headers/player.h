@@ -30,6 +30,7 @@ public:
 
     void clearHand();
 
+    virtual void addSum(int amount) = 0;
 
     ///Overloaded << operator
     friend std::ostream& operator<<(std::ostream& os, const Player& player);

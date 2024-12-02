@@ -1,6 +1,6 @@
 #include "../headers/humanPlayer.h"
 
-    HumanPlayer::HumanPlayer() : Player(), sum(500) {}
+    HumanPlayer::HumanPlayer() : Player(), sum(1000) {}
 
     HumanPlayer::HumanPlayer(const HumanPlayer &other) : Player(other), sum(other.sum) {}
 
@@ -16,6 +16,11 @@
             sum = 0;
         }
     }
+
+    void HumanPlayer::addSum(int amount) {
+        sum += amount;
+    }
+
 
 
 

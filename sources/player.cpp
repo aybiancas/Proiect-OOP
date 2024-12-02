@@ -39,7 +39,6 @@
         cards.clear();
     }
 
-
     ///Overloaded << operator
     std::ostream& operator<<(std::ostream& os, const Player& player) {
         for (const auto &card : player.cards) {
