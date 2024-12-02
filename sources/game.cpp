@@ -5,6 +5,10 @@
 #include "../headers/tableCards.h"
 #include "../headers/game.h"
 
+#include "../headers/BetInputInvalidExcept.h"
+#include "../headers/FileLoadFailureExcept.h"
+#include "../headers/NotEnoughFundsExcept.h"
+
 
 // De adaugat logica joc:
 // evaluatorul de carti si definirea unui handValue pentru a decide ce grupare este mai buna
@@ -18,7 +22,11 @@
 
 
     // constructor joc
-    Game::Game() : pot(0), roundBet(0) {
+    Game::Game() :
+    deck(),
+    roundBet(0),
+    window(nullptr) {
+        std::cout << "Game constructor" << std::endl;
         // deck ul isi da shuffle automat pentru joc, deoarece e construit ordonat
         // apelare shuffle de 5 ori de siguranta
         deck.shuffleCards();
@@ -26,11 +34,52 @@
         // deck.shuffleCards();
         // deck.shuffleCards();
         // deck.shuffleCards();
+
+
+        window = new sf::RenderWindow(sf::VideoMode(1300, 900), "");
+        window->setFramerateLimit(20);
+
+        if (!font.loadFromFile("fonts/BroncoPersonalUse.ttf")) {
+            throw FileLoadFailure("Error: Failed to load fonts");
+        }
+
+        player1Sum.setFont(font);
+        player1Sum.setString("Suma P1: " + std::to_string(player1.getSum()));
+        player1Sum.setCharacterSize(40);
+        player1Sum.setFillColor(sf::Color::White);
+        player1Sum.setPosition(650 - player1Sum.getGlobalBounds().width / 2, 800);
+
+        player2Sum.setFont(font);
+        player2Sum.setString("Suma P2: " + std::to_string(player2.getSum()));
+        player2Sum.setCharacterSize(40);
+        player2Sum.setFillColor(sf::Color::White);
+        player2Sum.setPosition(650 - player1Sum.getGlobalBounds().width / 2, 50);
+
+        promptText.setFont(font);
+        promptText.setString("Introdu o suma: ");
+        promptText.setCharacterSize(40);
+        promptText.setFillColor(sf::Color::White);
+        promptText.setPosition(650, 250);
+
+        inputBox.setSize(sf::Vector2f(400, 50));  // Width, Height of the box
+        inputBox.setFillColor(sf::Color::Black);
+        inputBox.setPosition(300, 460);
+
+        inputText.setFont(font);
+        inputText.setString("");
+        inputText.setCharacterSize(30);
+        inputText.setFillColor(sf::Color::White);
+        inputText.setPosition(650, 300);
+
     }
 
     // constructor de copiere
     Game::Game(const Game &other) :
-    deck(other.deck), player1(other.player1), player2(other.player2), pot(other.pot), roundBet(other.roundBet) {}
+    deck(other.deck),
+    player1(other.player1),
+    player2(other.player2),
+    roundBet(other.roundBet),
+    window(other.window) {}
 
     // destructor
     Game::~Game() {
@@ -44,9 +93,42 @@
         player2 = other.player2;
         roundBet = other.roundBet;
         table = other.table;
-        pot = other.pot;
         return *this;
     }
+
+    void Game::drawGame() {
+        window->clear(sf::Color{0,122,44});
+        window->draw(player1Sum);
+        window->draw(player2Sum);
+        window->display();
+    }
+
+    void Game::bettingRound() {
+        inputBet = "";
+        int player1Bet = 0;
+        int player2Bet = 0;
+
+            std::cout << "Player 1: ";
+            std::cin >> player1Bet;
+            std::cout << std::endl;
+            if(player1Bet > player1.getSum()) {
+                throw NotEnoughFundsExcept("Error: the player does not have enough credits for this bet");
+            }
+            if(player1Bet < 0) {
+                throw BetInputInvalidExcept("Error: bet value is invalid");
+            }
+            player1.subtractBet(player1Bet);
+            dealer.addPot(player1Bet);
+
+            player2Bet = rand() % 500 + 1;
+            if(player2Bet > player2.getSum()) {
+                throw NotEnoughFundsExcept("Error: the player does not have enough credits for this bet");
+            }
+            std::cout << "Player 2: " << player2Bet << std::endl;
+
+            player2.subtractBet(player2Bet);
+            dealer.addPot(player2Bet);
+        }
 
     // aici se dau cartile playerilor, in maniera 1-2-1-2
     void Game::dealHands() {
@@ -256,8 +338,29 @@
         return os;
     }
 
+void Game::resetRound() {
+        deck.shuffleCards();
+    }
+
     // functia jocului propriu zis
     void Game::play() {
+
+        while(window->isOpen()) {
+            sf::Event event;
+            while (window->pollEvent(event)) {
+                if (event.type == sf::Event::Closed) {
+                    window->close();
+                }
+
+            }
+            drawGame();
+        }
+
+        /*
+         *  VARIABILA DE WIN STATE, DETERMINA CASTIGATORUL JOCULUI
+         *  IN FUNCTIE DE ACEA VARIABILA SE VOR FACE SI SCHIMBARILE LA SUM UL FIECARUI PLAYER
+         */
+
 
         // se dau cartile jucatorilor
         dealHands();
@@ -270,21 +373,44 @@
         std::cout << std::endl << "Jucator 2:" << std::endl;
         std::cout << player2 << std::endl;
 
+
+        // bettingRound();
+
+        /*
+         * AICI SE ADAUGA INPUTUL PENTRU BETTING PANA LA CALL si se trece la prima repriza
+        */
+
         // acelasi caz ca la maini, afisari pur de test, dispar (in partialitate, cartile de pe masa oricum trebuie sa apara)
         std::cout << "Repriza 1 / Flop" << std::endl;
         dealFlop(); // adauga 3 carti pe masa
         std::cout << table << std::endl;
+
+        /*
+         *  SE VA CRESTE BETTING UL PANA LA CALL si se trece la repriza 2 - se afiseaza o carte in plus
+         */
 
         // afisari test
         std::cout << "Repriza 2 / Turn" << std::endl;
         dealTurnRiver(); // adauga o carte pe masa
         std::cout << table << std::endl;
 
+        /*
+         *  SE CRESTE DIN NOU BETTING UL PANA LA CALL si se trece la repriza 3 - se va afisa inca o carte
+         */
+
         std::cout << "Repriza 3 / River" << std::endl;
         dealTurnRiver(); // adauga o carte pe masa
         std::cout << table << std::endl;
 
+        /*
+         *  SE DETERMINA HAND VALUE PENTRU FIECARE JUCATOR SI SE TRATEAZA LOGICA
+         *  pt handvalue egal se va determina in functie de cartea cu cea mai mare valoare din gruparea de 5 (nu highCard)
+         */
+
         std::cout << "Hand Value p1: " << std::endl << cardGroupsEvaluate(player1) << std::endl;
         std::cout << "Hand value p2: " << std::endl << cardGroupsEvaluate(player2) << std::endl;
+
+        // NOTA
+        // TRY CATCH PENTRU DECK GOL
 
     }
