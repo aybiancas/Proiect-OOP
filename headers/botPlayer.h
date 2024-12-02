@@ -13,6 +13,10 @@ class BotPlayer : public Player {
     BotPlayer(const BotPlayer& other);
 
     ~BotPlayer() override;
+
+    int getSum() const;
+
+    void subtractBet(int amount);
 };
 
 #endif //BOTPLAYER_H

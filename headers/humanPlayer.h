@@ -8,12 +8,18 @@ class HumanPlayer : public Player {
 
     public:
 
+    ///HumanPlayer constructor
     HumanPlayer();
 
+    ///HumanPlayer copy constructor
     HumanPlayer(const HumanPlayer &other);
 
+    ///HumanPlayer destructor
     ~HumanPlayer() override;
 
+    int getSum() const;
+
+    void subtractBet(int amount);
 
 
 };
