@@ -18,3 +18,7 @@
         pot += amount;
     }
 
+    void DealerPlayer::addSum(int amount) {
+        pot += amount;
+    }
+

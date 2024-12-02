@@ -22,6 +22,8 @@ class DealerPlayer : public Player {
 
     void addPot(int amount);
 
+    void addSum(int amount) override;
+
     Card dealCard();
 };
 
