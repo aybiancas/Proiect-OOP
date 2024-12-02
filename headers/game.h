@@ -24,6 +24,7 @@ class Game {
     sf::Text player1Sum;
     sf::Text player2Sum;
     sf::Text textRoundBet;
+    sf::Text textRoundPot;
     sf::Text promptText;
     std::string inputBet;
     sf::Text inputText;
@@ -51,6 +52,10 @@ public:
 
     void bettingRound();
 
+    void updateSums();
+
+    void resetRound();
+
     // aici se dau cartile playerilor, in maniera 1-2-1-2
     void dealHands();
 
@@ -63,15 +68,15 @@ public:
 
     // verifica daca sunt 5 sau mai multe de acelasi suit
     // flush, straight flush, royal flush
-    bool isFlush(const std::vector<int>& suitCount);
+    static bool isFlush(const std::vector<int>& suitCount);
 
     // verificare straight
     // straight, straight flush
-    bool isStraight(const std::vector<int> &rankCount);
+    static bool isStraight(const std::vector<int> &rankCount);
 
-    int getMaxCount(const std::vector<int> &rankCount);
+    static int getMaxCount(const std::vector<int> &rankCount);
 
-    bool isTwoPair(const std::vector<int> &rankCount);
+    static bool isTwoPair(const std::vector<int> &rankCount);
 
     // folosita in evaluarea cartilor din mana si de pe masa
     static int getIndexRank (const std::string &rank);
@@ -79,13 +84,11 @@ public:
     // folosita in evaluarea cartilor si de pe masa
     static int getIndexSuit (const std::string &suit);
 
-    int highCardEvaluate (const std::vector<int> &rankCount);
+    int highCardEvaluate (const Player& player);
 
     int cardGroupsEvaluate (const Player& player);
 
     friend std::ostream& operator<<(std::ostream& os, const Game &game);
-
-    void resetRound();
 
     // functia jocului propriu zis
     void play();
