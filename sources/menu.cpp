@@ -12,7 +12,7 @@
     selectedOption(0),
     ruleShow(0) {
 
-        std::cout << "Meniu creat." << std::endl;
+        std::cout << "Menu created" << std::endl;
 
         window = new sf::RenderWindow(sf::VideoMode(1300, 900), "Texas Hold' em");
         window->setFramerateLimit(20);
@@ -44,7 +44,7 @@
             optionText.setFont(textFont);
             optionText.setString(options[i]);
             optionText.setCharacterSize(50);
-            optionText.setPosition(static_cast<float> (650 - optionText.getGlobalBounds().width / 2), static_cast<float> (350 + i * 150));
+            optionText.setPosition(static_cast<float>(650 - optionText.getGlobalBounds().width / 2), static_cast<float>(350 + i * 150));
             menuOptions.push_back(optionText);
         }
 
@@ -54,13 +54,17 @@
         rulesText.setPosition(50, 150);
     }
 
-    Menu::Menu (const Menu &other) : window(other.window), options(other.options),
-    game(other.game), selectedOption(other.selectedOption), ruleShow(other.ruleShow) {}
+    Menu::Menu (const Menu &other) :
+    window(other.window),
+    options(other.options),
+    game(other.game),
+    selectedOption(other.selectedOption),
+    ruleShow(other.ruleShow) {}
 
     Menu::~Menu() {
         delete game;
         delete window;
-        std::cout << "Meniu inchis." << std::endl;
+        std::cout << "Menu closed" << std::endl;
     }
 
     Menu& Menu::operator=(const Menu &other) {
@@ -113,8 +117,8 @@
         sf::Sprite sprite;
         sf::Vector2u sizeBg = bgImage.getSize();
         sf::Vector2u sizeWd = window->getSize();
-        float scaleX = static_cast<float> (sizeWd.x) / static_cast<float> (sizeBg.x);
-        float scaleY = static_cast<float> (sizeWd.y) / static_cast<float> (sizeBg.y);
+        float scaleX = static_cast<float>(sizeWd.x) / static_cast<float>(sizeBg.x);
+        float scaleY = static_cast<float>(sizeWd.y) / static_cast<float>(sizeBg.y);
         sprite.setTexture(bgImage);
         sprite.setScale(scaleX, scaleY);
         window->clear(sf::Color::Black);
@@ -193,22 +197,22 @@
                     else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                         if (selectedOption == 0) {
                             startGame();
-                            std::cout << "Joc inceput" << std::endl;
+                            std::cout << "Game started" << std::endl;
                         }
                         else if (selectedOption == 1) {
                             ruleShow = true;
-                            std::cout << "Reguli afisate pe ecran" << std::endl;
+                            std::cout << "Rules displayed" << std::endl;
                         }
                         else if (selectedOption == 2) {
                             window->close();
-                            std::cout << "Joc inchis" << std::endl;
+                            std::cout << "Game closed" << std::endl;
                         }
                     }
                 }
                 else {
                     if (event.type == sf::Event::MouseButtonPressed) {
                         ruleShow = false;
-                        std::cout << "Meniu afisat" << std::endl;
+                        std::cout << "Main menu displayed" << std::endl;
                     }
                 }
             }
