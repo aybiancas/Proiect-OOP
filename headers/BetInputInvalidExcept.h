@@ -10,7 +10,7 @@ class BetInputInvalidExcept : public std::exception {
 
     public:
 
-    BetInputInvalidExcept(std::string msg);
+    explicit BetInputInvalidExcept(std::string msg);
 
     virtual const char* what() const throw();
 };

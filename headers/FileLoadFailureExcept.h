@@ -10,7 +10,7 @@ class FileLoadFailure : public std::exception {
 
     public:
 
-    FileLoadFailure(std::string msg);
+    explicit FileLoadFailure(std::string msg);
 
     virtual const char* what() const throw();
 
