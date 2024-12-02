@@ -5,7 +5,9 @@
 #include <iostream>
 #include <fstream>
 
-    Menu::Menu() :
+#include "../headers/FileLoadFailureExcept.h"
+
+Menu::Menu() :
     window(nullptr),
     options({"Start", "Reguli", "Iesi"}),
     game(nullptr),
@@ -14,23 +16,24 @@
 
         std::cout << "Menu created" << std::endl;
 
+        try {
         window = new sf::RenderWindow(sf::VideoMode(1300, 900), "Texas Hold' em");
         window->setFramerateLimit(20);
 
         if (!titleFont.loadFromFile("fonts/Bleeding_Cowboys.ttf")) {
-            std::cout << "Error. Could not load font." << std::endl;
+            throw FileLoadFailure("Error: failed to load fonts");
         }
 
         if (!textFont.loadFromFile("fonts/BroncoPersonalUse.ttf")) {
-            std::cout << "Error. Could not load font." << std::endl;
+            throw FileLoadFailure("Error: failed to load fonts");
         }
 
         if (!ruleFont.loadFromFile("fonts/BabelSans.ttf")) {
-            std::cout << "Error. Could not load font." << std::endl;
+            throw FileLoadFailure("Error: failed to load fonts");
         }
 
         if(!bgImage.loadFromFile("textures/bgImage.jpg")) {
-            std::cout << "Error. Could not load image." << std::endl;
+            throw FileLoadFailure("Error: failed to load background sprite");
         }
 
         title.setFont(titleFont);
