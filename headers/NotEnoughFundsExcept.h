@@ -10,7 +10,7 @@ class NotEnoughFundsExcept : public std::exception {
 
     public:
 
-    explicit NotEnoughFundsExcept(std::string msg);
+    explicit NotEnoughFundsExcept(std::string& msg);
 
     virtual const char* what() const throw();
 };
