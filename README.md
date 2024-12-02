@@ -51,10 +51,10 @@ Formațiuni de cărți câștigătoare, în ordine crescătoare:
 
 #### Cerințe
 - [x] separarea codului din clase în `.h` (sau `.hpp`) și `.cpp`
-- [ ] moșteniri:
+- [x] moșteniri:
   - minim o clasă de bază și **3 clase derivate** din aceeași ierarhie
   - ierarhia trebuie să fie cu bază proprie, nu derivată dintr-o clasă predefinită
-  - [ ] funcții virtuale (pure) apelate prin pointeri de bază din clasa care conține atributul de tip pointer de bază
+  - [x] funcții virtuale (pure) apelate prin pointeri de bază din clasa care conține atributul de tip pointer de bază
     - minim o funcție virtuală va fi **specifică temei** (e.g. nu simple citiri/afișări)
     - constructori virtuali (clone): sunt necesari, dar nu se consideră funcții specifice temei
     - afișare virtuală, interfață non-virtuală
@@ -63,14 +63,14 @@ Formațiuni de cărți câștigătoare, în ordine crescătoare:
     - [ ] suprascris cc/op= pentru copieri/atribuiri corecte, copy and swap
     - [ ] `dynamic_cast`/`std::dynamic_pointer_cast` pentru downcast cu sens
     - [ ] smart pointers (recomandat, opțional)
-- [ ] excepții
-  - [ ] ierarhie proprie cu baza `std::exception` sau derivată din `std::exception`; minim **3** clase pentru erori specifice
-  - [ ] utilizare cu sens: de exemplu, `throw` în constructor (sau funcție care întoarce un obiect), `try`/`catch` în `main`
+- [x] excepții
+  - [x] ierarhie proprie cu baza `std::exception` sau derivată din `std::exception`; minim **3** clase pentru erori specifice
+  - [x] utilizare cu sens: de exemplu, `throw` în constructor (sau funcție care întoarce un obiect), `try`/`catch` în `main`
   - această ierarhie va fi complet independentă de ierarhia cu funcții virtuale
 - [x] funcții și atribute `static`
 - [x] STL
 - [x] cât mai multe `const`
-- [ ] funcții *de nivel înalt*, de eliminat cât mai mulți getters/setters/funcții low-level
+- [x] funcții *de nivel înalt*, de eliminat cât mai mulți getters/setters/funcții low-level
 - [ ] tag de `git`: de exemplu `v0.2`
 
 ## Milestone #3
