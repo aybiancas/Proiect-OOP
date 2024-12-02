@@ -13,49 +13,47 @@ Menu::Menu() :
     game(nullptr),
     selectedOption(0),
     ruleShow(0) {
+    std::cout << "Menu created" << std::endl;
 
-        std::cout << "Menu created" << std::endl;
+    window = new sf::RenderWindow(sf::VideoMode(1300, 900), "Texas Hold' em");
+    window->setFramerateLimit(20);
 
-        try {
-        window = new sf::RenderWindow(sf::VideoMode(1300, 900), "Texas Hold' em");
-        window->setFramerateLimit(20);
-
-        if (!titleFont.loadFromFile("fonts/Bleeding_Cowboys.ttf")) {
-            throw FileLoadFailure("Error: failed to load fonts");
-        }
-
-        if (!textFont.loadFromFile("fonts/BroncoPersonalUse.ttf")) {
-            throw FileLoadFailure("Error: failed to load fonts");
-        }
-
-        if (!ruleFont.loadFromFile("fonts/BabelSans.ttf")) {
-            throw FileLoadFailure("Error: failed to load fonts");
-        }
-
-        if(!bgImage.loadFromFile("textures/bgImage.jpg")) {
-            throw FileLoadFailure("Error: failed to load background sprite");
-        }
-
-        title.setFont(titleFont);
-        title.setString("Texas Hold' em");
-        title.setCharacterSize(100);
-        title.setFillColor(sf::Color::White);
-        title.setPosition(650 - title.getGlobalBounds().width / 2, 150);
-
-        for (int i = 0; i < 3; ++i) {
-            sf::Text optionText;
-            optionText.setFont(textFont);
-            optionText.setString(options[i]);
-            optionText.setCharacterSize(50);
-            optionText.setPosition(static_cast<float>(650 - optionText.getGlobalBounds().width / 2), static_cast<float>(350 + i * 150));
-            menuOptions.push_back(optionText);
-        }
-
-        rulesText.setFont(ruleFont);
-        rulesText.setCharacterSize(15);
-        rulesText.setFillColor(sf::Color::White);
-        rulesText.setPosition(50, 150);
+    if (!titleFont.loadFromFile("fonts/Bleeding_Cowboys.ttf")) {
+        throw FileLoadFailure("Error: failed to load fonts");
     }
+
+    if (!textFont.loadFromFile("fonts/BroncoPersonalUse.ttf")) {
+        throw FileLoadFailure("Error: failed to load fonts");
+    }
+
+    if (!ruleFont.loadFromFile("fonts/BabelSans.ttf")) {
+        throw FileLoadFailure("Error: failed to load fonts");
+    }
+
+    if(!bgImage.loadFromFile("textures/bgImage.jpg")) {
+        throw FileLoadFailure("Error: failed to load background sprite");
+    }
+
+    title.setFont(titleFont);
+    title.setString("Texas Hold' em");
+    title.setCharacterSize(100);
+    title.setFillColor(sf::Color::White);
+    title.setPosition(650 - title.getGlobalBounds().width / 2, 150);
+
+    for (int i = 0; i < 3; ++i) {
+        sf::Text optionText;
+        optionText.setFont(textFont);
+        optionText.setString(options[i]);
+        optionText.setCharacterSize(50);
+        optionText.setPosition(static_cast<float>(650 - optionText.getGlobalBounds().width / 2), static_cast<float>(350 + i * 150));
+        menuOptions.push_back(optionText);
+    }
+
+    rulesText.setFont(ruleFont);
+    rulesText.setCharacterSize(15);
+    rulesText.setFillColor(sf::Color::White);
+    rulesText.setPosition(50, 150);
+}
 
     Menu::Menu (const Menu &other) :
     window(other.window),
