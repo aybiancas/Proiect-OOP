@@ -35,10 +35,6 @@ public:
     // alegerea optiunii de meniu
     // void selectOption(int choice);
 
-    // void Menu::drawMenu(sf::RenderWindow &window, sf::Text &title, std::vector<sf::Text> &menuOptions, int selectedOption);
-    //
-    // void sfmlMainMenu();
-
     void drawMenu();
 
     void drawRules();

@@ -7,27 +7,31 @@
 #include "deck.h"
 #include "player.h"
 #include "tableCards.h"
-
-
-// De adaugat logica joc:
-// evaluatorul de carti si definirea unui handValue pentru a decide ce grupare este mai buna
-// + tiebreaker
-// implementarea de ture
-// ideea de call, raise, fold pentru player 1
-// + functie de all in pt raise
-// + caz pt call in care unul din playeri nu are suma necesara pt call -- automat fold
-// automat implementare de suma pentru betting (~500/1000?) si oprirea jocului cand un player are suma = 0
-
-
+#include "humanPlayer.h"
+#include <SFML/Graphics.hpp>
+#include "botPlayer.h"
+#include "dealerPlayer.h"
 
 class Game {
     Deck deck;
-    Player player1;
-    Player player2;
+    HumanPlayer player1;
+    BotPlayer player2;
+    DealerPlayer dealer;
     TableCards table;
-    int pot;
     int roundBet;
     std::vector<std::string> handTypes;
+    sf::RenderWindow* window;
+    sf::Text player1Sum;
+    sf::Text player2Sum;
+    sf::Text textRoundBet;
+    sf::Text promptText;
+    std::string inputBet;
+    sf::Text inputText;
+    sf::RectangleShape inputBox;
+    std::vector<std::string> options;
+    std::vector<sf::Text> playerOptions;
+    sf::Font font;
+
 
 public:
 
@@ -42,6 +46,10 @@ public:
 
     // operator =
     Game& operator=(const Game &other);
+
+    void drawGame();
+
+    void bettingRound();
 
     // aici se dau cartile playerilor, in maniera 1-2-1-2
     void dealHands();
@@ -76,6 +84,8 @@ public:
     int cardGroupsEvaluate (const Player& player);
 
     friend std::ostream& operator<<(std::ostream& os, const Game &game);
+
+    void resetRound();
 
     // functia jocului propriu zis
     void play();

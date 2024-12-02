@@ -25,6 +25,8 @@ public:
     friend std::ostream& operator<<(std::ostream &os, const Deck &deck);
 
     Card dealCard ();
+
+    void resetDeck();
 };
 
 #endif //DECK_H

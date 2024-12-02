@@ -10,18 +10,28 @@ class Player {
 
 public:
 
+    ///Player constructor
     Player();
 
+    ///Player copy constructor
     Player(const Player &other);
 
+    ///Player destructor
     virtual ~Player();
 
+    ///Player cards getter
     [[nodiscard]] const std::vector<Card>& getPlayerCards() const;
 
+    ///Overloaded = operator
     Player& operator=(const Player &other);
 
+    ///Adds a card object into the Player cards vector
     void addCard(const Card& card);
 
+    void clearHand();
+
+
+    ///Overloaded << operator
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
 };
 

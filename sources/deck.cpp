@@ -26,7 +26,7 @@
         return *this;
     }
 
-    void Deck::shuffleCards () {
+    void Deck::shuffleCards() {
         std::random_device rd;
         std::mt19937 g(rd());
         std::shuffle(cards.begin(), cards.end(), g);
@@ -39,8 +39,18 @@
         return os;
     }
 
-    Card Deck::dealCard () {
+    Card Deck::dealCard() {
         Card cardsDealt = cards.back();
         cards.pop_back();
         return cardsDealt;
+    }
+
+    void Deck::resetDeck() {
+        cards.clear();
+        for (const auto &suit : suits) {
+            for (const auto &rank : ranks) {
+                cards.emplace_back(suit, rank);
+            }
+        }
+        shuffleCards();
     }
