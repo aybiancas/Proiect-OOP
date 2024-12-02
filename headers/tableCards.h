@@ -28,16 +28,7 @@ public:
     // adauga cartea in vectorul de carti de pe masa
     void addCard(const Card& card);
 
-    // adauga suma la roundBet pt bet ul unei runde
-    // void bet(int amount);
-
-    // in cazul castigului rundei se adauga suma totala din bet ul rundei in suma playerului castigator
-    // void win(int amount);
-
-    // void fold();
-
-    // void resetHand();
-
+    void clearTable();
 
     // operator cout
     friend std::ostream& operator<<(std::ostream& os, const TableCards& table);

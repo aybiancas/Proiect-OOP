@@ -31,6 +31,11 @@
         cards.push_back(card);
     }
 
+    void TableCards::clearTable() {
+        cards.clear();
+    }
+
+
     // adauga suma la roundBet pt bet ul unei runde
     // void TableCards::bet(int amount) {
     //     sum = sum - amount;
