@@ -92,6 +92,7 @@
         player2 = other.player2;
         roundBet = other.roundBet;
         table = other.table;
+        window = other.window;
         return *this;
     }
 
@@ -149,6 +150,7 @@
         table.clearTable();
         player1.clearHand();
         player2.clearHand();
+        deck.resetDeck();
     }
 
     // aici se dau cartile playerilor, in maniera 1-2-1-2
