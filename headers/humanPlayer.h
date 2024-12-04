@@ -6,7 +6,7 @@
 class HumanPlayer : public Player {
     int sum;
 
-    public:
+public:
 
     ///HumanPlayer constructor
     HumanPlayer();

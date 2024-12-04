@@ -6,7 +6,7 @@
 class BotPlayer : public Player {
     int sum;
 
-    public:
+public:
 
     BotPlayer();
 

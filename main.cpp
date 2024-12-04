@@ -5,13 +5,6 @@
 
 int main() {
 
-    // menu test
-    //
-    // std::ifstream f("tastatura.txt");
-    // int choice;
-    // f >> choice;
-    // f.close();
-
     try {
         Menu menu;
         menu.run();

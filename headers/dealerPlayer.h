@@ -10,7 +10,7 @@ class DealerPlayer : public Player {
     Deck deck;
     int pot;
 
-    public:
+public:
 
     DealerPlayer();
 

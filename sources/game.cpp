@@ -77,6 +77,7 @@
     deck(other.deck),
     player1(other.player1),
     player2(other.player2),
+    dealer(other.dealer),
     roundBet(other.roundBet),
     window(other.window) {}
 
