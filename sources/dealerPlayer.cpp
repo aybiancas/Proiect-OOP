@@ -26,7 +26,9 @@ void DealerPlayer::addSum(int amount) {
     pot += amount;
 }
 
-int DealerPlayer::getSum() {}
+int DealerPlayer::getSum() {
+    return 0;
+}
 
 void DealerPlayer::subtractBet(int amount) {}
 
