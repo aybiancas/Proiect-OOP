@@ -33,6 +33,6 @@
         return sprite;
     }
 
-    void Card::setSprite(const sf::Sprite& sprite) {
-        this->sprite = sprite;
+    void Card::setSprite(const sf::Sprite& _sprite) {
+        this->sprite = _sprite;
     }

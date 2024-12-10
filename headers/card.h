@@ -83,7 +83,7 @@ public:
 	 *
 	 * @param sprite The new sprite for the card
 	 */
-    void setSprite(const sf::Sprite &sprite);
+    void setSprite(const sf::Sprite& _sprite);
 };
 
 #endif //CARD_H
