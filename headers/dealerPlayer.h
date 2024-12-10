@@ -6,27 +6,57 @@
 #include "deck.h"
 #include "card.h"
 
+/**
+ * @brief Represents a dealer player in a card game
+ * This class extends the Player class and defines behaviors specific to a dealer player
+ */
 class DealerPlayer : public Player {
-    Deck deck;
-    int pot;
+    // Deck deck;
+    int pot; ///< The game pot that is currently kept by the dealer player
 
 public:
-
+	/**
+	 * @brief Default DealerPlayer constructor
+	 */
     DealerPlayer();
 
+	/**
+	 * @brief DealerPlayer Copy constructor
+	 * @param other The DealerPlayer object to copy
+	 */
     DealerPlayer(const DealerPlayer &other);
 
+	/**
+	 * @brief DealerPlayer Destructor
+	 */
     ~DealerPlayer() override;
 
+	/**
+	 * @brief Assignment operator for DealerPlayer
+	 * @param other The DealerPlayer object to assign from
+	 * @return A reference to this DealerPlayer object
+	 */
     DealerPlayer& operator=(const DealerPlayer &other);
 
-    int getPot() const;
+	/**
+	 * @brief Retrieves the current pot value
+	 * @return The pot value that the dealer stores
+	 */
+    int getPot() override;
 
+	/**
+	 * @brief Adds a bet amount to the current pot
+	 * @param amount The amount to add to the pot
+	 */
     void addPot(int amount);
 
     void addSum(int amount) override;
 
     Card dealCard();
+
+    int getSum() override;
+
+    void subtractBet(int amount) override;
 };
 
 #endif //DEALERPLAYER_H
