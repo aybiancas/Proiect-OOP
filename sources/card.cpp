@@ -4,11 +4,11 @@
 #include "../headers/card.h"
 
 //
+    Card::Card() : suit(suit) {}
+
     Card::Card(const std::string &suit, const std::string &rank) : suit(suit), rank(rank) {}
 
     Card::Card(const Card &other) : suit(other.suit), rank(other.rank) {}
-
-    // Card::~Card();
 
     const std::string& Card::getSuit() const {
             return suit;
@@ -27,4 +27,12 @@
     std::ostream& operator<<(std::ostream &os, const Card &card) {
     os << card.rank << " of " << card.suit << std::endl;
     return os;
+    }
+
+    const sf::Sprite &Card::getSprite() const {
+        return sprite;
+    }
+
+    void Card::setSprite(const sf::Sprite& sprite) {
+        this->sprite = sprite;
     }
