@@ -27,7 +27,9 @@ void HumanPlayer::addSum(int amount) {
     sum += amount;
 }
 
-// int HumanPlayer::getPot(){}
+int HumanPlayer::getPot() {
+    return 0;
+}
 
 void HumanPlayer::addPot(int amount) {}
 

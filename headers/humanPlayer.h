@@ -47,7 +47,7 @@ public:
 	 * @brief Subtracts the bet amount from the human player's sum
 	 * @param amount The amount to subtract from the sum
 	 */
-    void subtractBet(int amount);
+    void subtractBet(int amount) override;
 
 	/**
 	 * @brief Adds the pot amount to the human player's sum
@@ -57,7 +57,7 @@ public:
 
     void addPot(int amount) override;
 
-    // int getPot() override;
+    int getPot() override;
 
 };
 

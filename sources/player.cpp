@@ -37,4 +37,9 @@
             return os;
         }
 
-    int Player::getPot() {}
+    // int Player::getPot() {}
+
+    void Player::addPot(int amount) {}
+
+    void Player::subtractBet(int amount) {}
+

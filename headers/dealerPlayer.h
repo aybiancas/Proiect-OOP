@@ -48,7 +48,7 @@ public:
 	 * @brief Adds a bet amount to the current pot
 	 * @param amount The amount to add to the pot
 	 */
-    void addPot(int amount);
+    void addPot(int amount) override;
 
     void addSum(int amount) override;
 

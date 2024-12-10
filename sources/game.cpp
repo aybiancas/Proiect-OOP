@@ -87,7 +87,9 @@
     // player2(other.player2),
     // dealer(other.dealer),
     roundBet(other.roundBet),
-    window(other.window) {}
+    window(other.window),
+    botBet(other.botBet),
+    humanBet(other.humanBet) {}
 
     // destructor
     Game::~Game() {
@@ -292,7 +294,7 @@
 
     void Game::displayHand() {
         int i = 1;
-        for(auto card : players[0]->getPlayerCards()) {
+        for(auto &card : players[0]->getPlayerCards()) {
             sf::Sprite sprite = card.getSprite();
             sprite.setPosition(100 * i, 100);
             window->draw(sprite);
@@ -309,7 +311,7 @@
 
     void Game::displayFlop() {
         int i = 1;
-        for (auto card : table.getTableCards()) {
+        for (auto &card : table.getTableCards()) {
             sf::Sprite sprite = card.getSprite();
             sprite.setPosition(100 * i, 400);
             window->draw(sprite);

@@ -80,21 +80,21 @@ public:
 	 * @brief Retrieves the player's current pot value
 	 * @return The game pot that is kept by the dealer player
 	 */
-    virtual int getPot();
+    virtual int getPot() = 0;
 
 	/**
 	 * @brief Subtracts the bet amount from the player's sum\n
 	 * This function is pure virtual and is implemented in derived classes
 	 * @param amount The amount to subtract from the player's score
 	 */
-    virtual void subtractBet(int amount) = 0;
+    virtual void subtractBet(int amount);
 
 	/**
 	 * @brief Adds a bet amount to the pot that is kept by the dealer player\n
 	 * This function is pure virtual and is implemented in derived classes
 	 * @param amount The amount to add to the pot
 	 */
-    virtual void addPot(int amount) = 0;
+    virtual void addPot(int amount);
 };
 
 #endif //PLAYER_H

@@ -45,7 +45,7 @@ public:
 	 * @brief Subtracts the bet amount from the bot player's sum
 	 * @param amount The amount to subtract from the sum
 	 */
-    void subtractBet(int amount);
+    void subtractBet(int amount) override;
 
 	/**
 	* @brief Adds a specified amount to the bot player's sum
