@@ -3,7 +3,7 @@
 #define CARD_H
 
 #include <string>
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 
 /**
  * @class Card

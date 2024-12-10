@@ -180,7 +180,7 @@
             throw BetInputInvalidExcept("Error: bet value is invalid");
         }
         players[0]->subtractBet(playerBet);
-        players[2]->addPot(playerBet);
+        players[2]->addSum(playerBet);
         updateSums();
 
         sf::Text playerBetText;
@@ -213,7 +213,7 @@
         std::cout << "Player 2: " << playerBet << std::endl;
 
         players[1]->subtractBet(playerBet);
-        players[2]->addPot(playerBet);
+        players[2]->addSum(playerBet);
         updateSums();
 
         sf::Text botBetText;
@@ -294,7 +294,7 @@
 
     void Game::displayHand() {
         int i = 1;
-        for(auto &card : players[0]->getPlayerCards()) {
+        for(auto const &card : players[0]->getPlayerCards()) {
             sf::Sprite sprite = card.getSprite();
             sprite.setPosition(100 * i, 100);
             window->draw(sprite);
@@ -311,7 +311,7 @@
 
     void Game::displayFlop() {
         int i = 1;
-        for (auto &card : table.getTableCards()) {
+        for (auto const &card : table.getTableCards()) {
             sf::Sprite sprite = card.getSprite();
             sprite.setPosition(100 * i, 400);
             window->draw(sprite);

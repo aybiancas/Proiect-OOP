@@ -21,16 +21,15 @@ int DealerPlayer::getPot() {
     return pot;
 }
 
-void DealerPlayer::addPot(int amount) {
+
+void DealerPlayer::addSum(int amount) {
     pot += amount;
 }
-
-void DealerPlayer::addSum(int amount) {}
 
 int DealerPlayer::getSum() {}
 
 void DealerPlayer::subtractBet(int amount) {}
 
-Card DealerPlayer::dealCard() {}
+// Card DealerPlayer::dealCard() {}
 
 

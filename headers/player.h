@@ -87,14 +87,8 @@ public:
 	 * This function is pure virtual and is implemented in derived classes
 	 * @param amount The amount to subtract from the player's score
 	 */
-    virtual void subtractBet(int amount);
+    virtual void subtractBet(int amount) = 0;
 
-	/**
-	 * @brief Adds a bet amount to the pot that is kept by the dealer player\n
-	 * This function is pure virtual and is implemented in derived classes
-	 * @param amount The amount to add to the pot
-	 */
-    virtual void addPot(int amount);
 };
 
 #endif //PLAYER_H

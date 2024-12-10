@@ -30,6 +30,3 @@ void HumanPlayer::addSum(int amount) {
 int HumanPlayer::getPot() {
     return 0;
 }
-
-void HumanPlayer::addPot(int amount) {}
-

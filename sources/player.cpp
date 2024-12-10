@@ -39,7 +39,5 @@
 
     // int Player::getPot() {}
 
-    void Player::addPot(int amount) {}
-
-    void Player::subtractBet(int amount) {}
+    // void Player::subtractBet(int amount) {}
 

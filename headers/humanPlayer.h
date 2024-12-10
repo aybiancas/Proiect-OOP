@@ -55,7 +55,7 @@ public:
 	 */
     void addSum(int amount) override;
 
-    void addPot(int amount) override;
+    // void addPot(int amount) override;
 
     int getPot() override;
 

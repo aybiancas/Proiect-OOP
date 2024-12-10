@@ -30,5 +30,3 @@ void BotPlayer::addSum(int amount) {
 int BotPlayer::getPot() {
     return 0;
 }
-
-void BotPlayer::addPot(int amount) {}
