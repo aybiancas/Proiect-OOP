@@ -12,8 +12,7 @@ HumanPlayer& HumanPlayer::operator=(const HumanPlayer &other) {
     return *this;
 }
 
-
-int HumanPlayer::getSum() const {
+int HumanPlayer::getSum() {
     return sum;
 }
 
@@ -27,3 +26,8 @@ void HumanPlayer::subtractBet(int amount) {
 void HumanPlayer::addSum(int amount) {
     sum += amount;
 }
+
+// int HumanPlayer::getPot(){}
+
+void HumanPlayer::addPot(int amount) {}
+

@@ -78,7 +78,6 @@ Menu::Menu() :
     }
 
 
-    // optiuni de meniu
     // void Menu::showMenu() const {
     //     std::cout << "Texas Hold' em" << std::endl;
     //     for(int i = 0; i < 3; i++) {
@@ -86,7 +85,6 @@ Menu::Menu() :
     //     }
     // }
 
-    // // alegerea optiunii de meniu
     // void Menu::selectOption(int choice) {
     //     std::cout << "Optiune: ";
     //
@@ -235,7 +233,6 @@ Menu::Menu() :
         game->play();
     }
 
-    // operator cout
     std::ostream& operator<<(std::ostream& os, const Menu& menu) {
         for (int i = 0; i < 3; i++) {
             os << i + 1 << ". " << menu.options[i] << std::endl;

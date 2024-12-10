@@ -12,12 +12,12 @@ DealerPlayer::~DealerPlayer() {}
 
 DealerPlayer& DealerPlayer::operator=(const DealerPlayer &other) {
     Player::operator=(other);
-    deck = other.deck;
+    // deck = other.deck;
     pot = other.pot;
     return *this;
 }
 
-int DealerPlayer::getPot() const {
+int DealerPlayer::getPot() {
     return pot;
 }
 
@@ -25,6 +25,12 @@ void DealerPlayer::addPot(int amount) {
     pot += amount;
 }
 
-void DealerPlayer::addSum(int amount) {
-    pot += amount;
-}
+void DealerPlayer::addSum(int amount) {}
+
+int DealerPlayer::getSum() {}
+
+void DealerPlayer::subtractBet(int amount) {}
+
+Card DealerPlayer::dealCard() {}
+
+

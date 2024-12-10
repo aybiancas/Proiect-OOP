@@ -12,7 +12,7 @@ BotPlayer& BotPlayer::operator=(const BotPlayer &other) {
     return *this;
 }
 
-int BotPlayer::getSum() const {
+int BotPlayer::getSum() {
     return sum;
 }
 
@@ -26,3 +26,7 @@ void BotPlayer::subtractBet(int amount) {
 void BotPlayer::addSum(int amount) {
     sum += amount;
 }
+
+int BotPlayer::getPot() {}
+
+void BotPlayer::addPot(int amount) {}
