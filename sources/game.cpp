@@ -73,7 +73,7 @@
         inputBox.setPosition(650, 460);
 
         inputText.setFont(font);
-        inputText.setString("");
+        inputText.setString(inputBet);
         inputText.setCharacterSize(30);
         inputText.setFillColor(sf::Color::White);
         inputText.setPosition(650, 300);
@@ -162,13 +162,13 @@
     }
 
     void Game::bettingHuman() {
-        std::string playerBetStr = inputText.getString();
+        inputBet = inputText.getString();
         int playerBet = 0;
         // std::cout << "Player 1: ";
         // std::cin >> playerBet;
         // std::cout << std::endl;
         try {
-            playerBet = std::stoi(playerBetStr);
+            playerBet = std::stoi(inputBet);
         }
         catch (const std::invalid_argument&) {
             return;
@@ -530,113 +530,96 @@
     // functia jocului propriu zis
     void Game::play() {
         while(window->isOpen()) {
-            handleTextInput();
             sf::Event event;
             while (window->pollEvent(event)) {
                 if (event.type == sf::Event::Closed) {
                     window->close();
                 }
-            }
-            drawGame();
 
-            /*
-             *  VARIABILA DE WIN STATE, DETERMINA CASTIGATORUL JOCULUI
-             *  IN FUNCTIE DE ACEA VARIABILA SE VOR FACE SI SCHIMBARILE LA SUM UL FIECARUI PLAYER
-             */
+                if(players[0]->getSum() > 0 && players[1]->getSum() > 0) {
+                    handleTextInput();
+                    drawGame();
 
+                    // se dau cartile jucatorilor
+                    dealHands();
+                    displayHand();
 
-            // se dau cartile jucatorilor
-            dealHands();
-            displayHand();
+                    // humanBet = false;
 
-            // humanBet = false;
+                    std::cout << std::endl << "Jucator 1:" << std::endl;
+                    std::cout << players[0]->getSum() << std::endl;
 
-            // afisari de carti din mana, pur de test, vor disparea la adaugarea logicii jocului
-            // (in partialitate, mana jucatorului 1 e de fapt userul care joaca)
-            std::cout << std::endl << "Jucator 1:" << std::endl;
-            // std::cout << players[0] << std::endl;
+                    std::cout << std::endl << "Jucator 2:" << std::endl;
+                    std::cout << players[1]->getSum() << std::endl;
 
-            std::cout << std::endl << "Jucator 2:" << std::endl;
-            // std::cout << players[1] << std::endl;
+                    humanBet = false;
+                    bettingRound(); // de revizuit unde se adauga ca sa functioneze jocul cum trebuie
+                    std::cout << roundBet << std::endl;
+                    std::cout << inputBet << std::endl;
 
-            humanBet = false;
-            bettingRound(); // de revizuit unde se adauga ca sa functioneze jocul cum trebuie
-            // functiile dedicate jocului trb inauntrul loop ului
+                    std::cout << "Repriza 1 / Flop" << std::endl;
+                    dealFlop(); // adauga 3 carti pe masa
+                    std::cout << table << std::endl;
 
-            /*
-             * AICI SE ADAUGA INPUTUL PENTRU BETTING PANA LA CALL si se trece la prima repriza
-            */
+                    displayFlop();
 
-            // acelasi caz ca la maini, afisari pur de test, dispar (in partialitate, cartile de pe masa oricum trebuie sa apara)
-            std::cout << "Repriza 1 / Flop" << std::endl;
-            dealFlop(); // adauga 3 carti pe masa
-            std::cout << table << std::endl;
+                    humanBet = false;
+                    bettingRound();
+                    std::cout << roundBet << std::endl;
+                    std::cout << inputBet << std::endl;
 
-            displayFlop();
+                    // afisari test
+                    std::cout << "Repriza 2 / Turn" << std::endl;
+                    dealTurnRiver(); // adauga o carte pe masa
+                    std::cout << table << std::endl;
 
-            humanBet = false;
-            bettingRound();
-            /*
-             *  SE VA CRESTE BETTING UL PANA LA CALL si se trece la repriza 2 - se afiseaza o carte in plus
-             */
+                    displayTurn();
 
-            // afisari test
-            std::cout << "Repriza 2 / Turn" << std::endl;
-            dealTurnRiver(); // adauga o carte pe masa
-            std::cout << table << std::endl;
+                    humanBet = false;
+                    bettingRound();
+                    std::cout << roundBet << std::endl;
+                    std::cout << inputBet << std::endl;
 
-            displayTurn();
+                    std::cout << "Repriza 3 / River" << std::endl;
+                    dealTurnRiver(); // adauga o carte pe masa
+                    std::cout << table << std::endl;
 
-            humanBet = false;
-            bettingRound();
+                    displayRiver();
 
-            /*
-             *  SE CRESTE DIN NOU BETTING UL PANA LA CALL si se trece la repriza 3 - se va afisa inca o carte
-             */
+                    int handValueP1 = cardGroupsEvaluate(*players[0]);
+                    int handValueP2 = cardGroupsEvaluate(*players[1]);
 
-            std::cout << "Repriza 3 / River" << std::endl;
-            dealTurnRiver(); // adauga o carte pe masa
-            std::cout << table << std::endl;
+                    std::cout << "Hand Value p1: " << std::endl << handValueP1 << std::endl;
+                    std::cout << "Hand value p2: " << std::endl << handValueP2 << std::endl;
 
-            displayRiver();
+                    if (handValueP1 > handValueP2) {
+                        std::cout << "P1 win" << std::endl;
+                        players[0]->addSum(players[2]->getPot());
+                    }
+                    else if (handValueP1 < handValueP2) {
+                        std::cout << "P2 win" << std::endl;
+                        players[1]->addSum(players[2]->getPot());
+                    }
+                    else {
+                        int highCardP1 = highCardEvaluate(*players[0]);
+                        int highCardP2 = highCardEvaluate(*players[1]);
 
-            /*
-             *  SE DETERMINA HAND VALUE PENTRU FIECARE JUCATOR SI SE TRATEAZA LOGICA
-             *  pt handvalue egal se va determina in functie de cartea cu cea mai mare valoare din gruparea de 5 (nu highCard)
-             */
-
-            int handValueP1 = cardGroupsEvaluate(*players[0]);
-            int handValueP2 = cardGroupsEvaluate(*players[1]);
-
-            std::cout << "Hand Value p1: " << std::endl << handValueP1 << std::endl;
-            std::cout << "Hand value p2: " << std::endl << handValueP2 << std::endl;
-
-            if (handValueP1 > handValueP2) {
-                std::cout << "P1 win" << std::endl;
-                players[0]->addSum(players[2]->getPot());
-            }
-            else if (handValueP1 < handValueP2) {
-                std::cout << "P2 win" << std::endl;
-                players[1]->addSum(players[2]->getPot());
-            }
-            else {
-                int highCardP1 = highCardEvaluate(*players[0]);
-                int highCardP2 = highCardEvaluate(*players[1]);
-
-                if (highCardP1 > highCardP2) {
-                    std::cout << "P1 win" << std::endl;
-                    players[0]->addSum(players[2]->getPot());
-                }
-                else if (highCardP1 < highCardP2) {
-                    std::cout << "P2 win" << std::endl;
-                    players[1]->addSum(players[2]->getPot());
-                }
-                else {
-                    std::cout << "Tie" << std::endl;
-                    players[0]->addSum((players[2]->getPot()) / 2);
-                    players[1]->addSum((players[2]->getPot()) / 2);
+                        if (highCardP1 > highCardP2) {
+                            std::cout << "P1 win" << std::endl;
+                            players[0]->addSum(players[2]->getPot());
+                        }
+                        else if (highCardP1 < highCardP2) {
+                            std::cout << "P2 win" << std::endl;
+                            players[1]->addSum(players[2]->getPot());
+                        }
+                        else {
+                            std::cout << "Tie" << std::endl;
+                            players[0]->addSum((players[2]->getPot()) / 2);
+                            players[1]->addSum((players[2]->getPot()) / 2);
+                        }
+                    }
+                    resetRound();
                 }
             }
-            resetRound();
         }
     }
