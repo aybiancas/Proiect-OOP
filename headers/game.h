@@ -38,6 +38,7 @@ class Game {
     std::vector<std::string> options; ///< List of available options for players
     std::vector<sf::Text> playerOptions; ///< SFML Text objects displaying player options
     sf::Font font; ///< SFML Font used for text rendering
+    bool inputTextCompleted;
     bool botBet;
     bool humanBet;
 
@@ -77,6 +78,11 @@ public:
      * @brief Draws the game interface and updates the window
      */
     void drawGame();
+
+    /**
+     * @brief Draws the game betting pop-ups (e.g. the pot, player bets, input box) and updates the window
+     */
+    void drawBettingPopups();
 
     /**
      * @brief Handles the betting logic for the human player

@@ -14,6 +14,7 @@
     deck(),
     roundBet(0),
     window(nullptr),
+    inputTextCompleted(false),
     botBet(true),
     humanBet(true) {
         std::cout << "Game constructor" << std::endl;
@@ -36,28 +37,28 @@
 
         player1Sum.setFont(font);
         player1Sum.setString("Suma P1: " + std::to_string(players[0]->getSum()));
-        std::cout << players[0]->getSum();
+        // std::cout << players[0]->getSum();
         player1Sum.setCharacterSize(40);
         player1Sum.setFillColor(sf::Color::White);
         player1Sum.setPosition(650 - player1Sum.getGlobalBounds().width / 2, 800);
 
         player2Sum.setFont(font);
         player2Sum.setString("Suma P2: " + std::to_string(players[1]->getSum()));
-        std::cout << players[1]->getSum();
+        // std::cout << players[1]->getSum();
         player2Sum.setCharacterSize(40);
         player2Sum.setFillColor(sf::Color::White);
         player2Sum.setPosition(650 - player1Sum.getGlobalBounds().width / 2, 50);
 
         textRoundPot.setFont(font);
         textRoundPot.setString("Pot: " + std::to_string(players[2]->getPot()));
-        std::cout << players[2]->getPot();
+        // std::cout << players[2]->getPot();
         textRoundPot.setCharacterSize(40);
         textRoundPot.setFillColor(sf::Color::White);
         textRoundPot.setPosition(350 - textRoundPot.getGlobalBounds().width / 2, 250);
 
         textRoundBet.setFont(font);
         textRoundBet.setString("Pariu curent: " + std::to_string(roundBet));
-        std::cout << roundBet;
+        // std::cout << roundBet;
         textRoundBet.setCharacterSize(40);
         textRoundBet.setFillColor(sf::Color::White);
         textRoundBet.setPosition(650 - textRoundBet.getGlobalBounds().width / 2, 150);
@@ -114,15 +115,17 @@
             if (event.type == sf::Event::Closed) {
                 window->close();
             }
-            else if (event.type == sf::Event::TextEntered) {
-                // Handle text input
+            else if (!inputTextCompleted && event.type == sf::Event::TextEntered) {
                 if (event.text.unicode < 128) {
                     if (event.text.unicode == 8 && inputText.getString().getSize() > 0) {
-                        // Backspace key, remove last character
                         std::string currentString = inputText.getString();
                         currentString.pop_back();
                         inputText.setString(currentString);
-                    } else if (event.text.unicode != 13) {  // Ignore Enter key
+                    }
+                    else if (event.text.unicode == 13) {
+                        inputTextCompleted = true;
+                    }
+                    else {
                         inputText.setString(inputText.getString() + static_cast<char>(event.text.unicode));
                     }
                 }
@@ -137,9 +140,19 @@
         window->draw(player2Sum);
         window->draw(textRoundPot);
         window->draw(textRoundBet);
-        window->draw(promptText);
-        window->draw(inputBox);
-        window->draw(inputText);
+
+        drawBettingPopups();
+        // de adaugat display la carti
+
+        window->display();
+    }
+
+    void Game::drawBettingPopups() {
+        if (!inputTextCompleted) {
+            window->draw(promptText);
+            window->draw(inputBox);
+            window->draw(inputText);
+        }
 
         if (!inputText.getString().isEmpty()) {
             sf::Text betText;
@@ -147,13 +160,10 @@
             betText.setString("P1 Bet: " + inputText.getString());
             betText.setCharacterSize(30);
             betText.setFillColor(sf::Color::White);
-            betText.setPosition(650 - betText.getGlobalBounds().width / 2, 500);
+            betText.setPosition(650 - betText.getGlobalBounds().width / 2, 450);
             window->draw(betText);
         }
 
-        // de adaugat display la carti
-
-        window->display();
     }
 
     void Game::updateSums() {
@@ -162,15 +172,20 @@
     }
 
     void Game::bettingHuman() {
-        inputBet = inputText.getString();
+        std::cout << "betting round HUman enter\n";
+        inputBet = inputText.getString().toAnsiString();
+        std::cout << inputBet;
         int playerBet = 0;
         // std::cout << "Player 1: ";
         // std::cin >> playerBet;
         // std::cout << std::endl;
         try {
             playerBet = std::stoi(inputBet);
+            std::cout << "player betting: " << playerBet << std::endl;
+
         }
         catch (const std::invalid_argument&) {
+            std::cout << "Invalid input\n";
             return;
         }
         if(playerBet > players[0]->getSum()) {
@@ -188,7 +203,7 @@
         playerBetText.setString("P1 Bet: " + std::to_string(playerBet));
         playerBetText.setCharacterSize(30);
         playerBetText.setFillColor(sf::Color::White);
-        playerBetText.setPosition(650 - playerBetText.getGlobalBounds().width / 2, 400);
+        playerBetText.setPosition(650 - playerBetText.getGlobalBounds().width / 2, 300);
 
         window->draw(playerBetText);
         sf::sleep(sf::seconds(1));
@@ -198,6 +213,7 @@
     }
 
     void Game::bettingBot() {
+        std::cout << "betting round BOT enter\n";
         if (botBet) {
             return;
         }
@@ -234,45 +250,17 @@
 
     void Game::bettingRound() {
 
-        if(dynamic_cast<HumanPlayer*>(players[0]) && botBet && !humanBet) bettingHuman();
-
-        sf::sleep(sf::seconds(1));
-
-        if(dynamic_cast<BotPlayer*>(players[1]) && !botBet && humanBet) bettingBot();
-
-        sf::sleep(sf::seconds(1));
-
-
-        /*
-        int playerBetHuman = 0;
-        std::cout << "Player 1: ";
-        std::cin >> playerBetHuman;
-        std::cout << std::endl;
-        if(playerBetHuman > players[0]->getSum()) {
-            throw NotEnoughFundsExcept("Error: the player does not have enough credits for this bet");
+        std::cout << "betting round enter\n";
+        if(dynamic_cast<HumanPlayer*>(players[0]) && (botBet && !humanBet)) {
+            bettingHuman();
+            sf::sleep(sf::seconds(1));
         }
-        if(playerBetHuman < 0) {
-            throw BetInputInvalidExcept("Error: bet value is invalid");
+
+        else if(dynamic_cast<BotPlayer*>(players[1]) && (!botBet && humanBet)) {
+            bettingBot();
+            sf::sleep(sf::seconds(1));
         }
-        players[0]->subtractBet(playerBetHuman);
-        players[2]->addPot(playerBetHuman);
-        updateSums();
-
-        int playerBetBot = 0;
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<> distrib(1, 500);
-        playerBetBot = distrib(gen);
-        if(playerBetBot > players[1]->getSum()) {
-            throw NotEnoughFundsExcept("Error: the player does not have enough credits for this bet");
-        }
-        std::cout << "Player 2: " << playerBetBot << std::endl;
-
-        players[1]->subtractBet(playerBetBot);
-        players[2]->addPot(playerBetBot);
-
-        updateSums();
-        */
+        else std::cout << "dynamic cast esuat\n";
     }
 
     void Game::resetRound() {
@@ -280,7 +268,9 @@
         players[0]->clearHand();
         players[1]->clearHand();
         deck.resetDeck();
-        botBet = false;
+        botBet = true;
+        humanBet = true;
+        inputTextCompleted = false;
     }
 
     // aici se dau cartile playerilor, in maniera 1-2-1-2
@@ -537,67 +527,88 @@
                 }
 
                 if(players[0]->getSum() > 0 && players[1]->getSum() > 0) {
+                    std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
                     handleTextInput();
                     drawGame();
+                    // drawBettingPopups();
 
                     // se dau cartile jucatorilor
-                    dealHands();
-                    displayHand();
+                    if(inputTextCompleted) dealHands();
+                    //displayHand();
 
-                    // humanBet = false;
+                    std::cout << std::endl << "Jucator 1 suma: ";
+                    std::cout << players[0]->getSum() << "\n\n";
 
-                    std::cout << std::endl << "Jucator 1:" << std::endl;
-                    std::cout << players[0]->getSum() << std::endl;
-
-                    std::cout << std::endl << "Jucator 2:" << std::endl;
-                    std::cout << players[1]->getSum() << std::endl;
+                    std::cout << std::endl << "Jucator 2: ";
+                    std::cout << players[1]->getSum() << "\n\n";
 
                     humanBet = false;
+                    inputTextCompleted = false;
+                    handleTextInput();
+                    drawBettingPopups();
+                    // functie de draw la betting options pe ecran separata si apoi apelata in drawgame
+
+                    std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
                     bettingRound(); // de revizuit unde se adauga ca sa functioneze jocul cum trebuie
-                    std::cout << roundBet << std::endl;
-                    std::cout << inputBet << std::endl;
+                    std::cout << "Roundbet: " << roundBet << "\n\n";
+                    std::cout << "Player input bet: " << inputBet << "\n\n";
+                    std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
 
-                    std::cout << "Repriza 1 / Flop" << std::endl;
-                    dealFlop(); // adauga 3 carti pe masa
-                    std::cout << table << std::endl;
 
-                    displayFlop();
+                    std::cout << "Repriza 1 / Flop : ";
+                    if(inputTextCompleted) dealFlop(); // adauga 3 carti pe masa
+                    std::cout << table << "\n\n";
+
+                    //displayFlop();
 
                     humanBet = false;
+                    inputTextCompleted = false;
+                    handleTextInput();
+                    drawBettingPopups();
+
+                    std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
                     bettingRound();
-                    std::cout << roundBet << std::endl;
-                    std::cout << inputBet << std::endl;
+                    std::cout << "Roundbet: " << roundBet << "\n\n";
+                    std::cout << "Player input bet: " << inputBet << "\n\n";
+                    std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
+
 
                     // afisari test
-                    std::cout << "Repriza 2 / Turn" << std::endl;
-                    dealTurnRiver(); // adauga o carte pe masa
-                    std::cout << table << std::endl;
+                    std::cout << "Repriza 2 / Turn : ";
+                    if(inputTextCompleted) dealTurnRiver(); // adauga o carte pe masa
+                    std::cout << table << "\n\n";
 
-                    displayTurn();
+                    //displayTurn();
 
                     humanBet = false;
+                    inputTextCompleted = false;
+                    handleTextInput();
+                    drawBettingPopups();
+
+                    std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
                     bettingRound();
-                    std::cout << roundBet << std::endl;
-                    std::cout << inputBet << std::endl;
+                    std::cout << "Roundbet: " << roundBet << "\n\n";
+                    std::cout << "Player input bet: " << inputBet << "\n\n";
+                    std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
 
-                    std::cout << "Repriza 3 / River" << std::endl;
-                    dealTurnRiver(); // adauga o carte pe masa
-                    std::cout << table << std::endl;
+                    std::cout << "Repriza 3 / River : ";
+                    if(inputTextCompleted) dealTurnRiver(); // adauga o carte pe masa
+                    std::cout << table << "\n\n";
 
-                    displayRiver();
+                    // displayRiver();
 
                     int handValueP1 = cardGroupsEvaluate(*players[0]);
                     int handValueP2 = cardGroupsEvaluate(*players[1]);
 
-                    std::cout << "Hand Value p1: " << std::endl << handValueP1 << std::endl;
-                    std::cout << "Hand value p2: " << std::endl << handValueP2 << std::endl;
+                    std::cout << "Hand Value p1: " << handValueP1 << "\n\n";
+                    std::cout << "Hand value p2: " << handValueP2 << "\n\n";
 
                     if (handValueP1 > handValueP2) {
-                        std::cout << "P1 win" << std::endl;
+                        std::cout << "P1 win" << "\n\n";
                         players[0]->addSum(players[2]->getPot());
                     }
                     else if (handValueP1 < handValueP2) {
-                        std::cout << "P2 win" << std::endl;
+                        std::cout << "P2 win" << "\n\n";
                         players[1]->addSum(players[2]->getPot());
                     }
                     else {
@@ -605,20 +616,32 @@
                         int highCardP2 = highCardEvaluate(*players[1]);
 
                         if (highCardP1 > highCardP2) {
-                            std::cout << "P1 win" << std::endl;
+                            std::cout << "P1 win" << "\n\n";
                             players[0]->addSum(players[2]->getPot());
                         }
                         else if (highCardP1 < highCardP2) {
-                            std::cout << "P2 win" << std::endl;
+                            std::cout << "P2 win" << "\n\n";
                             players[1]->addSum(players[2]->getPot());
                         }
                         else {
-                            std::cout << "Tie" << std::endl;
+                            std::cout << "Tie" << "\n\n";
                             players[0]->addSum((players[2]->getPot()) / 2);
                             players[1]->addSum((players[2]->getPot()) / 2);
                         }
                     }
+                    if (players[0]->getSum() <= 0 || players[1]->getSum() <= 0) {
+                        if (players[0]->getSum() > 0) {
+                            std::cout << "P1 overall win" << "\n\n";
+                        }
+                        else if (players[1]->getSum() > 0) {
+                            std::cout << "P2 overall win" << "\n\n";
+                        }
+                        else std::cout << "Overall Tie" << "\n\n";
+                        break;
+                    }
                     resetRound();
+                    std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
+
                 }
             }
         }
