@@ -534,7 +534,7 @@
 
                     // se dau cartile jucatorilor
                     if(inputTextCompleted) dealHands();
-                    //displayHand();
+                    displayHand();
 
                     std::cout << std::endl << "Jucator 1 suma: ";
                     std::cout << players[0]->getSum() << "\n\n";
@@ -559,7 +559,7 @@
                     if(inputTextCompleted) dealFlop(); // adauga 3 carti pe masa
                     std::cout << table << "\n\n";
 
-                    //displayFlop();
+                    displayFlop();
 
                     humanBet = false;
                     inputTextCompleted = false;
@@ -578,7 +578,7 @@
                     if(inputTextCompleted) dealTurnRiver(); // adauga o carte pe masa
                     std::cout << table << "\n\n";
 
-                    //displayTurn();
+                    displayTurn();
 
                     humanBet = false;
                     inputTextCompleted = false;
@@ -595,7 +595,7 @@
                     if(inputTextCompleted) dealTurnRiver(); // adauga o carte pe masa
                     std::cout << table << "\n\n";
 
-                    // displayRiver();
+                    displayRiver();
 
                     int handValueP1 = cardGroupsEvaluate(*players[0]);
                     int handValueP2 = cardGroupsEvaluate(*players[1]);
