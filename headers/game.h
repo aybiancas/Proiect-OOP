@@ -43,16 +43,15 @@ class Game {
     bool botBet;
     bool humanBet;
 
-
-public:
-
-    static Game *getInstance();
-
     /**
      * @brief Default Game constructor\n
      * Constructs a new Game object and its components
      **/
     Game();
+
+public:
+
+    static Game *getInstance();
 
     /**
      * @brief Game copy constructor. Automatically disabled.
