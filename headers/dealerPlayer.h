@@ -49,6 +49,8 @@ public:
     int getSum() override;
 
     void subtractBet(int amount) override;
+
+	void setSum(int amount) override;
 };
 
 #endif //DEALERPLAYER_H

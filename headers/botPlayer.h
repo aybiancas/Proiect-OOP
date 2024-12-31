@@ -55,6 +55,8 @@ public:
 
     int getPot() override;
 
+	void setSum(int amount) override;
+
     // void addPot(int amount) override;
 
 };

@@ -34,6 +34,10 @@ void DealerPlayer::subtractBet(int amount) {
     pot -= amount;
 }
 
+void DealerPlayer::setSum(int amount) {
+    this->pot = amount;
+}
+
 // Card DealerPlayer::dealCard() {}
 
 

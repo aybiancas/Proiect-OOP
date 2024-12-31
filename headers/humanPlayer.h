@@ -59,6 +59,8 @@ public:
 
     int getPot() override;
 
+	void setSum(int amount) override;
+
 };
 
 #endif //HUMANPLAYER_H
