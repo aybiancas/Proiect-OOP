@@ -89,6 +89,8 @@ public:
 	 */
     virtual void subtractBet(int amount) = 0;
 
+	virtual void setSum(int amount) = 0;
+
 };
 
 #endif //PLAYER_H

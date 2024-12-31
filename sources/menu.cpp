@@ -168,8 +168,8 @@ Menu::Menu() :
                     }
                     else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                         if (selectedOption == 0) {
-                            startGame();
                             std::cout << "Game started" << std::endl;
+                            startGame();
                         }
                         else if (selectedOption == 1) {
                             ruleShow = true;
