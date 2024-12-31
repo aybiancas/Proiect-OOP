@@ -15,7 +15,7 @@ class Deck {
     std::vector<Card> cards; ///< A vector containing the cards in the deck
     std::vector<std::string> suits; ///< A vector containing the suit names
     std::vector<std::string> ranks; ///< A vector containing the rank names
-	std::vector<sf::Texture*> textures;
+	std::vector<sf::Texture> textures;
 
 public:
 	/**
@@ -40,7 +40,7 @@ public:
 	 * @param rank The rank of the card
 	 * @return An sf::Sprite object representing the card
 	 */
-    sf::Sprite loadCard(const std::string &suit, const std::string &rank);
+    //sf::Sprite loadCard(const std::string &suit, const std::string &rank);
 
 	/**
 	 * @brief Assignment operator to assign one deck to another

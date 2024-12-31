@@ -81,6 +81,13 @@ public:
     const sf::Sprite &getSprite() const;
 
 	/**
+	 * @brief Gets the texture associated with the card
+	 *
+	 * @return A constant reference to the sprite representing the card
+	 */
+	const sf::Texture &getTexture() const;
+
+	/**
 	 * @brief Sets the sprite for the card
 	 *
 	 * @param sprite The new sprite for the card

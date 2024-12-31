@@ -244,13 +244,19 @@ void Game::dealHands() {
 }
 
 void Game::displayHand() {
-	int i = 1;
+	int i = 2;
 	for (auto const &card: players[0]->getPlayerCards()) {
+		std::cout << "Card address: " << &card << std::endl;
 		sf::Sprite sprite = card.getSprite();
-		sprite.setPosition(100 * i, 100);
+		std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
+		if (sprite.getTexture() == nullptr) {
+			std::cout << "Error: Texture not found for card!" << std::endl;
+		}
+		sprite.setPosition(100 * i, 200);
 		window->draw(sprite);
 		i++;
 	}
+	window->display();
 }
 
 void Game::dealFlop() {
@@ -260,13 +266,19 @@ void Game::dealFlop() {
 }
 
 void Game::displayFlop() {
-	int i = 1;
+	int i = 2;
 	for (auto const &card: table.getTableCards()) {
+		std::cout << "Card address: " << &card << std::endl;
 		sf::Sprite sprite = card.getSprite();
-		sprite.setPosition(100 * i, 400);
+		std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
+		if (sprite.getTexture() == nullptr) {
+			std::cout << "Error: Texture not found for card!" << std::endl;
+		}
+		sprite.setPosition(100 * i, 500);
 		window->draw(sprite);
 		i++;
 	}
+	window->display();
 }
 
 void Game::dealTurnRiver() {
@@ -275,16 +287,28 @@ void Game::dealTurnRiver() {
 
 void Game::displayTurn() {
 	std::vector<Card> cards = table.getTableCards();
+	std::cout << "Card address: " << &cards[3] << std::endl;
 	sf::Sprite sprite = cards[3].getSprite();
-	sprite.setPosition(100 * 4, 400);
+	std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
+	if (sprite.getTexture() == nullptr) {
+		std::cout << "Error: Texture not found for card!" << std::endl;
+	}
+	sprite.setPosition(100 * 4, 500);
 	window->draw(sprite);
+	window->display();
 }
 
 void Game::displayRiver() {
 	std::vector<Card> cards = table.getTableCards();
+	std::cout << "Card address: " << &cards[4] << std::endl;
 	sf::Sprite sprite = cards[4].getSprite();
-	sprite.setPosition(100 * 5, 400);
+	std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
+	if (sprite.getTexture() == nullptr) {
+		std::cout << "Error: Texture not found for card!" << std::endl;
+	}
+	sprite.setPosition(100 * 5, 500);
 	window->draw(sprite);
+	window->display();
 }
 
 bool Game::isFlush(const std::vector<int> &suitCount) {

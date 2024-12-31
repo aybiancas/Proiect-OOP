@@ -10,9 +10,17 @@
     ranks({"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"}) {
         for (const auto &suit : suits) {
             for (const auto &rank : ranks) {
-                Card card(suit, rank);
-                card.setSprite(loadCard(suit, rank));
+                // sf::Texture texture;
+                textures.emplace_back();
+                std::string path = "textures/cards/" + rank + "_" + suit + ".png";
+                std::cout << path << std::endl;
+                if(!textures.back().loadFromFile(path)) {
+                    throw FileLoadFailure("Error: Failed to load card texture");
+                }
+                //textures.emplace_back(std::move(texture));
+                Card card(suit, rank, textures.back());
                 cards.emplace_back(card);
+                std::cout << "Texture address: " << &textures.back() << std::endl;
             }
         }
         std::cout << "Deck constructor" << std::endl;
@@ -22,11 +30,8 @@
 
     Deck::~Deck() {
         std::cout << "Deck destructor" << std::endl;
-        for(auto texture : textures) {
-            delete texture;
-        }
     }
-
+/*
     sf::Sprite Deck::loadCard(const std::string &suit, const std::string &rank) {
         std::string path = "textures/cards/" + rank + "_" + suit + ".png";
         sf::Texture* texture = new sf::Texture();
@@ -38,7 +43,7 @@
         sprite.setTexture(*texture);
         return sprite;
     }
-
+*/
 
     Deck& Deck::operator=(const Deck &other) {
         cards = other.cards;
@@ -68,7 +73,13 @@
         cards.clear();
         for (const auto &suit : suits) {
             for (const auto &rank : ranks) {
-                cards.emplace_back(suit, rank);
+                sf::Texture texture;
+                std::string path = "textures/cards/" + rank + "_" + suit + ".png";
+                if(!texture.loadFromFile(path)) {
+                    throw FileLoadFailure("Error: Failed to load card texture");
+                }
+                Card card(suit, rank, texture);
+                cards.emplace_back(card);
             }
         }
         shuffleCards();
