@@ -17,6 +17,7 @@
  * @brief Represents the main game logic for the Texas Hold' em game
  */
 class Game {
+    static Game* game;
     Deck deck; ///< Deck object representing the game deck of cards
     // HumanPlayer player1;
     // BotPlayer player2;
@@ -44,6 +45,9 @@ class Game {
 
 
 public:
+
+    static Game *getInstance();
+
     /**
      * @brief Default Game constructor\n
      * Constructs a new Game object and its components
@@ -51,10 +55,10 @@ public:
     Game();
 
     /**
-     * @brief Game copy constructor
+     * @brief Game copy constructor. Automatically disabled.
      * @param other Another Game-type object to assign from
      */
-    Game(const Game &other);
+    Game(const Game &other) = delete;
 
     /**
      * @brief Game destructor
@@ -62,11 +66,11 @@ public:
     ~Game();
 
     /**
-     * @brief Copy assignment operator for the Game class
+     * @brief Copy assignment operator for the Game class. Automatically disabled.
      * @param other Another Game-type object to assign from
      * @return Reference to the assigned Game object
      */
-    Game &operator=(const Game &other);
+    Game &operator=(const Game &other) = delete;
 
 
     /**

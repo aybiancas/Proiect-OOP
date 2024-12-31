@@ -20,7 +20,7 @@ class Menu {
     sf::Text rulesText; ///< Text object for displaying rules in the menu
     std::vector<sf::Text> menuOptions; ///< List of text objects for the menu options
     std::vector<std::string> options; ///< List of menu option labels
-    Game* game; ///< Pointer to the Game object
+    // Game* game; ///< Pointer to the Game object
     int selectedOption; ///< Index of the currently selected menu option
     int ruleShow; ///< Flag to determine if the rules should be shown
 

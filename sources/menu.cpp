@@ -10,7 +10,6 @@
 Menu::Menu() :
     window(nullptr),
     options({"Start", "Reguli", "Iesi"}),
-    game(nullptr),
     selectedOption(0),
     ruleShow(0) {
     std::cout << "Menu created" << std::endl;
@@ -58,12 +57,10 @@ Menu::Menu() :
     Menu::Menu (const Menu &other) :
     window(other.window),
     options(other.options),
-    game(other.game),
     selectedOption(other.selectedOption),
     ruleShow(other.ruleShow) {}
 
     Menu::~Menu() {
-        delete game;
         delete window;
         std::cout << "Menu closed" << std::endl;
     }
@@ -71,45 +68,10 @@ Menu::Menu() :
     Menu& Menu::operator=(const Menu &other) {
         window = other.window;
         options = other.options;
-        game = other.game;
         selectedOption = other.selectedOption;
         ruleShow = other.ruleShow;
         return *this;
     }
-
-
-    // void Menu::showMenu() const {
-    //     std::cout << "Texas Hold' em" << std::endl;
-    //     for(int i = 0; i < 3; i++) {
-    //         std::cout << i + 1 << ". " << options[i] << std::endl;
-    //     }
-    // }
-
-    // void Menu::selectOption(int choice) {
-    //     std::cout << "Optiune: ";
-    //
-    //     switch (choice) {
-    //         case 1:
-    //             std::cout << "Incepe jocul ..." << std::endl;
-    //         startGame();
-    //         // apelare functie de joc
-    //         break;
-    //
-    //         case 2:
-    //             std::cout << "Reguli: [...]" << std::endl;
-    //         showRules();
-    //         // idee: sa ramana in meniu inainte de a inchide meniul
-    //         break;
-    //
-    //         case 3:
-    //             std::cout << "Se inchide ..." << std::endl;
-    //         // opreste programul
-    //         break;
-    //
-    //         default:
-    //             std::cout << "Invalid ..." << std::endl;
-    //     }
-    // }
 
 
     void Menu::drawMenu() {
@@ -225,10 +187,7 @@ Menu::Menu() :
     }
 
     void Menu::startGame() {
-        if (game != nullptr) {
-            delete game;
-        }
-        game = new Game();
+        Game* game = Game::getInstance();
         window->close();
         game->play();
     }

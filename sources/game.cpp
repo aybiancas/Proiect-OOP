@@ -10,6 +10,16 @@
 #include "../headers/FileLoadFailureExcept.h"
 #include "../headers/NotEnoughFundsExcept.h"
 
+    Game* Game::game = nullptr;
+
+    Game* Game::getInstance() {
+        if(game == nullptr) {
+            game = new Game();
+        }
+        return game;
+    }
+
+
     Game::Game() :
     deck(),
     roundBet(0),
@@ -81,32 +91,9 @@
 
     }
 
-    // constructor de copiere
-    Game::Game(const Game &other) :
-    deck(other.deck),
-    // player1(other.player1),
-    // player2(other.player2),
-    // dealer(other.dealer),
-    roundBet(other.roundBet),
-    window(other.window),
-    botBet(other.botBet),
-    humanBet(other.humanBet) {}
-
     // destructor
     Game::~Game() {
         std::cout << "Game destructor" << std::endl;
-    }
-
-    // operator =
-    Game& Game::operator=(const Game &other) {
-        deck = other.deck;
-        // player1 = other.player1;
-        // player2 = other.player2;
-        players = other.players;
-        roundBet = other.roundBet;
-        table = other.table;
-        window = other.window;
-        return *this;
     }
 
     void Game::handleTextInput(sf::Event &event) {
