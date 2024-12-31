@@ -30,9 +30,6 @@
         std::cout << "Game constructor" << std::endl;
         deck.shuffleCards();
         deck.shuffleCards();
-        // deck.shuffleCards();
-        // deck.shuffleCards();
-        // deck.shuffleCards();
 
         players.push_back(new HumanPlayer);
         players.push_back(new BotPlayer);
@@ -111,6 +108,7 @@
                     }
                     else if (event.text.unicode == '\r') {
                         inputTextCompleted = true;
+                        // inputText.setString("");
                     }
                     else {
                         inputText.setString(inputText.getString() + static_cast<char>(event.text.unicode));
@@ -525,10 +523,9 @@
                     // drawBettingPopups();
 
                     // se dau cartile jucatorilor
-                    if(inputTextCompleted) {
-                        dealHands();
-                        displayHand();
-                    }
+
+                    dealHands();
+                    displayHand();
 
                     std::cout << std::endl << "Jucator 1 suma: ";
                     std::cout << players[0]->getSum() << "\n\n";
