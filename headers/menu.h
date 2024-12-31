@@ -11,6 +11,7 @@
  * @brief The Menu class handles the user interface of the game, including displaying the menu, selecting options, and showing rules
  */
 class Menu {
+	static Menu* menu;
     sf::RenderWindow* window; ///< Pointer to the SFML render window
     sf::Font titleFont; ///< Font for the title of the menu
     sf::Font textFont; ///< Font for regular text (options) in the menu
@@ -24,18 +25,21 @@ class Menu {
     int selectedOption; ///< Index of the currently selected menu option
     int ruleShow; ///< Flag to determine if the rules should be shown
 
-public:
 	/**
 	 * @brief Default Menu constructor\n
 	 * Initializes the menu, loading fonts, textures, and setting up default values
 	 */
-    Menu();
+	Menu();
+
+public:
+
+	static Menu* getInstance();
 
 	/**
 	 * @brief Menu copy constructor
 	 * @param other The Menu object to copy
 	 */
-    Menu(const Menu &other);
+    Menu(const Menu &other) = delete;
 
 	/**
 	 * @brief Menu destructor\n
@@ -48,7 +52,7 @@ public:
 	 * @param other The Menu object to assign from.
 	 * @return A reference to the current Menu object.
 	 */
-    Menu& operator=(const Menu &other);
+    Menu& operator=(const Menu &other) = delete;
 
     // void showMenu() const;
 

@@ -5,9 +5,9 @@
 
 int main() {
 
+    Menu* menu = Menu::getInstance();
     try {
-        Menu menu;
-        menu.run();
+        menu->run();
     } catch (FileLoadFailure& e) {
         std::cout << "FileLoadFailure: " << e.what() << std::endl;
     } catch (NotEnoughFundsExcept& e) {

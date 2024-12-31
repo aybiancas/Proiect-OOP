@@ -7,6 +7,16 @@
 
 #include "../headers/FileLoadFailureExcept.h"
 
+Menu* Menu::menu = nullptr;
+
+Menu* Menu::getInstance() {
+    if(menu == nullptr) {
+        menu = new Menu();
+    }
+    return menu;
+}
+
+
 Menu::Menu() :
     window(nullptr),
     options({"Start", "Reguli", "Iesi"}),
@@ -54,17 +64,18 @@ Menu::Menu() :
     rulesText.setPosition(50, 150);
 }
 
+/*
     Menu::Menu (const Menu &other) :
     window(other.window),
     options(other.options),
     selectedOption(other.selectedOption),
     ruleShow(other.ruleShow) {}
-
+*/
     Menu::~Menu() {
         delete window;
         std::cout << "Menu closed" << std::endl;
     }
-
+/*
     Menu& Menu::operator=(const Menu &other) {
         window = other.window;
         options = other.options;
@@ -72,7 +83,7 @@ Menu::Menu() :
         ruleShow = other.ruleShow;
         return *this;
     }
-
+*/
 
     void Menu::drawMenu() {
         sf::Sprite sprite;
