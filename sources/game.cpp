@@ -109,8 +109,8 @@
         return *this;
     }
 
-    void Game::handleTextInput() {
-        sf::Event event;
+    void Game::handleTextInput(sf::Event &event) {
+        // inputText.setString("");
         while (window->pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window->close();
@@ -122,7 +122,7 @@
                         currentString.pop_back();
                         inputText.setString(currentString);
                     }
-                    else if (event.text.unicode == 13) {
+                    else if (event.text.unicode == '\r') {
                         inputTextCompleted = true;
                     }
                     else {
@@ -528,13 +528,20 @@
 
                 if(players[0]->getSum() > 0 && players[1]->getSum() > 0) {
                     std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
-                    handleTextInput();
-                    drawGame();
+
+                    inputTextCompleted = false;
+                    while(!inputTextCompleted) {
+                        handleTextInput(event);
+                        drawGame();
+                    }
+
                     // drawBettingPopups();
 
                     // se dau cartile jucatorilor
-                    if(inputTextCompleted) dealHands();
-                    displayHand();
+                    if(inputTextCompleted) {
+                        dealHands();
+                        displayHand();
+                    }
 
                     std::cout << std::endl << "Jucator 1 suma: ";
                     std::cout << players[0]->getSum() << "\n\n";
@@ -544,8 +551,10 @@
 
                     humanBet = false;
                     inputTextCompleted = false;
-                    handleTextInput();
-                    drawBettingPopups();
+                    while(!inputTextCompleted) {
+                        handleTextInput(event);
+                        drawGame();
+                    }
                     // functie de draw la betting options pe ecran separata si apoi apelata in drawgame
 
                     std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
@@ -556,15 +565,17 @@
 
 
                     std::cout << "Repriza 1 / Flop : ";
-                    if(inputTextCompleted) dealFlop(); // adauga 3 carti pe masa
+                    dealFlop(); // adauga 3 carti pe masa
                     std::cout << table << "\n\n";
 
                     displayFlop();
 
                     humanBet = false;
                     inputTextCompleted = false;
-                    handleTextInput();
-                    drawBettingPopups();
+                    while(!inputTextCompleted) {
+                        handleTextInput(event);
+                        drawGame();
+                    }
 
                     std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
                     bettingRound();
@@ -575,15 +586,17 @@
 
                     // afisari test
                     std::cout << "Repriza 2 / Turn : ";
-                    if(inputTextCompleted) dealTurnRiver(); // adauga o carte pe masa
+                    dealTurnRiver(); // adauga o carte pe masa
                     std::cout << table << "\n\n";
 
                     displayTurn();
 
                     humanBet = false;
                     inputTextCompleted = false;
-                    handleTextInput();
-                    drawBettingPopups();
+                    while(!inputTextCompleted) {
+                        handleTextInput(event);
+                        drawGame();
+                    }
 
                     std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
                     bettingRound();
@@ -592,7 +605,7 @@
                     std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
 
                     std::cout << "Repriza 3 / River : ";
-                    if(inputTextCompleted) dealTurnRiver(); // adauga o carte pe masa
+                    dealTurnRiver(); // adauga o carte pe masa
                     std::cout << table << "\n\n";
 
                     displayRiver();

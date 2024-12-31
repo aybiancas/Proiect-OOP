@@ -71,8 +71,9 @@ public:
 
     /**
      * @brief Handles the player 1's text input for the bet
+     * @param event Reference to the game events
      */
-    void handleTextInput();
+    void handleTextInput(sf::Event &event);
 
     /**
      * @brief Draws the game interface and updates the window
