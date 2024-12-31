@@ -15,6 +15,7 @@ class Deck {
     std::vector<Card> cards; ///< A vector containing the cards in the deck
     std::vector<std::string> suits; ///< A vector containing the suit names
     std::vector<std::string> ranks; ///< A vector containing the rank names
+	std::vector<sf::Texture*> textures;
 
 public:
 	/**

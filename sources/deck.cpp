@@ -22,16 +22,20 @@
 
     Deck::~Deck() {
         std::cout << "Deck destructor" << std::endl;
+        for(auto texture : textures) {
+            delete texture;
+        }
     }
 
     sf::Sprite Deck::loadCard(const std::string &suit, const std::string &rank) {
         std::string path = "textures/cards/" + rank + "_" + suit + ".png";
-        sf::Texture texture;
-        if(!texture.loadFromFile(path)) {
+        sf::Texture* texture = new sf::Texture();
+        if(!texture->loadFromFile(path)) {
             throw FileLoadFailure("Error: Failed to load card texture");
         }
+        textures.emplace_back(texture);
         sf::Sprite sprite;
-        sprite.setTexture(texture);
+        sprite.setTexture(*texture);
         return sprite;
     }
 

@@ -13,6 +13,7 @@ class Card {
     std::string suit; ///< The suit of the card
     std::string rank; ///< The rank of the card
     sf::Sprite sprite; ///< The graphical representation of the card
+	sf::Texture texture;
 
 public:
 	/**
@@ -84,6 +85,8 @@ public:
 	 * @param sprite The new sprite for the card
 	 */
     void setSprite(const sf::Sprite& _sprite);
+
+	void loadTexture(const std::string &path);
 };
 
 #endif //CARD_H
