@@ -8,7 +8,9 @@
 
     Card::Card() {}
 
-    Card::Card(const std::string &suit, const std::string &rank) : suit(suit), rank(rank) {}
+    Card::Card(const std::string &suit, const std::string &rank, const sf::Texture &texture) : suit(suit), rank(rank) {
+        sprite.setTexture(texture);
+    }
 
     Card::Card(const Card &other) : suit(other.suit), rank(other.rank) {}
 
