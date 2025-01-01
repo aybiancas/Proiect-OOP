@@ -19,14 +19,9 @@
 class Game {
     static Game* game;
     Deck deck; ///< Deck object representing the game deck of cards
-    // HumanPlayer player1;
-    // BotPlayer player2;
-    // DealerPlayer dealer;
-    // std::vector<std::unique_ptr<Player>> players;
     std::vector<Player *> players; ///< Vector of pointers to Player objects participating in the game
     TableCards table; ///< TableCards object representing cards on the table
     int roundBet; ///< The current bet amount for the round
-    // std::vector<std::string> handTypes; ///< List of possible hand types in the game
     sf::RenderWindow *window; ///< Pointer to the SFML RenderWindow for graphical output
     sf::Text player1Sum; ///< SFML Text object displaying Player 1's total score or balance
     sf::Text player2Sum; ///< SFML Text object displaying Player 2's total score or balance
@@ -42,6 +37,7 @@ class Game {
     bool inputTextCompleted;
     bool botBet;
     bool humanBet;
+    std::vector<sf::Sprite> cardSprites;
 
     /**
      * @brief Default Game constructor\n

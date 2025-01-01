@@ -19,7 +19,7 @@
                 }
                 //textures.emplace_back(std::move(texture));
                 Card card(suit, rank, textures.back());
-                cards.emplace_back(card);
+                cards.push_back(card);
                 std::cout << "Texture address: " << &textures.back() << std::endl;
             }
         }

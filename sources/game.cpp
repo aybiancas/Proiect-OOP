@@ -41,6 +41,7 @@ Game::Game() : deck(),
 
 	window = new sf::RenderWindow(sf::VideoMode(1300, 900), "Texas Hold' em");
 	window->setFramerateLimit(20);
+	// window->clear(sf::Color{0, 122, 44});
 
 	if (!font.loadFromFile("fonts/BroncoPersonalUse.ttf")) {
 		throw FileLoadFailure("Error: Failed to load fonts");
@@ -114,14 +115,14 @@ void Game::handleTextInput(sf::Event &event) {
 }
 
 void Game::drawGame() {
-	window->clear(sf::Color{0, 122, 44});
+	// window->clear(sf::Color{0, 122, 44});
 	window->draw(player1Sum);
 	window->draw(player2Sum);
 	window->draw(textRoundPot);
-	// window->draw(textRoundBet);
-
+	for(auto const &sprite : cardSprites) {
+		window->draw(sprite);
+	}
 	drawBettingPopups();
-
 	window->display();
 }
 
@@ -245,18 +246,21 @@ void Game::dealHands() {
 
 void Game::displayHand() {
 	int i = 2;
-	for (auto const &card: players[0]->getPlayerCards()) {
+	for (auto const &card : players[0]->getPlayerCards()) {
+		std::cout << card;
 		std::cout << "Card address: " << &card << std::endl;
 		sf::Sprite sprite = card.getSprite();
 		std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
 		if (sprite.getTexture() == nullptr) {
 			std::cout << "Error: Texture not found for card!" << std::endl;
+			continue;
 		}
 		sprite.setPosition(100 * i, 200);
-		window->draw(sprite);
+		sprite.setScale(0.25f, 0.25f);
+		cardSprites.push_back(sprite);
 		i++;
 	}
-	window->display();
+	// window->display();
 }
 
 void Game::dealFlop() {
@@ -275,6 +279,7 @@ void Game::displayFlop() {
 			std::cout << "Error: Texture not found for card!" << std::endl;
 		}
 		sprite.setPosition(100 * i, 500);
+		sprite.setScale(0.25f, 0.25f);
 		window->draw(sprite);
 		i++;
 	}
@@ -294,6 +299,7 @@ void Game::displayTurn() {
 		std::cout << "Error: Texture not found for card!" << std::endl;
 	}
 	sprite.setPosition(100 * 4, 500);
+	sprite.setScale(0.25f, 0.25f);
 	window->draw(sprite);
 	window->display();
 }
@@ -307,6 +313,7 @@ void Game::displayRiver() {
 		std::cout << "Error: Texture not found for card!" << std::endl;
 	}
 	sprite.setPosition(100 * 5, 500);
+	sprite.setScale(0.25f, 0.25f);
 	window->draw(sprite);
 	window->display();
 }
@@ -496,17 +503,10 @@ void Game::play() {
 				break;
 			}
 		}
+		window->clear(sf::Color{0, 122, 44});
+
 
 		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
-		//
-		// humanBet = false;
-		// inputTextCompleted = false;
-		// while (!inputTextCompleted) {
-		// 	handleTextInput(event);
-		// 	drawGame();
-		// }
-		//
-		// bettingRound();
 
 		// se dau cartile jucatorilor
 
@@ -522,6 +522,7 @@ void Game::play() {
 			handleTextInput(event);
 			drawGame();
 		}
+		//displayHand();
 
 		bettingRound();
 		updateSums();
@@ -541,6 +542,7 @@ void Game::play() {
 		dealFlop();
 		std::cout << table << "\n\n";
 		displayFlop();
+		//displayHand();
 
 		humanBet = false;
 		inputTextCompleted = false;
@@ -548,6 +550,8 @@ void Game::play() {
 			handleTextInput(event);
 			drawGame();
 		}
+		//displayHand();
+
 		bettingRound();
 		updateSums();
 		bettingRound();
@@ -565,6 +569,7 @@ void Game::play() {
 		dealTurnRiver();
 		std::cout << table << "\n\n";
 		displayTurn();
+		//displayHand();
 
 		humanBet = false;
 		inputTextCompleted = false;
@@ -572,6 +577,8 @@ void Game::play() {
 			handleTextInput(event);
 			drawGame();
 		}
+		//displayHand();
+
 		bettingRound();
 		updateSums();
 		bettingRound();
@@ -589,6 +596,7 @@ void Game::play() {
 		dealTurnRiver(); // adauga o carte pe masa
 		std::cout << table << "\n\n";
 		displayRiver();
+		//displayHand();
 
 		int handValueP1 = cardGroupsEvaluate(*players[0]);
 		int handValueP2 = cardGroupsEvaluate(*players[1]);
