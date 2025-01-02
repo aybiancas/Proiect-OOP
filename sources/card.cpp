@@ -58,13 +58,13 @@ const sf::Texture &Card::getTexture() const {
 	return texture;
 }
 
-void Card::setSprite(const sf::Sprite &_sprite) {
-	this->sprite = _sprite;
-}
+// void Card::setSprite(const sf::Sprite &_sprite) {
+// 	this->sprite = _sprite;
+// }
 
-void Card::loadTexture(const std::string &path) {
-	if (!texture.loadFromFile(path)) {
-		throw FileLoadFailure("Error: Failed to load card texture");
-	}
-	sprite.setTexture(texture);
-}
+// void Card::loadTexture(const std::string &path) {
+// 	if (!texture.loadFromFile(path)) {
+// 		throw FileLoadFailure("Error: Failed to load card texture");
+// 	}
+// 	sprite.setTexture(texture);
+// }
