@@ -523,7 +523,6 @@ void Game::play() {
 			drawGame();
 		}
 		//displayHand();
-
 		bettingRound();
 		updateSums();
 		bettingRound();
