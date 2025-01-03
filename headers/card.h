@@ -26,9 +26,8 @@ public:
 	 *
 	 * @param suit The suit of the card
 	 * @param rank The rank of the card
-	 * @param texture The texture of the card
 	 */
-    Card(const std::string &suit, const std::string &rank, const sf::Texture &texture);
+    Card(const std::string &suit, const std::string &rank);
 
 	/**
 	 * @brief Card Copy constructor

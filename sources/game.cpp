@@ -91,6 +91,20 @@ Game::Game() : deck(),
 Game::~Game() {
 	std::cout << "Game destructor" << std::endl;
 }
+/*
+void Game::loadCardTextures() {
+	for (const auto &suit : {"HEARTS", "DIAMONDS", "CLUBS", "SPADES"}) {
+		for (const auto &rank : {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"}) {
+			sf::Texture texture;
+			std::string texturePath = "textures/cards/" + rank + "_" + suit + ".png";
+			if (!texture.loadFromFile(texturePath)) {
+				throw FileLoadFailure("Error: could not load card file!");
+			}
+			cardTextures[{suit, rank}] = texture;
+		}
+	}
+}
+*/
 
 void Game::handleTextInput(sf::Event &event) {
 	while (window->pollEvent(event)) {
@@ -115,18 +129,13 @@ void Game::handleTextInput(sf::Event &event) {
 }
 
 void Game::drawGame() {
-	// window->clear(sf::Color{0, 122, 44});
+	window->clear(sf::Color{0, 122, 44});
 	window->draw(player1Sum);
 	window->draw(player2Sum);
 	window->draw(textRoundPot);
 	for(auto const &sprite : cardSprites) {
 		window->draw(sprite);
 	}
-	drawBettingPopups();
-	window->display();
-}
-
-void Game::drawBettingPopups() {
 	if (!inputTextCompleted) {
 		window->draw(promptText);
 		window->draw(inputBox);
@@ -142,6 +151,7 @@ void Game::drawBettingPopups() {
 		betText.setPosition(650 - betText.getGlobalBounds().width / 2, 450);
 		window->draw(betText);
 	}
+	window->display();
 }
 
 void Game::updateSums() {
@@ -235,6 +245,7 @@ void Game::resetRound() {
 	botBet = true;
 	humanBet = true;
 	inputTextCompleted = false;
+	cardSprites.clear();
 }
 
 void Game::dealHands() {
@@ -260,7 +271,7 @@ void Game::displayHand() {
 		cardSprites.push_back(sprite);
 		i++;
 	}
-	// window->display();
+	window->display();
 }
 
 void Game::dealFlop() {
@@ -495,7 +506,6 @@ void Game::play() {
 					std::cout << "Game Over! It's a Tie!" << "\n\n";
 				}
 				gameOverText.setPosition(650 - gameOverText.getGlobalBounds().width / 2, 300);
-				window->clear(sf::Color::Black);
 				window->draw(gameOverText);
 				window->display();
 				sf::sleep(sf::seconds(10));
@@ -522,7 +532,6 @@ void Game::play() {
 			handleTextInput(event);
 			drawGame();
 		}
-		//displayHand();
 		bettingRound();
 		updateSums();
 		bettingRound();
@@ -541,7 +550,6 @@ void Game::play() {
 		dealFlop();
 		std::cout << table << "\n\n";
 		displayFlop();
-		//displayHand();
 
 		humanBet = false;
 		inputTextCompleted = false;
@@ -549,7 +557,6 @@ void Game::play() {
 			handleTextInput(event);
 			drawGame();
 		}
-		//displayHand();
 
 		bettingRound();
 		updateSums();
@@ -568,7 +575,6 @@ void Game::play() {
 		dealTurnRiver();
 		std::cout << table << "\n\n";
 		displayTurn();
-		//displayHand();
 
 		humanBet = false;
 		inputTextCompleted = false;
@@ -576,7 +582,6 @@ void Game::play() {
 			handleTextInput(event);
 			drawGame();
 		}
-		//displayHand();
 
 		bettingRound();
 		updateSums();
@@ -595,7 +600,6 @@ void Game::play() {
 		dealTurnRiver(); // adauga o carte pe masa
 		std::cout << table << "\n\n";
 		displayRiver();
-		//displayHand();
 
 		int handValueP1 = cardGroupsEvaluate(*players[0]);
 		int handValueP2 = cardGroupsEvaluate(*players[1]);

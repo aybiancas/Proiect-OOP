@@ -38,6 +38,7 @@ class Game {
     bool botBet;
     bool humanBet;
     std::vector<sf::Sprite> cardSprites;
+    // std::map<std::pair<std::string, std::string>, sf::Texture> cardTextures;
 
     /**
      * @brief Default Game constructor\n
@@ -67,6 +68,8 @@ public:
      */
     Game &operator=(const Game &other) = delete;
 
+    // void loadCardTextures();
+
 
     /**
      * @brief Handles the player 1's text input for the bet
@@ -82,7 +85,7 @@ public:
     /**
      * @brief Draws the game betting pop-ups (e.g. the pot, player bets, input box) and updates the window
      */
-    void drawBettingPopups();
+    // void drawBettingPopups();
 
     /**
      * @brief Handles the betting logic for the human player

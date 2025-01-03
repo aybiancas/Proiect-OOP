@@ -9,20 +9,14 @@
 Card::Card() {
 }
 
-Card::Card(const std::string &suit, const std::string &rank, const sf::Texture &texture) : suit(suit), rank(rank) {
+Card::Card(const std::string &suit, const std::string &rank) : suit(suit), rank(rank) {
 	std::cout << "Creating card: " << rank << " of " << suit << std::endl;
-	this->texture = texture;
-	sprite.setTexture(texture);
-	// if (texture.getSize().x == 0 || texture.getSize().y == 0) {
-	//     std::cout << "Error: Texture is empty or failed to load!" << std::endl;
-	// }
-	if (sprite.getTexture() == nullptr) {
-		std::cout << "Error: Sprite texture is not set!" << std::endl;
-	} else {
-		std::cout << "Sprite texture set successfully!" << std::endl;
+	std::string textureFile = "textures/cards/" + rank + "_" + suit + ".png";
+	std::cout << textureFile << std::endl;
+	if (!texture.loadFromFile(textureFile)) {
+		throw FileLoadFailure("Error: could not load card file!");
 	}
-	std::cout << "Texture address: " << &this->texture << std::endl;
-	std::cout << "Sprite address: " << &sprite << std::endl;
+	sprite.setTexture(texture);
 }
 
 Card::Card(const Card &other) : suit(other.suit), rank(other.rank), sprite(other.sprite) {
