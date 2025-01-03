@@ -35,14 +35,6 @@ public:
     ~Deck();
 
 	/**
-	 * @brief Loads the sprite for a specific card given its suit and rank
-	 * @param suit The suit of the card
-	 * @param rank The rank of the card
-	 * @return An sf::Sprite object representing the card
-	 */
-    //sf::Sprite loadCard(const std::string &suit, const std::string &rank);
-
-	/**
 	 * @brief Assignment operator to assign one deck to another
 	 * @param other The deck to copy from
 	 * @return A reference to the assigned deck

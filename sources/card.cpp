@@ -26,7 +26,6 @@ Card::Card(const std::string &suit, const std::string &rank, const sf::Texture &
 }
 
 Card::Card(const Card &other) : suit(other.suit), rank(other.rank), sprite(other.sprite) {
-	std::cout << "Copied sprite texture address: " << sprite.getTexture() << std::endl;
 }
 
 const std::string &Card::getSuit() const {

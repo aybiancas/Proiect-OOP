@@ -87,14 +87,6 @@ public:
 	 */
 	const sf::Texture &getTexture() const;
 
-	/**
-	 * @brief Sets the sprite for the card
-	 *
-	 * @param sprite The new sprite for the card
-	 */
-    // void setSprite(const sf::Sprite& _sprite);
-
-	// void loadTexture(const std::string &path);
 };
 
 #endif //CARD_H
