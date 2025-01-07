@@ -108,12 +108,12 @@ bool Game::getHumanBet() const {
 	return humanBet;
 }
 
-void Game::setBotBet(bool botBet) {
-	this->botBet = botBet;
+void Game::setBotBet(bool botBet_) {
+	this->botBet = botBet_;
 }
 
-void Game::setHumanBet(bool humanBet) {
-	this->humanBet = humanBet;
+void Game::setHumanBet(bool humanBet_) {
+	this->humanBet = humanBet_;
 }
 
 void Game::setStrategy(BetStrategy* strat) {

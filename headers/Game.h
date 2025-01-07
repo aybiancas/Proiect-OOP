@@ -83,9 +83,9 @@ public:
 
 	bool getHumanBet() const;
 
-	void setBotBet(bool botBet);
+	void setBotBet(bool botBet_);
 
-	void setHumanBet(bool humanBet);
+	void setHumanBet(bool humanBet_);
 
 	void setStrategy(BetStrategy* strat);
 
