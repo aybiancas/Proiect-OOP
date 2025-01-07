@@ -1,4 +1,4 @@
-#include "../headers/dealerPlayer.h"
+#include "../headers/DealerPlayer.h"
 
 DealerPlayer::DealerPlayer() :
     Player(),

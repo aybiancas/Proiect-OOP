@@ -1,4 +1,4 @@
-#include "../headers/humanPlayer.h"
+#include "../headers/HumanPlayer.h"
 
 HumanPlayer::HumanPlayer() : Player(), sum(1000) {}
 

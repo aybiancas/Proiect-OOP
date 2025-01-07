@@ -2,8 +2,8 @@
 #ifndef BOTBETSTRATEGY_H
 #define BOTBETSTRATEGY_H
 
-#include "betStrategy.h"
-#include "game.h"
+#include "BetStrategy.h"
+#include "Game.h"
 
 class BotBetStrategy : public BetStrategy {
 	public:

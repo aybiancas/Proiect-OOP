@@ -1,5 +1,5 @@
-#include "../headers/botBetStrategy.h"
-#include "../headers/game.h"
+#include "../headers/BotBetStrategy.h"
+#include "../headers/Game.h"
 #include <iostream>
 #include <random>
 #include <SFML/Graphics.hpp>

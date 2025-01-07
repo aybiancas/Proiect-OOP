@@ -1,7 +1,7 @@
 
 #ifndef BOTPLAYER_H
 #define BOTPLAYER_H
-#include "player.h"
+#include "Player.h"
 
 /**
  * @brief Represents a bot player in a card game\n

@@ -2,9 +2,9 @@
 #ifndef DEALERPLAYER_H
 #define DEALERPLAYER_H
 
-#include "player.h"
-#include "deck.h"
-#include "card.h"
+#include "Player.h"
+#include "Deck.h"
+#include "Card.h"
 
 /**
  * @brief Represents a dealer player in a card game

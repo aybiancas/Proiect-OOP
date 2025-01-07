@@ -1,5 +1,5 @@
-#include "../headers/tableCards.h"
-#include "../headers/card.h"
+#include "../headers/TableCards.h"
+#include "../headers/Card.h"
 #include <iostream>
 #include <vector>
 

@@ -3,17 +3,17 @@
 
 #include <iostream>
 #include <memory>
-#include "card.h"
-#include "deck.h"
-#include "player.h"
-#include "tableCards.h"
-#include "humanPlayer.h"
+#include "Card.h"
+#include "Deck.h"
+#include "Player.h"
+#include "TableCards.h"
+#include "HumanPlayer.h"
 #include <SFML/Graphics.hpp>
-#include "botPlayer.h"
-#include "dealerPlayer.h"
-#include "betStrategy.h"
-#include "humanBetStrategy.h"
-#include "botBetStrategy.h"
+#include "BotPlayer.h"
+#include "DealerPlayer.h"
+#include "BetStrategy.h"
+#include "HumanBetStrategy.h"
+#include "BotBetStrategy.h"
 
 /**
  * @class Game

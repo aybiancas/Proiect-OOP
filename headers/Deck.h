@@ -1,7 +1,7 @@
 #ifndef DECK_H
 #define DECK_H
 
-#include "card.h"
+#include "Card.h"
 #include <vector>
 #include <iostream>
 #include <SFML/Graphics.hpp>

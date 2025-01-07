@@ -2,7 +2,7 @@
 #include <random>
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "../headers/card.h"
+#include "../headers/Card.h"
 #include "../headers/FileLoadFailureExcept.h"
 
 

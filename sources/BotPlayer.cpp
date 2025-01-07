@@ -1,4 +1,4 @@
-#include "../headers/botPlayer.h"
+#include "../headers/BotPlayer.h"
 
 BotPlayer::BotPlayer() : Player(), sum(1000) {}
 

@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include <vector>
-#include "card.h"
+#include "Card.h"
 
 /**
  * @class Player

@@ -1,15 +1,15 @@
 #include <iostream>
 #include <random>
 #include <vector>
-#include "../headers/card.h"
-#include "../headers/deck.h"
-#include "../headers/player.h"
-#include "../headers/tableCards.h"
-#include "../headers/game.h"
+#include "../headers/Card.h"
+#include "../headers/Deck.h"
+#include "../headers/Player.h"
+#include "../headers/TableCards.h"
+#include "../headers/Game.h"
 #include "../headers/BetInputInvalidExcept.h"
 #include "../headers/FileLoadFailureExcept.h"
-#include "../headers/humanBetStrategy.h"
-#include "../headers/botBetStrategy.h"
+#include "../headers/HumanBetStrategy.h"
+#include "../headers/BotBetStrategy.h"
 #include "../headers/NotEnoughFundsExcept.h"
 
 Game *Game::game = nullptr;

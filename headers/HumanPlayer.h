@@ -2,7 +2,7 @@
 #ifndef HUMANPLAYER_H
 #define HUMANPLAYER_H
 
-#include "player.h"
+#include "Player.h"
 
 /**
  * @brief Represents a human player in a card game

@@ -1,5 +1,5 @@
 #include "../headers/HumanBetStrategy.h"
-#include "../headers/game.h"
+#include "../headers/Game.h"
 #include "../headers/BetInputInvalidExcept.h"
 #include "../headers/NotEnoughFundsExcept.h"
 #include <iostream>

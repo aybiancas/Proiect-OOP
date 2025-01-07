@@ -1,4 +1,4 @@
-#include "headers/menu.h"
+#include "headers/Menu.h"
 #include "headers/BetInputInvalidExcept.h"
 #include "headers/FileLoadFailureExcept.h"
 #include "headers/NotEnoughFundsExcept.h"

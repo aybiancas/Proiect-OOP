@@ -2,8 +2,8 @@
 #ifndef HUMANBETSTRATEGY_H
 #define HUMANBETSTRATEGY_H
 
-#include "betStrategy.h"
-#include "game.h"
+#include "BetStrategy.h"
+#include "Game.h"
 
 class HumanBetStrategy : public BetStrategy {
 	public:

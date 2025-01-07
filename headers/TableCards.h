@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include "card.h"
+#include "Card.h"
 
 /**
  * @class TableCards

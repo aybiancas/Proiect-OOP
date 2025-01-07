@@ -1,5 +1,5 @@
-#include "../headers/deck.h"
-#include "../headers/card.h"
+#include "../headers/Deck.h"
+#include "../headers/Card.h"
 #include "../headers/FileLoadFailureExcept.h"
 #include <iostream>
 #include <random>

@@ -1,5 +1,5 @@
-#include "../headers/player.h"
-#include "../headers/card.h"
+#include "../headers/Player.h"
+#include "../headers/Card.h"
 #include <iostream>
 
     Player::Player() {

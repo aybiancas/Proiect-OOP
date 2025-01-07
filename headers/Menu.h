@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include "game.h"
+#include "Game.h"
 
 /**
  * @class Menu
