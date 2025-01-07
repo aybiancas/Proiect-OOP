@@ -53,37 +53,37 @@ endif()
 add_executable(${PROJECT_NAME}
     main.cpp
     generated/src/Helper.cpp
-        headers/card.h
-        sources/card.cpp
-        headers/deck.h
-        sources/deck.cpp
-        headers/player.h
-        sources/player.cpp
-        headers/tableCards.h
-        sources/tableCards.cpp
-        headers/game.h
-        sources/game.cpp
-        headers/menu.h
-        sources/menu.cpp
-        sources/game.cpp
-        headers/humanPlayer.h
-        sources/humanPlayer.cpp
-        headers/botPlayer.h
-        sources/botPlayer.cpp
-        headers/dealerPlayer.h
-        sources/dealerPlayer.cpp
+        headers/Card.h
+        sources/Card.cpp
+        headers/Deck.h
+        sources/Deck.cpp
+        headers/Player.h
+        sources/Player.cpp
+        headers/TableCards.h
+        sources/TableCards.cpp
+        headers/Game.h
+        sources/Game.cpp
+        headers/Menu.h
+        sources/Menu.cpp
+        sources/Game.cpp
+        headers/HumanPlayer.h
+        sources/HumanPlayer.cpp
+        headers/BotPlayer.h
+        sources/BotPlayer.cpp
+        headers/DealerPlayer.h
+        sources/DealerPlayer.cpp
         headers/NotEnoughFundsExcept.h
         sources/NotEnoughFundsExcept.cpp
         headers/BetInputInvalidExcept.h
         sources/BetInputInvalidExcept.cpp
         headers/FileLoadFailureExcept.h
         sources/FileLoadFailureExcept.cpp
-        headers/betStrategy.h
-        sources/betStrategy.cpp
-        headers/humanBetStrategy.h
-        sources/humanBetStrategy.cpp
-        headers/botBetStrategy.h
-        sources/botBetStrategy.cpp
+        headers/BetStrategy.h
+        sources/BetStrategy.cpp
+        headers/HumanBetStrategy.h
+        sources/HumanBetStrategy.cpp
+        headers/BotBetStrategy.h
+        sources/BotBetStrategy.cpp
 )
 
 include(cmake/CompilerFlags.cmake)
