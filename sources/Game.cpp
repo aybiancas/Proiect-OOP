@@ -104,12 +104,6 @@ bool Game::getBotBet() const {
 	return botBet;
 }
 
-/*
-bool Game::getHumanBet() const {
-	return humanBet;
-}
-*/
-
 void Game::setBotBet(bool botBet_) {
 	this->botBet = botBet_;
 }
@@ -178,74 +172,6 @@ void Game::updateSums() {
 	player2Sum.setString("Suma P2: " + std::to_string(players[1]->getSum()));
 	textRoundPot.setString("Pot: " + std::to_string(players[2]->getPot()));
 }
-
-/*
-void Game::bettingHuman() {
-	std::cout << "Betting round: Human enter\n";
-	inputBet = inputText.getString().toAnsiString();
-	std::cout << inputBet;
-	int playerBet = 0;
-	try {
-		playerBet = std::stoi(inputBet);
-		std::cout << "player betting: " << playerBet << std::endl;
-	} catch (const std::invalid_argument &) {
-		std::cout << "Invalid input\n";
-		return;
-	}
-	if (playerBet > players[0]->getSum()) {
-		throw NotEnoughFundsExcept("Error: the player does not have enough credits for this bet");
-	}
-	if (playerBet < 0) {
-		throw BetInputInvalidExcept("Error: bet value is invalid");
-	}
-	players[0]->subtractBet(playerBet);
-	players[2]->addSum(playerBet);
-
-	sf::Text playerBetText;
-	playerBetText.setFont(font);
-	playerBetText.setString("P1 Bet: " + std::to_string(playerBet));
-	playerBetText.setCharacterSize(30);
-	playerBetText.setFillColor(sf::Color::White);
-	playerBetText.setPosition(650 - playerBetText.getGlobalBounds().width / 2, 300);
-
-	window->draw(playerBetText);
-	sf::sleep(sf::seconds(1));
-
-	botBet = false;
-	humanBet = true;
-}
-*/
-/*
-void Game::bettingBot() {
-	std::cout << "betting round BOT enter\n";
-	if (botBet) {
-		return;
-	}
-	int playerBet = 0;
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distrib(1, 500);
-	playerBet = distrib(gen);
-	if (playerBet > players[1]->getSum()) {
-		playerBet = players[1]->getSum();
-	}
-	std::cout << "Player 2: " << playerBet << std::endl;
-
-	players[1]->subtractBet(playerBet);
-	players[2]->addSum(playerBet);
-
-	sf::Text botBetText;
-	botBetText.setFont(font);
-	botBetText.setString("P2 bet: " + std::to_string(playerBet));
-	botBetText.setCharacterSize(30);
-	botBetText.setFillColor(sf::Color::White);
-	botBetText.setPosition(650 - botBetText.getGlobalBounds().width / 2, 500);
-
-	window->draw(botBetText);
-	sf::sleep(sf::seconds(1));
-	botBet = true;
-}
-*/
 
 void Game::bettingRound() {
 	std::cout << "Betting round enter\n";
