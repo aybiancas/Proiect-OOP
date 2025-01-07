@@ -11,15 +11,8 @@ Deck::Deck() :
     ranks({"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"}) {
         for (const auto &suit : suits) {
             for (const auto &rank : ranks) {
-                // textures.emplace_back();
-                // std::string path = "textures/cards/" + rank + "_" + suit + ".png";
-                // std::cout << path << std::endl;
-                // if(!textures.back().loadFromFile(path)) {
-                //     throw FileLoadFailure("Error: Failed to load card texture");
-                // }
                 Card card(suit, rank);
                 cards.emplace_back(card);
-                // std::cout << "Texture address: " << &textures.back() << std::endl;
             }
         }
         std::cout << "Deck constructor" << std::endl;
