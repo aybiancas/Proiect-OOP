@@ -33,7 +33,7 @@ Deck::Deck() :
 
 
     Deck& Deck::operator=(const Deck &other) {
-        // cards = other.cards;
+        cards = other.cards;
         return *this;
     }
 

@@ -91,20 +91,6 @@ Game::Game() : deck(),
 Game::~Game() {
 	std::cout << "Game destructor" << std::endl;
 }
-/*
-void Game::loadCardTextures() {
-	for (const auto &suit : {"HEARTS", "DIAMONDS", "CLUBS", "SPADES"}) {
-		for (const auto &rank : {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"}) {
-			sf::Texture texture;
-			std::string texturePath = "textures/cards/" + rank + "_" + suit + ".png";
-			if (!texture.loadFromFile(texturePath)) {
-				throw FileLoadFailure("Error: could not load card file!");
-			}
-			cardTextures[{suit, rank}] = texture;
-		}
-	}
-}
-*/
 
 void Game::handleTextInput(sf::Event &event) {
 	while (window->pollEvent(event)) {
@@ -474,9 +460,9 @@ int Game::cardGroupsEvaluate(const Player &player) {
 }
 
 std::ostream &operator<<(std::ostream &os, const Game &game) {
-	for (const auto& player : game.players) {
-		os << player << std::endl;
-	}
+	os << game.players[0] << std::endl;
+	os << game.players[1] << std::endl;
+	os << game.players[2] << std::endl;
 	os << game.table << std::endl;
 	return os;
 }
