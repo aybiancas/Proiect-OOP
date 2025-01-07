@@ -78,6 +78,12 @@ add_executable(${PROJECT_NAME}
         sources/BetInputInvalidExcept.cpp
         headers/FileLoadFailureExcept.h
         sources/FileLoadFailureExcept.cpp
+        headers/betStrategy.h
+        sources/betStrategy.cpp
+        headers/humanBetStrategy.h
+        sources/humanBetStrategy.cpp
+        headers/botBetStrategy.h
+        sources/botBetStrategy.cpp
 )
 
 include(cmake/CompilerFlags.cmake)

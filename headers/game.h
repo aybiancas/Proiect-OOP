@@ -11,211 +11,232 @@
 #include <SFML/Graphics.hpp>
 #include "botPlayer.h"
 #include "dealerPlayer.h"
+#include "betStrategy.h"
+#include "humanBetStrategy.h"
+#include "botBetStrategy.h"
 
 /**
  * @class Game
  * @brief Represents the main game logic for the Texas Hold' em game
  */
 class Game {
-    static Game* game;
-    Deck deck; ///< Deck object representing the game deck of cards
-    std::vector<Player *> players; ///< Vector of pointers to Player objects participating in the game
-    TableCards table; ///< TableCards object representing cards on the table
-    int roundBet; ///< The current bet amount for the round
-    sf::RenderWindow *window; ///< Pointer to the SFML RenderWindow for graphical output
-    sf::Text player1Sum; ///< SFML Text object displaying Player 1's total score or balance
-    sf::Text player2Sum; ///< SFML Text object displaying Player 2's total score or balance
-    sf::Text textRoundBet; ///< SFML Text object displaying the current round's bet
-    sf::Text textRoundPot; ///< SFML Text object displaying the current round's pot
-    sf::Text promptText; ///< SFML Text object displaying input prompts to player 1
-    std::string inputBet; ///< String to capture player 1's input for betting
-    sf::Text inputText; ///< SFML Text object displaying the player 1's input
-    sf::RectangleShape inputBox; ///< SFML RectangleShape representing the input box UI element
-    std::vector<std::string> options; ///< List of available options for players
-    std::vector<sf::Text> playerOptions; ///< SFML Text objects displaying player options
-    sf::Font font; ///< SFML Font used for text rendering
-    bool inputTextCompleted;
-    bool botBet;
-    bool humanBet;
-    std::vector<sf::Sprite> cardSprites;
-    // std::map<std::pair<std::string, std::string>, sf::Texture> cardTextures;
+	static Game *game;
+	Deck deck; ///< Deck object representing the game deck of cards
+	std::vector<Player *> players; ///< Vector of pointers to Player objects participating in the game
+	TableCards table; ///< TableCards object representing cards on the table
+	int roundBet; ///< The current bet amount for the round
+	sf::RenderWindow *window; ///< Pointer to the SFML RenderWindow for graphical output
+	sf::Text player1Sum; ///< SFML Text object displaying Player 1's total score or balance
+	sf::Text player2Sum; ///< SFML Text object displaying Player 2's total score or balance
+	sf::Text textRoundBet; ///< SFML Text object displaying the current round's bet
+	sf::Text textRoundPot; ///< SFML Text object displaying the current round's pot
+	sf::Text promptText; ///< SFML Text object displaying input prompts to player 1
+	std::string inputBet; ///< String to capture player 1's input for betting
+	sf::Text inputText; ///< SFML Text object displaying the player 1's input
+	sf::RectangleShape inputBox; ///< SFML RectangleShape representing the input box UI element
+	std::vector<std::string> options; ///< List of available options for players
+	std::vector<sf::Text> playerOptions; ///< SFML Text objects displaying player options
+	sf::Font font; ///< SFML Font used for text rendering
+	bool inputTextCompleted;
+	bool botBet;
+	bool humanBet;
+	BetStrategy* betStrategy;
+	std::vector<sf::Sprite> cardSprites;
+	// std::map<std::pair<std::string, std::string>, sf::Texture> cardTextures;
 
-    /**
-     * @brief Default Game constructor\n
-     * Constructs a new Game object and its components
-     **/
-    Game();
+	/**
+	 * @brief Default Game constructor\n
+	 * Constructs a new Game object and its components
+	 **/
+	Game();
 
 public:
+	static Game *getInstance();
 
-    static Game *getInstance();
+	/**
+	 * @brief Game copy constructor. Automatically disabled.
+	 * @param other Another Game-type object to assign from
+	 */
+	Game(const Game &other) = delete;
 
-    /**
-     * @brief Game copy constructor. Automatically disabled.
-     * @param other Another Game-type object to assign from
-     */
-    Game(const Game &other) = delete;
+	/**
+	 * @brief Game destructor
+	 */
+	~Game();
 
-    /**
-     * @brief Game destructor
-     */
-    ~Game();
+	/**
+	 * @brief Copy assignment operator for the Game class. Automatically disabled.
+	 * @param other Another Game-type object to assign from
+	 * @return Reference to the assigned Game object
+	 */
+	Game &operator=(const Game &other) = delete;
 
-    /**
-     * @brief Copy assignment operator for the Game class. Automatically disabled.
-     * @param other Another Game-type object to assign from
-     * @return Reference to the assigned Game object
-     */
-    Game &operator=(const Game &other) = delete;
+	// void loadCardTextures();
 
-    // void loadCardTextures();
+	sf::Text getInputText() const;
 
+	std::vector<Player*> &getPlayers();
 
-    /**
-     * @brief Handles the player 1's text input for the bet
-     * @param event Reference to the game events
-     */
-    void handleTextInput(sf::Event &event);
+	sf::Font getFont() const;
 
-    /**
-     * @brief Draws the game interface and updates the window
-     */
-    void drawGame();
+	bool getBotBet() const;
 
-    /**
-     * @brief Draws the game betting pop-ups (e.g. the pot, player bets, input box) and updates the window
-     */
-    // void drawBettingPopups();
+	bool getHumanBet() const;
 
-    /**
-     * @brief Handles the betting logic for the human player
-     */
-    void bettingHuman();
+	void setBotBet(bool botBet);
 
-    /**
-     * @brief Handles the betting logic for the bot player.
-     */
-    void bettingBot();
+	void setHumanBet(bool humanBet);
 
-    /**
-     * @brief Executes a single betting round
-     */
-    void bettingRound();
+	void setStrategy(BetStrategy* strat);
 
-    /**
-     * @brief Updates the displayed sums for all players
-     */
-    void updateSums();
-
-    /**
-     * @brief Resets the game state for a new round
-     */
-    void resetRound();
-
-    /**
-     * @brief Deals initial hands to all players
-     */
-    void dealHands();
-
-    /**
-     * @brief Displays the player 1's cards in the game window
-     */
-    void displayHand();
-
-    /**
-     * @brief Deals the "flop" round cards to the table
-     */
-    void dealFlop();
-
-    /**
-     * @brief Displays the "flop" round cards on the table
-     */
-    void displayFlop();
-
-    /**
-     * @brief Deals the "turn" and "river" round cards to the table
-     */
-    void dealTurnRiver();
-
-    /**
-     * @brief Displays the "turn" round cards on the table
-     */
-    void displayTurn();
-
-    /**
-     * @brief Displays the "river" round cards on the table
-     */
-    void displayRiver();
-
-    /**
-     * @brief Determines if a hand is a flush
-     * @param suitCount Vector of suit counts
-     * @return True if the hand is a flush, otherwise false
-     */
-    static bool isFlush(const std::vector<int> &suitCount);
-
-    /**
-     * @brief Determines if a hand is a straight
-     * @param rankCount Vector of rank counts
-     * @return True if the hand is a straight, otherwise false
-     */
-    static bool isStraight(const std::vector<int> &rankCount);
-
-    /**
-     * @brief Gets the maximum count of any rank in the hand
-     * @param rankCount Vector of rank counts
-     * @return The highest count of any rank
-     */
-    static int getMaxCount(const std::vector<int> &rankCount);
+	void strategy();
 
 
-    /**
-     * @brief Determines if a hand is a two pair
-     * @param rankCount Vector of rank counts
-     * @return True if the hand is a two pair, otherwise false
-     */
-    static bool isTwoPair(const std::vector<int> &rankCount);
+	/**
+	 * @brief Handles the player 1's text input for the bet
+	 * @param event Reference to the game events
+	 */
+	void handleTextInput(sf::Event &event);
 
-    /**
-     * @brief Gets the index of a rank in a predefined rank list
-     * @param rank The rank as a string
-     * @return The index of the rank
-     */
-    static int getIndexRank(const std::string &rank);
+	/**
+	 * @brief Draws the game interface and updates the window
+	 */
+	void drawGame();
 
-    /**
-     * @brief Gets the index of a suit in a predefined suit list
-     * @param suit The suit as a string
-     * @return The index of the suit
-     */
-    static int getIndexSuit(const std::string &suit);
+	/**
+	 * @brief Draws the game betting pop-ups (e.g. the pot, player bets, input box) and updates the window
+	 */
+	// void drawBettingPopups();
 
-    /**
-     * @brief Evaluates the high card score for a player's hand
-     * @param player The Player object whose hand is evaluated
-     * @return The score of the high card
-     */
-    int highCardEvaluate(const Player &player);
+	/**
+	 * @brief Handles the betting logic for the human player
+	 */
+	void bettingHuman();
 
-    /**
-     * @brief Evaluates grouped cards in a player's hand
-     * @param player The Player object whose hand is evaluated
-     * @return The score of the grouped cards
-     */
-    int cardGroupsEvaluate(const Player &player);
+	/**
+	 * @brief Handles the betting logic for the bot player.
+	 */
+	void bettingBot();
 
-    /**
-     * @brief Overloads the << operator to output the game state
-     * @param os The output stream
-     * @param game The Game object to output
-     * @return The output stream with game state information
-     */
-    friend std::ostream &operator<<(std::ostream &os, const Game &game);
+	/**
+	 * @brief Executes a single betting round
+	 */
+	void bettingRound();
 
-    /**
-     * @brief Starts the game loop and handles game logic
-     */
-    void play();
+	/**
+	 * @brief Updates the displayed sums for all players
+	 */
+	void updateSums();
+
+	/**
+	 * @brief Resets the game state for a new round
+	 */
+	void resetRound();
+
+	/**
+	 * @brief Deals initial hands to all players
+	 */
+	void dealHands();
+
+	/**
+	 * @brief Displays the player 1's cards in the game window
+	 */
+	void displayHand();
+
+	/**
+	 * @brief Deals the "flop" round cards to the table
+	 */
+	void dealFlop();
+
+	/**
+	 * @brief Displays the "flop" round cards on the table
+	 */
+	void displayFlop();
+
+	/**
+	 * @brief Deals the "turn" and "river" round cards to the table
+	 */
+	void dealTurnRiver();
+
+	/**
+	 * @brief Displays the "turn" round cards on the table
+	 */
+	void displayTurn();
+
+	/**
+	 * @brief Displays the "river" round cards on the table
+	 */
+	void displayRiver();
+
+	/**
+	 * @brief Determines if a hand is a flush
+	 * @param suitCount Vector of suit counts
+	 * @return True if the hand is a flush, otherwise false
+	 */
+	static bool isFlush(const std::vector<int> &suitCount);
+
+	/**
+	 * @brief Determines if a hand is a straight
+	 * @param rankCount Vector of rank counts
+	 * @return True if the hand is a straight, otherwise false
+	 */
+	static bool isStraight(const std::vector<int> &rankCount);
+
+	/**
+	 * @brief Gets the maximum count of any rank in the hand
+	 * @param rankCount Vector of rank counts
+	 * @return The highest count of any rank
+	 */
+	static int getMaxCount(const std::vector<int> &rankCount);
+
+
+	/**
+	 * @brief Determines if a hand is a two pair
+	 * @param rankCount Vector of rank counts
+	 * @return True if the hand is a two pair, otherwise false
+	 */
+	static bool isTwoPair(const std::vector<int> &rankCount);
+
+	/**
+	 * @brief Gets the index of a rank in a predefined rank list
+	 * @param rank The rank as a string
+	 * @return The index of the rank
+	 */
+	static int getIndexRank(const std::string &rank);
+
+	/**
+	 * @brief Gets the index of a suit in a predefined suit list
+	 * @param suit The suit as a string
+	 * @return The index of the suit
+	 */
+	static int getIndexSuit(const std::string &suit);
+
+	/**
+	 * @brief Evaluates the high card score for a player's hand
+	 * @param player The Player object whose hand is evaluated
+	 * @return The score of the high card
+	 */
+	int highCardEvaluate(const Player &player);
+
+	/**
+	 * @brief Evaluates grouped cards in a player's hand
+	 * @param player The Player object whose hand is evaluated
+	 * @return The score of the grouped cards
+	 */
+	int cardGroupsEvaluate(const Player &player);
+
+	/**
+	 * @brief Overloads the << operator to output the game state
+	 * @param os The output stream
+	 * @param game The Game object to output
+	 * @return The output stream with game state information
+	 */
+	friend std::ostream &operator<<(std::ostream &os, const Game &game);
+
+	/**
+	 * @brief Starts the game loop and handles game logic
+	 */
+	void play();
 };
 
 #endif //GAME_H

@@ -8,6 +8,8 @@
 #include "../headers/game.h"
 #include "../headers/BetInputInvalidExcept.h"
 #include "../headers/FileLoadFailureExcept.h"
+#include "../headers/humanBetStrategy.h"
+#include "../headers/botBetStrategy.h"
 #include "../headers/NotEnoughFundsExcept.h"
 
 Game *Game::game = nullptr;
@@ -19,13 +21,13 @@ Game *Game::getInstance() {
 	return game;
 }
 
-
 Game::Game() : deck(),
 			   roundBet(0),
 			   window(nullptr),
 			   inputTextCompleted(false),
 			   botBet(true),
-			   humanBet(true) {
+			   humanBet(true),
+			   betStrategy(nullptr) {
 	std::cout << "Game constructor" << std::endl;
 	deck.shuffleCards();
 	deck.shuffleCards();
@@ -34,14 +36,8 @@ Game::Game() : deck(),
 	players.push_back(new BotPlayer);
 	players.push_back(new DealerPlayer);
 
-	/*
-	std::cout << "Type of players[0]: " << typeid(*players[0]).name() << std::endl;
-	std::cout << "Type of players[1]: " << typeid(*players[1]).name() << std::endl;
-	*/
-
 	window = new sf::RenderWindow(sf::VideoMode(1300, 900), "Texas Hold' em");
 	window->setFramerateLimit(20);
-	// window->clear(sf::Color{0, 122, 44});
 
 	if (!font.loadFromFile("fonts/BroncoPersonalUse.ttf")) {
 		throw FileLoadFailure("Error: Failed to load fonts");
@@ -92,6 +88,42 @@ Game::~Game() {
 	std::cout << "Game destructor" << std::endl;
 }
 
+sf::Text Game::getInputText() const {
+	return inputText;
+}
+
+std::vector<Player *> &Game::getPlayers() {
+	return players;
+}
+
+sf::Font Game::getFont() const {
+	return font;
+}
+
+bool Game::getBotBet() const {
+	return botBet;
+}
+
+bool Game::getHumanBet() const {
+	return humanBet;
+}
+
+void Game::setBotBet(bool botBet) {
+	this->botBet = botBet;
+}
+
+void Game::setHumanBet(bool humanBet) {
+	this->humanBet = humanBet;
+}
+
+void Game::setStrategy(BetStrategy* strat) {
+	betStrategy = strat;
+}
+
+void Game::strategy() {
+	if (betStrategy) betStrategy->bet(window);
+}
+
 void Game::handleTextInput(sf::Event &event) {
 	while (window->pollEvent(event)) {
 		if (event.type == sf::Event::Closed) {
@@ -105,7 +137,6 @@ void Game::handleTextInput(sf::Event &event) {
 					inputText.setString(currentString);
 				} else if (event.text.unicode == '\r') {
 					inputTextCompleted = true;
-					//inputText.setString("");
 				} else {
 					inputText.setString(inputText.getString() + static_cast<char>(event.text.unicode));
 				}
@@ -119,7 +150,7 @@ void Game::drawGame() {
 	window->draw(player1Sum);
 	window->draw(player2Sum);
 	window->draw(textRoundPot);
-	for(auto const &sprite : cardSprites) {
+	for (auto const &sprite: cardSprites) {
 		window->draw(sprite);
 	}
 	if (!inputTextCompleted) {
@@ -147,7 +178,7 @@ void Game::updateSums() {
 }
 
 void Game::bettingHuman() {
-	std::cout << "betting round Human enter\n";
+	std::cout << "Betting round: Human enter\n";
 	inputBet = inputText.getString().toAnsiString();
 	std::cout << inputBet;
 	int playerBet = 0;
@@ -212,12 +243,15 @@ void Game::bettingBot() {
 }
 
 void Game::bettingRound() {
-	std::cout << "betting round enter\n";
+
+	std::cout << "Betting round enter\n";
 	if (dynamic_cast<HumanPlayer *>(players[0]) && (botBet && !humanBet)) {
-		bettingHuman();
+		setStrategy(new HumanBetStrategy());
+		strategy();
 		sf::sleep(sf::seconds(1));
 	} else if (dynamic_cast<BotPlayer *>(players[1]) && (!botBet && humanBet)) {
-		bettingBot();
+		setStrategy(new BotBetStrategy());
+		strategy();
 		sf::sleep(sf::seconds(1));
 	} else std::cout << "dynamic cast error\n";
 }
@@ -243,7 +277,7 @@ void Game::dealHands() {
 
 void Game::displayHand() {
 	int i = 2;
-	for (auto const &card : players[0]->getPlayerCards()) {
+	for (auto const &card: players[0]->getPlayerCards()) {
 		std::cout << card;
 		std::cout << "Card address: " << &card << std::endl;
 		sf::Sprite sprite = card.getSprite();
@@ -288,8 +322,6 @@ void Game::dealTurnRiver() {
 }
 
 void Game::displayTurn() {
-	// std::vector<Card> cards = table.getTableCards();
-	// std::cout << "Card address: " << &cards[3] << std::endl;
 	sf::Sprite sprite = table.getTableCards()[3].getSprite();
 	std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
 	if (sprite.getTexture() == nullptr) {
@@ -302,8 +334,6 @@ void Game::displayTurn() {
 }
 
 void Game::displayRiver() {
-	// std::vector<Card> cards = table.getTableCards();
-	// std::cout << "Card address: " << &cards[4] << std::endl;
 	sf::Sprite sprite = table.getTableCards()[4].getSprite();
 	std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
 	if (sprite.getTexture() == nullptr) {
@@ -474,7 +504,6 @@ void Game::play() {
 			if (event.type == sf::Event::Closed) {
 				window->close();
 			}
-
 			if (players[0]->getSum() <= 0 || players[1]->getSum() <= 0) {
 				sf::Text gameOverText;
 				gameOverText.setFont(font);
@@ -501,10 +530,7 @@ void Game::play() {
 		}
 		window->clear(sf::Color{0, 122, 44});
 
-
 		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
-
-		// se dau cartile jucatorilor
 
 		dealHands();
 		displayHand();
