@@ -1,14 +1,13 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <iostream>
 #include <memory>
 #include "Card.h"
 #include "Deck.h"
 #include "Player.h"
 #include "TableCards.h"
-#include "HumanPlayer.h"
 #include <SFML/Graphics.hpp>
+#include "HumanPlayer.h"
 #include "BotPlayer.h"
 #include "DealerPlayer.h"
 #include "BetStrategy.h"
@@ -17,10 +16,10 @@
 
 /**
  * @class Game
- * @brief Represents the main game logic for the Texas Hold' em game
+ * @brief The Game class encapsulates the logic, state, and graphical representation of a card game.
  */
 class Game {
-	static Game *game;
+	static Game *game; ///< Singleton instance of the Game class
 	Deck deck; ///< Deck object representing the game deck of cards
 	std::vector<Player *> players; ///< Vector of pointers to Player objects participating in the game
 	TableCards table; ///< TableCards object representing cards on the table
@@ -37,12 +36,11 @@ class Game {
 	std::vector<std::string> options; ///< List of available options for players
 	std::vector<sf::Text> playerOptions; ///< SFML Text objects displaying player options
 	sf::Font font; ///< SFML Font used for text rendering
-	bool inputTextCompleted;
-	bool botBet;
-	bool humanBet;
-	BetStrategy* betStrategy;
-	std::vector<sf::Sprite> cardSprites;
-	// std::map<std::pair<std::string, std::string>, sf::Texture> cardTextures;
+	bool inputTextCompleted; ///< Tracks whether the input text entry has been completed
+	bool botBet; ///< Flag to indicate if the bot has placed a bet
+	bool humanBet; ///< Flag to indicate if the human player has placed a bet
+	BetStrategy* betStrategy; ///< Pointer to the current betting strategy
+	std::vector<sf::Sprite> cardSprites; ///< Vector of SFML sprites representing the cards
 
 	/**
 	 * @brief Default Game constructor\n
@@ -51,10 +49,14 @@ class Game {
 	Game();
 
 public:
+	/**
+	 * @brief Returns the singleton instance of the Game class
+	 * @return Pointer to the single Game instance
+	 */
 	static Game *getInstance();
 
 	/**
-	 * @brief Game copy constructor. Automatically disabled.
+	 * @brief Game copy constructor. Automatically disabled
 	 * @param other Another Game-type object to assign from
 	 */
 	Game(const Game &other) = delete;
@@ -65,32 +67,60 @@ public:
 	~Game();
 
 	/**
-	 * @brief Copy assignment operator for the Game class. Automatically disabled.
+	 * @brief Copy assignment operator for the Game class. Automatically disabled
 	 * @param other Another Game-type object to assign from
 	 * @return Reference to the assigned Game object
 	 */
 	Game &operator=(const Game &other) = delete;
 
-	// void loadCardTextures();
-
+	/**
+	 * @brief Gets the SFML Text object representing the player input
+	 * @return The input text object
+	 */
 	sf::Text getInputText() const;
 
+	/**
+	 * @brief Provides access to the list of players in the game
+	 * @return Reference to the vector of Player pointers
+	 */
 	std::vector<Player*> &getPlayers();
 
+	/**
+	 * @brief Gets the font used for rendering text
+	 * @return The SFML Font object
+	 */
 	sf::Font getFont() const;
 
+	/**
+	 * @brief Checks if the bot has placed a bet
+	 * @return True if the bot has bet; otherwise false
+	 */
 	bool getBotBet() const;
 
 	// bool getHumanBet() const;
 
+	/**
+	 * @brief Sets the flag for a bot bet
+	 * @param botBet_ True if the bot has placed a bet; otherwise false
+	 */
 	void setBotBet(bool botBet_);
 
+	/**
+	 * @brief Sets the flag for a human bet
+	 * @param humanBet_ True if the human player has placed a bet; otherwise false
+	 */
 	void setHumanBet(bool humanBet_);
 
+	/**
+	 * @brief Sets the strategy to be used during the game
+	 * @param strat Pointer to a BetStrategy object
+	 */
 	void setStrategy(BetStrategy* strat);
 
+	/**
+	 * @brief Executes the betting strategy for the game round
+	 */
 	void strategy();
-
 
 	/**
 	 * @brief Handles the player 1's text input for the bet
@@ -111,12 +141,12 @@ public:
 	/**
 	 * @brief Handles the betting logic for the human player
 	 */
-	void bettingHuman();
+	// void bettingHuman();
 
 	/**
-	 * @brief Handles the betting logic for the bot player.
+	 * @brief Handles the betting logic for the bot player
 	 */
-	void bettingBot();
+	// void bettingBot();
 
 	/**
 	 * @brief Executes a single betting round

@@ -12,7 +12,7 @@
  * @brief The Menu class handles the user interface of the game, including displaying the menu, selecting options, and showing rules
  */
 class Menu {
-	static Menu *menu;
+	static Menu *menu; ///< Singleton instance of the Menu class
 	sf::RenderWindow *window; ///< Pointer to the SFML render window
 	sf::Font titleFont; ///< Font for the title of the menu
 	sf::Font textFont; ///< Font for regular text (options) in the menu
@@ -25,10 +25,9 @@ class Menu {
 	// Game* game; ///< Pointer to the Game object
 	int selectedOption; ///< Index of the currently selected menu option
 	int ruleShow; ///< Flag to determine if the rules should be shown
-
-	Command* startGameCommand;
-	Command* showRulesCommand;
-	Command* exitCommand;
+	Command* startGameCommand; ///< Command object to handle the "Start" action
+	Command* showRulesCommand; ///< Command object to handle the "Reguli" action
+	Command* exitCommand; ///< Command object to handle the "Iesi" action
 
 	/**
 	 * @brief Default Menu constructor\n
@@ -37,6 +36,11 @@ class Menu {
 	Menu();
 
 public:
+	/**
+	 * @brief Gets the singleton instance of the Menu class
+	 *
+	 * @return A pointer to the instance of the Menu class
+	 */
 	static Menu *getInstance();
 
 	/**
@@ -86,11 +90,15 @@ public:
 	 */
 	void startGame();
 
+	/**
+	 * @brief Sets the ruleShow flag to true
+	 */
 	void showRules();
 
+	/**
+	 * @brief Closes the window
+	 */
 	void exit();
-
-	// static void showRules();
 
 	/**
 	 * @brief Overloaded output stream operator to print the menu details
