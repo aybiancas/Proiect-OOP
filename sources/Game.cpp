@@ -211,6 +211,9 @@ void Game::displayHand() {
 		std::cout << card;
 		std::cout << "Card address: " << &card << std::endl;
 		sf::Sprite sprite = card.getSprite();
+		// sf::Texture texture = card.getTexture();
+		// sf::Sprite sprite;
+		// sprite.setTexture(texture);
 		std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
 		if (sprite.getTexture() == nullptr) {
 			std::cout << "Error: Texture not found for card!" << std::endl;
@@ -241,6 +244,7 @@ void Game::displayFlop() {
 		}
 		sprite.setPosition(100 * i, 500);
 		sprite.setScale(0.25f, 0.25f);
+		cardSprites.push_back(sprite);
 		window->draw(sprite);
 		i++;
 	}
@@ -259,6 +263,7 @@ void Game::displayTurn() {
 	}
 	sprite.setPosition(100 * 4, 500);
 	sprite.setScale(0.25f, 0.25f);
+	cardSprites.push_back(sprite);
 	window->draw(sprite);
 	window->display();
 }
@@ -271,6 +276,7 @@ void Game::displayRiver() {
 	}
 	sprite.setPosition(100 * 5, 500);
 	sprite.setScale(0.25f, 0.25f);
+	cardSprites.push_back(sprite);
 	window->draw(sprite);
 	window->display();
 }

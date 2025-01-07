@@ -16,6 +16,7 @@ Card::Card(const std::string &suit, const std::string &rank) : suit(suit), rank(
 	if (!texture.loadFromFile(textureFile)) {
 		throw FileLoadFailure("Error: could not load card file!");
 	}
+	this->texture = texture;
 	sprite.setTexture(texture);
 }
 
