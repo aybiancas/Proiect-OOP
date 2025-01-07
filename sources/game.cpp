@@ -266,7 +266,7 @@ void Game::displayHand() {
 			std::cout << "Error: Texture not found for card!" << std::endl;
 			continue;
 		}
-		sprite.setPosition(100 * i, 200);
+		sprite.setPosition(100 * i, 600);
 		sprite.setScale(0.25f, 0.25f);
 		cardSprites.push_back(sprite);
 		i++;
@@ -302,9 +302,9 @@ void Game::dealTurnRiver() {
 }
 
 void Game::displayTurn() {
-	std::vector<Card> cards = table.getTableCards();
-	std::cout << "Card address: " << &cards[3] << std::endl;
-	sf::Sprite sprite = cards[3].getSprite();
+	// std::vector<Card> cards = table.getTableCards();
+	// std::cout << "Card address: " << &cards[3] << std::endl;
+	sf::Sprite sprite = table.getTableCards()[3].getSprite();
 	std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
 	if (sprite.getTexture() == nullptr) {
 		std::cout << "Error: Texture not found for card!" << std::endl;
@@ -316,9 +316,9 @@ void Game::displayTurn() {
 }
 
 void Game::displayRiver() {
-	std::vector<Card> cards = table.getTableCards();
-	std::cout << "Card address: " << &cards[4] << std::endl;
-	sf::Sprite sprite = cards[4].getSprite();
+	// std::vector<Card> cards = table.getTableCards();
+	// std::cout << "Card address: " << &cards[4] << std::endl;
+	sf::Sprite sprite = table.getTableCards()[4].getSprite();
 	std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
 	if (sprite.getTexture() == nullptr) {
 		std::cout << "Error: Texture not found for card!" << std::endl;
@@ -474,9 +474,9 @@ int Game::cardGroupsEvaluate(const Player &player) {
 }
 
 std::ostream &operator<<(std::ostream &os, const Game &game) {
-	os << game.players[0] << std::endl;
-	os << game.players[1] << std::endl;
-	os << game.players[2] << std::endl;
+	for (const auto& player : game.players) {
+		os << player << std::endl;
+	}
 	os << game.table << std::endl;
 	return os;
 }

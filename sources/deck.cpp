@@ -4,8 +4,9 @@
 #include <iostream>
 #include <random>
 #include <algorithm>
+#include <memory>
 
-    Deck::Deck() :
+Deck::Deck() :
     suits({"HEARTS", "DIAMONDS", "CLUBS", "SPADES"}),
     ranks({"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"}) {
         for (const auto &suit : suits) {
@@ -17,21 +18,22 @@
                 //     throw FileLoadFailure("Error: Failed to load card texture");
                 // }
                 Card card(suit, rank);
-                cards.push_back(card);
+                cards.emplace_back(card);
                 // std::cout << "Texture address: " << &textures.back() << std::endl;
             }
         }
         std::cout << "Deck constructor" << std::endl;
     }
 
-    Deck::Deck (const Deck &other) : cards(other.cards) {}
+    // Deck::Deck (const Deck &other) : cards(other.cards) {}
 
     Deck::~Deck() {
         std::cout << "Deck destructor" << std::endl;
     }
 
+
     Deck& Deck::operator=(const Deck &other) {
-        cards = other.cards;
+        // cards = other.cards;
         return *this;
     }
 
@@ -58,11 +60,6 @@
         cards.clear();
         for (const auto &suit : suits) {
             for (const auto &rank : ranks) {
-                // sf::Texture texture;
-                // std::string path = "textures/cards/" + rank + "_" + suit + ".png";
-                // if(!texture.loadFromFile(path)) {
-                //     throw FileLoadFailure("Error: Failed to load card texture");
-                // }
                 Card card(suit, rank);
                 cards.emplace_back(card);
             }
