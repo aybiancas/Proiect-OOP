@@ -81,7 +81,7 @@ public:
 
 	bool getBotBet() const;
 
-	bool getHumanBet() const;
+	// bool getHumanBet() const;
 
 	void setBotBet(bool botBet_);
 

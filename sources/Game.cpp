@@ -104,9 +104,11 @@ bool Game::getBotBet() const {
 	return botBet;
 }
 
+/*
 bool Game::getHumanBet() const {
 	return humanBet;
 }
+*/
 
 void Game::setBotBet(bool botBet_) {
 	this->botBet = botBet_;
@@ -177,6 +179,7 @@ void Game::updateSums() {
 	textRoundPot.setString("Pot: " + std::to_string(players[2]->getPot()));
 }
 
+/*
 void Game::bettingHuman() {
 	std::cout << "Betting round: Human enter\n";
 	inputBet = inputText.getString().toAnsiString();
@@ -211,7 +214,8 @@ void Game::bettingHuman() {
 	botBet = false;
 	humanBet = true;
 }
-
+*/
+/*
 void Game::bettingBot() {
 	std::cout << "betting round BOT enter\n";
 	if (botBet) {
@@ -241,9 +245,9 @@ void Game::bettingBot() {
 	sf::sleep(sf::seconds(1));
 	botBet = true;
 }
+*/
 
 void Game::bettingRound() {
-
 	std::cout << "Betting round enter\n";
 	if (dynamic_cast<HumanPlayer *>(players[0]) && (botBet && !humanBet)) {
 		setStrategy(new HumanBetStrategy());
