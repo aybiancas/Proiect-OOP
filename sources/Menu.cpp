@@ -4,7 +4,11 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 #include <fstream>
+
+#include "../headers/ExitCommand.h"
 #include "../headers/FileLoadFailureExcept.h"
+#include "../headers/ShowRulesCommand.h"
+#include "../headers/StartGameCommand.h"
 
 Menu *Menu::menu = nullptr;
 
@@ -60,10 +64,17 @@ Menu::Menu() : window(nullptr),
 	rulesText.setCharacterSize(15);
 	rulesText.setFillColor(sf::Color::White);
 	rulesText.setPosition(50, 150);
+
+	startGameCommand = new StartGameCommand(this);
+	showRulesCommand = new ShowRulesCommand(this);
+	exitCommand = new ExitCommand(this);
 }
 
 Menu::~Menu() {
 	delete window;
+	delete startGameCommand;
+	delete showRulesCommand;
+	delete exitCommand;
 	std::cout << "Menu closed" << std::endl;
 }
 
@@ -148,14 +159,14 @@ void Menu::run() {
 					}
 				} else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 					if (selectedOption == 0) {
-						std::cout << "Game started" << std::endl;
-						startGame();
+						startGameCommand->execute();
+						std::cout << "Starting game" << std::endl;
 					} else if (selectedOption == 1) {
-						ruleShow = true;
+						showRulesCommand->execute();
 						std::cout << "Rules displayed" << std::endl;
 					} else if (selectedOption == 2) {
-						window->close();
-						std::cout << "Game closed" << std::endl;
+						exitCommand->execute();
+						std::cout << "Exit menu" << std::endl;
 					}
 				}
 			} else {
@@ -177,6 +188,14 @@ void Menu::startGame() {
 	Game *game = Game::getInstance();
 	window->close();
 	game->play();
+}
+
+void Menu::showRules() {
+	ruleShow = true;
+}
+
+void Menu::exit() {
+	window->close();
 }
 
 std::ostream &operator<<(std::ostream &os, const Menu &menu) {

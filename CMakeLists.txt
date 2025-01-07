@@ -84,6 +84,14 @@ add_executable(${PROJECT_NAME}
         sources/HumanBetStrategy.cpp
         headers/BotBetStrategy.h
         sources/BotBetStrategy.cpp
+        headers/Command.h
+        sources/Command.cpp
+        headers/StartGameCommand.h
+        sources/StartGameCommand.cpp
+        headers/ShowRulesCommand.h
+        sources/ShowRulesCommand.cpp
+        headers/ExitCommand.h
+        sources/ExitCommand.cpp
 )
 
 include(cmake/CompilerFlags.cmake)
