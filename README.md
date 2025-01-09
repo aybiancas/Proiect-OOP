@@ -77,12 +77,27 @@ Formațiuni de cărți câștigătoare, în ordine crescătoare:
 
 #### Cerințe
 - [x] 2 șabloane de proiectare (design patterns)
-- [ ] o clasă șablon cu sens; minim **2 instanțieri**
+- [x] o clasă șablon cu sens; minim **2 instanțieri**
   - [ ] preferabil și o funcție șablon (template) cu sens; minim 2 instanțieri
-- [ ] tag de `git`: de exemplu `v0.3` sau `v1.0`
+- [x] tag de `git`: de exemplu `v0.3` sau `v1.0`
 
 ## Resurse
 
 - [SFML](https://github.com/SFML/SFML/tree/2.6.1) (Zlib)
   - [OpenAL](https://openal-soft.org/) (LGPL): din cauza licenței, trebuie distribuită ca shared library
-- adăugați trimiteri către resursele externe care v-au ajutat sau pe care le-ați folosit
+- [CARD SPRITES](https://opengameart.org/content/playing-cards-vector-png) (Author: Byron Knoll)
+- [FIGMA COLOR WHEEL](https://www.figma.com/color-wheel/)
+- [Informatii despre tie-breaker pentru jocul de poker](https://www.blitzpoker.com/blogs/texas-holdem-tie-breaker/)
+- Fonturi:
+  - [Babel-Sans](https://www.dafont.com/babel-sans.font)
+  - [Bleeding Cowboys](https://www.dafont.com/bleeding-cowboys.font) (PERSONAL USE!)
+  - [Bronco](https://www.dafont.com/bronco.font) (PERSONAL USE!)
+- Alte link-uri ajutatoare:
+  - [Sortare de vector de obiecte](https://stackoverflow.com/questions/34385586/sort-vector-of-class-objects-based-on-some-member-variable)
+  - [Random shuffle](https://en.cppreference.com/w/cpp/algorithm/random_shuffle)
+  - [SFML Shapes](https://www.sfml-dev.org/documentation/2.6.2/classsf_1_1Shape.php)
+  - [Render pentru o imagine de fundal](https://stackoverflow.com/questions/36448101/2-3-1-set-scale-of-background-texture-to-renderwindow-size)
+  - [Culori in SFML](https://learnsfml.com/basics/graphics/how-to-use-colors-in-sfml/)
+  - [Randomizare de numere](https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution)
+  - [Convertire SFML Text la std::string](https://stackoverflow.com/questions/38082453/sfml-getting-text-from-sftext)
+- [...]
