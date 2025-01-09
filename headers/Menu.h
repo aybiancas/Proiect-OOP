@@ -52,7 +52,11 @@ public:
 	 */
 	~Menu();
 
-	void loadFonts(const std::string &filePath);
+	/**
+	 * @brief Loads font files to the font resource container
+	 * @param fileName The name of the file (without extension)
+	 */
+	void loadFonts(const std::string &fileName);
 
 	/**
 	 * @brief Assignment operator for the Menu class.
@@ -60,10 +64,6 @@ public:
 	 * @return A reference to the current Menu object.
 	 */
 	Menu &operator=(const Menu &other) = delete;
-
-	// void showMenu() const;
-
-	// void selectOption(int choice);
 
 	/**
 	 * @brief Draws the menu to the screen\n
