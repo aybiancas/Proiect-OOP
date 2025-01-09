@@ -13,6 +13,7 @@
 #include "BetStrategy.h"
 #include "HumanBetStrategy.h"
 #include "BotBetStrategy.h"
+#include "Resources.h"
 
 /**
  * @class Game
@@ -41,6 +42,7 @@ class Game {
 	bool humanBet; ///< Flag to indicate if the human player has placed a bet
 	BetStrategy* betStrategy; ///< Pointer to the current betting strategy
 	std::vector<sf::Sprite> cardSprites; ///< Vector of SFML sprites representing the cards
+	Resources<sf::Texture> cardTextures; ///<Resources container for the card textures (uses a template)
 
 	/**
 	 * @brief Default Game constructor\n

@@ -43,6 +43,18 @@ Game::Game() : deck(),
 		throw FileLoadFailure("Error: Failed to load fonts");
 	}
 
+	for (const auto &suit : deck.getSuits()) {
+		for (const auto &rank : deck.getRanks()) {
+			std::string key = rank + "_" + suit;
+			std::string filePath = "textures/cards/" + rank + "_" + suit + ".png";
+			sf::Texture texture;
+			if (!texture.loadFromFile(filePath)) {
+				throw FileLoadFailure("Error: could not load card file!");
+			}
+			cardTextures.addResource(key, texture);
+		}
+	}
+
 	player1Sum.setFont(font);
 	player1Sum.setString("Suma P1: " + std::to_string(players[0]->getSum()));
 	player1Sum.setCharacterSize(40);
@@ -210,11 +222,9 @@ void Game::displayHand() {
 	for (auto const &card: players[0]->getPlayerCards()) {
 		std::cout << card;
 		std::cout << "Card address: " << &card << std::endl;
-		sf::Sprite sprite = card.getSprite();
-		// sf::Texture texture = card.getTexture();
-		// sf::Sprite sprite;
-		// sprite.setTexture(texture);
-		std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
+		std::string cardKey = card.getRank() + "_" + card.getSuit();
+		sf::Sprite sprite;
+		sprite.setTexture(cardTextures.getResource(cardKey));
 		if (sprite.getTexture() == nullptr) {
 			std::cout << "Error: Texture not found for card!" << std::endl;
 			continue;

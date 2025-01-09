@@ -4,7 +4,6 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 #include <fstream>
-
 #include "../headers/ExitCommand.h"
 #include "../headers/FileLoadFailureExcept.h"
 #include "../headers/ShowRulesCommand.h"
@@ -28,6 +27,7 @@ Menu::Menu() : window(nullptr),
 	window = new sf::RenderWindow(sf::VideoMode(1300, 900), "Texas Hold' em");
 	window->setFramerateLimit(20);
 
+
 	if (!titleFont.loadFromFile("fonts/Bleeding_Cowboys.ttf")) {
 		throw FileLoadFailure("Error: failed to load fonts");
 	}
@@ -40,10 +40,15 @@ Menu::Menu() : window(nullptr),
 		throw FileLoadFailure("Error: failed to load fonts");
 	}
 
+	loadFonts("Bleeding_Cowboys");
+	loadFonts("BroncoPersonalUse");
+	loadFonts("BabelSans");
+
 	if (!bgImage.loadFromFile("textures/bgImage.jpg")) {
 		throw FileLoadFailure("Error: failed to load background sprite");
 	}
 
+	// title.setFont(fonts.getResource("Bleeding_Cowboys"));
 	title.setFont(titleFont);
 	title.setString("Texas Hold' em");
 	title.setCharacterSize(100);
@@ -52,6 +57,7 @@ Menu::Menu() : window(nullptr),
 
 	for (int i = 0; i < 3; ++i) {
 		sf::Text optionText;
+		// optionText.setFont(fonts.getResource("BroncoPersonalUse")); // font.getResource("BroncoPersonalUse")
 		optionText.setFont(textFont);
 		optionText.setString(options[i]);
 		optionText.setCharacterSize(50);
@@ -60,6 +66,7 @@ Menu::Menu() : window(nullptr),
 		menuOptions.push_back(optionText);
 	}
 
+	// rulesText.setFont(fonts.getResource("BabelSans"));
 	rulesText.setFont(ruleFont);
 	rulesText.setCharacterSize(15);
 	rulesText.setFillColor(sf::Color::White);
@@ -77,6 +84,16 @@ Menu::~Menu() {
 	delete exitCommand;
 	std::cout << "Menu closed" << std::endl;
 }
+
+void Menu::loadFonts(const std::string &fileName) {
+	sf::Font font;
+	if (!font.loadFromFile("fonts/" + fileName + ".ttf")) {
+		throw FileLoadFailure("Error: failed to load fonts");
+	}
+	// std::cout << "fonts/" + fileName + ".ttf";
+	fonts.addResource(fileName, font);
+}
+
 
 void Menu::drawMenu() {
 	sf::Sprite sprite;

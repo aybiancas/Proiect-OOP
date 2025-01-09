@@ -92,6 +92,7 @@ add_executable(${PROJECT_NAME}
         sources/ShowRulesCommand.cpp
         headers/ExitCommand.h
         sources/ExitCommand.cpp
+        headers/Resources.h
 )
 
 include(cmake/CompilerFlags.cmake)

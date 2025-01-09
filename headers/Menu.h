@@ -3,9 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
-
 #include "Command.h"
 #include "Game.h"
+#include "Resources.h"
 
 /**
  * @class Menu
@@ -28,6 +28,7 @@ class Menu {
 	Command* startGameCommand; ///< Command object to handle the "Start" action
 	Command* showRulesCommand; ///< Command object to handle the "Reguli" action
 	Command* exitCommand; ///< Command object to handle the "Iesi" action
+	Resources<sf::Font> fonts; ///Resources container for the Menu fonts (uses a template)
 
 	/**
 	 * @brief Default Menu constructor\n
@@ -54,6 +55,8 @@ public:
 	 * Cleans up any resources allocated by the menu
 	 */
 	~Menu();
+
+	void loadFonts(const std::string &filePath);
 
 	/**
 	 * @brief Assignment operator for the Menu class.
