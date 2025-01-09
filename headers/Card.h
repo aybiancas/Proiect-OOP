@@ -77,14 +77,14 @@ public:
 	 *
 	 * @return A constant reference to the sprite representing the card
 	 */
-    const sf::Sprite &getSprite() const;
+    // const sf::Sprite &getSprite() const;
 
 	/**
 	 * @brief Gets the texture associated with the card
 	 *
 	 * @return A constant reference to the sprite representing the card
 	 */
-	const sf::Texture &getTexture() const;
+	// const sf::Texture &getTexture() const;
 
 };
 

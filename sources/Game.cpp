@@ -247,8 +247,9 @@ void Game::displayFlop() {
 	int i = 2;
 	for (auto const &card: table.getTableCards()) {
 		std::cout << "Card address: " << &card << std::endl;
-		sf::Sprite sprite = card.getSprite();
-		std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
+		std::string cardKey = card.getRank() + "_" + card.getSuit();
+		sf::Sprite sprite;
+		sprite.setTexture(cardTextures.getResource(cardKey));
 		if (sprite.getTexture() == nullptr) {
 			std::cout << "Error: Texture not found for card!" << std::endl;
 		}
@@ -266,7 +267,9 @@ void Game::dealTurnRiver() {
 }
 
 void Game::displayTurn() {
-	sf::Sprite sprite = table.getTableCards()[3].getSprite();
+	std::string cardKey = table.getTableCards()[3].getRank() + "_" + table.getTableCards()[3].getSuit();
+	sf::Sprite sprite;
+	sprite.setTexture(cardTextures.getResource(cardKey));
 	std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
 	if (sprite.getTexture() == nullptr) {
 		std::cout << "Error: Texture not found for card!" << std::endl;
@@ -279,7 +282,9 @@ void Game::displayTurn() {
 }
 
 void Game::displayRiver() {
-	sf::Sprite sprite = table.getTableCards()[4].getSprite();
+	std::string cardKey = table.getTableCards()[4].getRank() + "_" + table.getTableCards()[4].getSuit();
+	sf::Sprite sprite;
+	sprite.setTexture(cardTextures.getResource(cardKey));
 	std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
 	if (sprite.getTexture() == nullptr) {
 		std::cout << "Error: Texture not found for card!" << std::endl;

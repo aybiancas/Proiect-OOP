@@ -27,19 +27,6 @@ Menu::Menu() : window(nullptr),
 	window = new sf::RenderWindow(sf::VideoMode(1300, 900), "Texas Hold' em");
 	window->setFramerateLimit(20);
 
-
-	if (!titleFont.loadFromFile("fonts/Bleeding_Cowboys.ttf")) {
-		throw FileLoadFailure("Error: failed to load fonts");
-	}
-
-	if (!textFont.loadFromFile("fonts/BroncoPersonalUse.ttf")) {
-		throw FileLoadFailure("Error: failed to load fonts");
-	}
-
-	if (!ruleFont.loadFromFile("fonts/BabelSans.ttf")) {
-		throw FileLoadFailure("Error: failed to load fonts");
-	}
-
 	loadFonts("Bleeding_Cowboys");
 	loadFonts("BroncoPersonalUse");
 	loadFonts("BabelSans");
@@ -48,8 +35,7 @@ Menu::Menu() : window(nullptr),
 		throw FileLoadFailure("Error: failed to load background sprite");
 	}
 
-	// title.setFont(fonts.getResource("Bleeding_Cowboys"));
-	title.setFont(titleFont);
+	title.setFont(fonts.getResource("Bleeding_Cowboys"));
 	title.setString("Texas Hold' em");
 	title.setCharacterSize(100);
 	title.setFillColor(sf::Color::White);
@@ -57,8 +43,7 @@ Menu::Menu() : window(nullptr),
 
 	for (int i = 0; i < 3; ++i) {
 		sf::Text optionText;
-		// optionText.setFont(fonts.getResource("BroncoPersonalUse")); // font.getResource("BroncoPersonalUse")
-		optionText.setFont(textFont);
+		optionText.setFont(fonts.getResource("BroncoPersonalUse"));
 		optionText.setString(options[i]);
 		optionText.setCharacterSize(50);
 		optionText.setPosition(static_cast<float>(650 - optionText.getGlobalBounds().width / 2),
@@ -66,8 +51,7 @@ Menu::Menu() : window(nullptr),
 		menuOptions.push_back(optionText);
 	}
 
-	// rulesText.setFont(fonts.getResource("BabelSans"));
-	rulesText.setFont(ruleFont);
+	rulesText.setFont(fonts.getResource("BabelSans"));
 	rulesText.setCharacterSize(15);
 	rulesText.setFillColor(sf::Color::White);
 	rulesText.setPosition(50, 150);
@@ -90,7 +74,6 @@ void Menu::loadFonts(const std::string &fileName) {
 	if (!font.loadFromFile("fonts/" + fileName + ".ttf")) {
 		throw FileLoadFailure("Error: failed to load fonts");
 	}
-	// std::cout << "fonts/" + fileName + ".ttf";
 	fonts.addResource(fileName, font);
 }
 
@@ -131,7 +114,7 @@ void Menu::drawRules() {
 	window->draw(rulesText);
 
 	sf::Text backText;
-	backText.setFont(textFont);
+	backText.setFont(fonts.getResource("BroncoPersonalUse"));
 	backText.setString("< Meniu (ESC)");
 	backText.setCharacterSize(40);
 	backText.setPosition(40, 40);

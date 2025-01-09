@@ -14,15 +14,11 @@
 class Menu {
 	static Menu *menu; ///< Singleton instance of the Menu class
 	sf::RenderWindow *window; ///< Pointer to the SFML render window
-	sf::Font titleFont; ///< Font for the title of the menu
-	sf::Font textFont; ///< Font for regular text (options) in the menu
-	sf::Font ruleFont; ///< Font for the rules text in the menu
 	sf::Texture bgImage; ///< Background texture for the menu
 	sf::Text title; ///< Text object for the menu title
 	sf::Text rulesText; ///< Text object for displaying rules in the menu
 	std::vector<sf::Text> menuOptions; ///< List of text objects for the menu options
 	std::vector<std::string> options; ///< List of menu option labels
-	// Game* game; ///< Pointer to the Game object
 	int selectedOption; ///< Index of the currently selected menu option
 	int ruleShow; ///< Flag to determine if the rules should be shown
 	Command* startGameCommand; ///< Command object to handle the "Start" action
