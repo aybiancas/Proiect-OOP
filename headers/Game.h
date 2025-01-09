@@ -99,8 +99,6 @@ public:
 	 */
 	bool getBotBet() const;
 
-	// bool getHumanBet() const;
-
 	/**
 	 * @brief Sets the flag for a bot bet
 	 * @param botBet_ True if the bot has placed a bet; otherwise false
@@ -134,21 +132,6 @@ public:
 	 * @brief Draws the game interface and updates the window
 	 */
 	void drawGame();
-
-	/**
-	 * @brief Draws the game betting pop-ups (e.g. the pot, player bets, input box) and updates the window
-	 */
-	// void drawBettingPopups();
-
-	/**
-	 * @brief Handles the betting logic for the human player
-	 */
-	// void bettingHuman();
-
-	/**
-	 * @brief Handles the betting logic for the bot player
-	 */
-	// void bettingBot();
 
 	/**
 	 * @brief Executes a single betting round
