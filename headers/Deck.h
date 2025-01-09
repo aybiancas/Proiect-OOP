@@ -67,9 +67,9 @@ public:
 	 */
 	void resetDeck();
 
-	[[nodiscard]] std::vector<std::string> getSuits() const;
+	[[nodiscard]] const std::vector<std::string> &getSuits() const;
 
-	[[nodiscard]] std::vector<std::string> getRanks() const;
+	[[nodiscard]] const std::vector<std::string> &getRanks() const;
 };
 
 #endif //DECK_H

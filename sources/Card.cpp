@@ -41,14 +41,4 @@ std::ostream &operator<<(std::ostream &os, const Card &card) {
 	os << card.rank << " of " << card.suit << std::endl;
 	return os;
 }
-//
-// const sf::Sprite &Card::getSprite() const {
-// 	std::cout << "Returning sprite for " << rank << " of " << suit << std::endl;
-// 	return sprite;
-// }
-//
-// const sf::Texture &Card::getTexture() const {
-// 	std::cout << "Returning texture for " << rank << " of " << suit << std::endl;
-// 	return texture;
-// }
 
