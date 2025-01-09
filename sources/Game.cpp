@@ -140,7 +140,7 @@ void Game::handleTextInput(sf::Event &event) {
 			window->close();
 		} else if (!inputTextCompleted && event.type == sf::Event::TextEntered) {
 			if (event.text.unicode < 128) {
-				// 8 in unicode is backspace
+				// in unicode 8 este backspace
 				if (event.text.unicode == 8 && inputText.getString().getSize() > 0) {
 					std::string currentString = inputText.getString();
 					currentString.pop_back();
@@ -214,14 +214,9 @@ void Game::displayHand() {
 	int i = 2;
 	for (auto const &card: players[0]->getPlayerCards()) {
 		std::cout << card;
-		std::cout << "Card address: " << &card << std::endl;
 		std::string cardKey = card.getRank() + "_" + card.getSuit();
 		sf::Sprite sprite;
 		sprite.setTexture(cardTextures.getResource(cardKey));
-		if (sprite.getTexture() == nullptr) {
-			std::cout << "Error: Texture not found for card!" << std::endl;
-			continue;
-		}
 		sprite.setPosition(100 * i, 650);
 		sprite.setScale(0.25f, 0.25f);
 		cardSprites.push_back(sprite);
@@ -239,13 +234,9 @@ void Game::dealFlop() {
 void Game::displayFlop() {
 	int i = 2;
 	for (auto const &card: table.getTableCards()) {
-		std::cout << "Card address: " << &card << std::endl;
 		std::string cardKey = card.getRank() + "_" + card.getSuit();
 		sf::Sprite sprite;
 		sprite.setTexture(cardTextures.getResource(cardKey));
-		if (sprite.getTexture() == nullptr) {
-			std::cout << "Error: Texture not found for card!" << std::endl;
-		}
 		sprite.setPosition(100 * i, 400);
 		sprite.setScale(0.25f, 0.25f);
 		cardSprites.push_back(sprite);
@@ -263,10 +254,6 @@ void Game::displayTurn() {
 	std::string cardKey = table.getTableCards()[3].getRank() + "_" + table.getTableCards()[3].getSuit();
 	sf::Sprite sprite;
 	sprite.setTexture(cardTextures.getResource(cardKey));
-	std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
-	if (sprite.getTexture() == nullptr) {
-		std::cout << "Error: Texture not found for card!" << std::endl;
-	}
 	sprite.setPosition(100 * 5, 400);
 	sprite.setScale(0.25f, 0.25f);
 	cardSprites.push_back(sprite);
@@ -278,10 +265,6 @@ void Game::displayRiver() {
 	std::string cardKey = table.getTableCards()[4].getRank() + "_" + table.getTableCards()[4].getSuit();
 	sf::Sprite sprite;
 	sprite.setTexture(cardTextures.getResource(cardKey));
-	std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
-	if (sprite.getTexture() == nullptr) {
-		std::cout << "Error: Texture not found for card!" << std::endl;
-	}
 	sprite.setPosition(100 * 6, 400);
 	sprite.setScale(0.25f, 0.25f);
 	cardSprites.push_back(sprite);
