@@ -11,13 +11,6 @@ Card::Card() {
 
 Card::Card(const std::string &suit, const std::string &rank) : suit(suit), rank(rank) {
 	std::cout << "Creating card: " << rank << " of " << suit << std::endl;
-	// std::string textureFile = "textures/cards/" + rank + "_" + suit + ".png";
-	// std::cout << textureFile << std::endl;
-	// if (!texture.loadFromFile(textureFile)) {
-	// 	throw FileLoadFailure("Error: could not load card file!");
-	// }
-	// this->texture = texture;
-	// sprite.setTexture(texture);
 }
 
 Card::Card(const Card &other) : suit(other.suit), rank(other.rank), sprite(other.sprite) {
