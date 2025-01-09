@@ -35,7 +35,3 @@ std::ostream& operator<<(std::ostream& os, const Player& player) {
         }
         return os;
     }
-
-// int Player::getPot() {}
-
-// void Player::subtractBet(int amount) {}
