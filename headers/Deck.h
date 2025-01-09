@@ -66,6 +66,10 @@ public:
 	 * This function recreates the deck with all 52 cards, shuffling them
 	 */
 	void resetDeck();
+
+	[[nodiscard]] std::vector<std::string> getSuits() const;
+
+	[[nodiscard]] std::vector<std::string> getRanks() const;
 };
 
 #endif //DECK_H

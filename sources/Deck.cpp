@@ -59,3 +59,11 @@ Deck::Deck() :
         }
         shuffleCards();
     }
+
+std::vector<std::string> Deck::getSuits() const {
+    return suits;
+}
+
+std::vector<std::string> Deck::getRanks() const {
+    return ranks;
+}
