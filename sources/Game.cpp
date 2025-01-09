@@ -430,21 +430,23 @@ void Game::play() {
 			if (event.type == sf::Event::Closed) {
 				window->close();
 			}
+			/*
 			if (players[0]->getSum() <= 0 || players[1]->getSum() <= 0) {
+
 				sf::Text gameOverText;
 				gameOverText.setFont(font);
 				gameOverText.setCharacterSize(50);
 				gameOverText.setFillColor(sf::Color::White);
 
 				if (players[0]->getSum() > 0) {
-					gameOverText.setString("Game Over! Player 1 Wins!");
-					std::cout << "Game Over! Player 1 Wins!" << "\n\n";
+					gameOverText.setString("Game Over! Player 1 Win");
+					std::cout << "Game Over! Player 1 Win" << std::endl;
 				} else if (players[1]->getSum() > 0) {
-					gameOverText.setString("Game Over! Player 2 Wins!");
-					std::cout << "Game Over! Player 2 Wins!" << "\n\n";
+					gameOverText.setString("Game Over! Player 2 Win");
+					std::cout << "Game Over! Player 2 Win" << std::endl;
 				} else {
-					gameOverText.setString("Game Over! It's a Tie!");
-					std::cout << "Game Over! It's a Tie!" << "\n\n";
+					gameOverText.setString("Game Over! It's a Tie");
+					std::cout << "Game Over! It's a Tie" << std::endl;
 				}
 				gameOverText.setPosition(650 - gameOverText.getGlobalBounds().width / 2, 300);
 				window->draw(gameOverText);
@@ -453,16 +455,17 @@ void Game::play() {
 				window->close();
 				break;
 			}
+			*/
 		}
 		window->clear(sf::Color{0, 122, 44});
 
-		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
+		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << std::endl;
 
 		dealHands();
 		displayHand();
 
-		std::cout << std::endl << "Player 1 sum: " << players[0]->getSum() << "\n\n";
-		std::cout << std::endl << "Player 2 sum: " << players[1]->getSum() << "\n\n";
+		std::cout << std::endl << "Player 1 sum: " << players[0]->getSum() << std::endl;
+		std::cout << std::endl << "Player 2 sum: " << players[1]->getSum() << std::endl;
 
 		humanBet = false;
 		inputTextCompleted = false;
@@ -475,18 +478,17 @@ void Game::play() {
 		bettingRound();
 		updateSums();
 		std::cout << "POT: " << players[2]->getPot() << std::endl;
-		std::cout << std::endl << "Player 1 sum: " << players[0]->getSum() << "\n\n";
-		std::cout << std::endl << "Player 2 sum: " << players[1]->getSum() << "\n\n";
+		std::cout << std::endl << "Player 1 sum: " << players[0]->getSum() << std::endl;
+		std::cout << std::endl << "Player 2 sum: " << players[1]->getSum() << std::endl;
 
-		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
-		std::cout << "Roundbet: " << roundBet << "\n\n";
-		std::cout << "Player input bet: " << inputBet << "\n\n";
-		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
+		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << std::endl;
+		std::cout << "Player input bet: " << inputBet << std::endl;
+		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << std::endl;
 
 
 		std::cout << "ROUND 1 Flop : ";
 		dealFlop();
-		std::cout << table << "\n\n";
+		std::cout << table << std::endl;
 		displayFlop();
 
 		humanBet = false;
@@ -501,17 +503,16 @@ void Game::play() {
 		bettingRound();
 		updateSums();
 		std::cout << "POT: " << players[2]->getPot() << std::endl;
-		std::cout << std::endl << "Player 1 sum: " << players[0]->getSum() << "\n\n";
-		std::cout << std::endl << "Player 2 sum: " << players[1]->getSum() << "\n\n";
+		std::cout << std::endl << "Player 1 sum: " << players[0]->getSum() << std::endl;
+		std::cout << std::endl << "Player 2 sum: " << players[1]->getSum() << std::endl;
 
-		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
-		std::cout << "Roundbet: " << roundBet << "\n\n";
-		std::cout << "Player input bet: " << inputBet << "\n\n";
-		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
+		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << std::endl;
+		std::cout << "Player input bet: " << inputBet << std::endl;
+		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << std::endl;
 
 		std::cout << "ROUND 2 Turn : ";
 		dealTurnRiver();
-		std::cout << table << "\n\n";
+		std::cout << table << std::endl;
 		displayTurn();
 
 		humanBet = false;
@@ -526,62 +527,61 @@ void Game::play() {
 		bettingRound();
 		updateSums();
 		std::cout << "POT: " << players[2]->getPot() << std::endl;
-		std::cout << std::endl << "Player 1 sum: " << players[0]->getSum() << "\n\n";
-		std::cout << std::endl << "Player 2 sum: " << players[1]->getSum() << "\n\n";
+		std::cout << std::endl << "Player 1 sum: " << players[0]->getSum() << std::endl;
+		std::cout << std::endl << "Player 2 sum: " << players[1]->getSum() << std::endl;
 
-		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
-		std::cout << "Roundbet: " << roundBet << "\n\n";
-		std::cout << "Player input bet: " << inputBet << "\n\n";
-		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
+		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << std::endl;
+		std::cout << "Player input bet: " << inputBet << std::endl;
+		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << std::endl;
 
 		std::cout << "ROUND 3 River : ";
-		dealTurnRiver(); // adauga o carte pe masa
-		std::cout << table << "\n\n";
+		dealTurnRiver();
+		std::cout << table << std::endl;
 		displayRiver();
 
 		int handValueP1 = cardGroupsEvaluate(*players[0]);
 		int handValueP2 = cardGroupsEvaluate(*players[1]);
 
-		std::cout << "Hand Value p1: " << handValueP1 << "\n\n";
-		std::cout << "Hand value p2: " << handValueP2 << "\n\n";
+		std::cout << "Hand Value p1: " << handValueP1 << std::endl;
+		std::cout << "Hand value p2: " << handValueP2 << std::endl;
 
-		std::cout << std::endl << "Player 1 sum: " << players[0]->getSum() << "\n\n";
-		std::cout << std::endl << "Player 2 sum: " << players[1]->getSum() << "\n\n";
+		std::cout << std::endl << "Player 1 sum: " << players[0]->getSum() << std::endl;
+		std::cout << std::endl << "Player 2 sum: " << players[1]->getSum() << std::endl;
 
 
 		if (handValueP1 > handValueP2) {
-			std::cout << "P1 win" << "\n\n";
+			std::cout << "P1 win" << std::endl;
 			players[0]->addSum(players[2]->getPot());
 		} else if (handValueP1 < handValueP2) {
-			std::cout << "P2 win" << "\n\n";
+			std::cout << "P2 win" << std::endl;
 			players[1]->addSum(players[2]->getPot());
 		} else {
 			int highCardP1 = highCardEvaluate(*players[0]);
 			int highCardP2 = highCardEvaluate(*players[1]);
 
 			if (highCardP1 > highCardP2) {
-				std::cout << "P1 win" << "\n\n";
+				std::cout << "P1 win" << std::endl;
 				players[0]->addSum(players[2]->getPot());
 			} else if (highCardP1 < highCardP2) {
-				std::cout << "P2 win" << "\n\n";
+				std::cout << "P2 win" << std::endl;
 				players[1]->addSum(players[2]->getPot());
 			} else {
-				std::cout << "Tie" << "\n\n";
+				std::cout << "Tie" << std::endl;
 				players[0]->addSum((players[2]->getPot()) / 2);
 				players[1]->addSum((players[2]->getPot()) / 2);
 			}
 		}
-		std::cout << std::endl << "Player 1 sum: " << players[0]->getSum() << "\n\n";
-		std::cout << std::endl << "Player 2 sum: " << players[1]->getSum() << "\n\n";
+		std::cout << std::endl << "Player 1 sum: " << players[0]->getSum() << std::endl;
+		std::cout << std::endl << "Player 2 sum: " << players[1]->getSum() << std::endl;
 		if (players[0]->getSum() <= 0 || players[1]->getSum() <= 0) {
 			if (players[0]->getSum() > 0) {
-				std::cout << "P1 overall win" << "\n\n";
+				std::cout << "P1 overall win" << std::endl;
 			} else if (players[1]->getSum() > 0) {
-				std::cout << "P2 overall win" << "\n\n";
-			} else std::cout << "Overall Tie" << "\n\n";
+				std::cout << "P2 overall win" << std::endl;
+			} else std::cout << "Overall Tie" << std::endl;
 			break;
 		}
 		resetRound();
-		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << "\n\n";
+		std::cout << "Human bool bet: " << humanBet << "  Bot bool bet: " << botBet << std::endl;
 	}
 }
