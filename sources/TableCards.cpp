@@ -31,7 +31,7 @@ void TableCards::clearTable() {
     }
 
 std::ostream& operator<<(std::ostream& os, const TableCards& table) {
-        os << "Carti pe masa: " << std::endl;
+        os << "Cards on table: " << std::endl;
         for (const auto &card : table.cards) {
             os << card << std::endl;
         }
