@@ -31,6 +31,8 @@ Game::Game() : deck(),
 	std::cout << "Game constructor" << std::endl;
 	deck.shuffleCards();
 	deck.shuffleCards();
+	deck.shuffleCards();
+	deck.shuffleCards();
 
 	players.push_back(new HumanPlayer);
 	players.push_back(new BotPlayer);
@@ -83,17 +85,17 @@ Game::Game() : deck(),
 	promptText.setString("Introdu o suma: ");
 	promptText.setCharacterSize(40);
 	promptText.setFillColor(sf::Color::White);
-	promptText.setPosition(300, 460);
+	promptText.setPosition(890, 400);
 
-	inputBox.setSize(sf::Vector2f(200, 50));
+	inputBox.setSize(sf::Vector2f(100, 50));
 	inputBox.setFillColor(sf::Color::Black);
-	inputBox.setPosition(650, 460);
+	inputBox.setPosition(950, 450);
 
 	inputText.setFont(font);
 	inputText.setString(inputBet);
-	inputText.setCharacterSize(30);
+	inputText.setCharacterSize(35);
 	inputText.setFillColor(sf::Color::White);
-	inputText.setPosition(650, 300);
+	inputText.setPosition(980, 450);
 }
 
 Game::~Game() {
@@ -167,15 +169,6 @@ void Game::drawGame() {
 		window->draw(inputText);
 	}
 
-	if (!inputText.getString().isEmpty()) {
-		sf::Text betText;
-		betText.setFont(font);
-		betText.setString("P1 Bet: " + inputText.getString());
-		betText.setCharacterSize(30);
-		betText.setFillColor(sf::Color::White);
-		betText.setPosition(650 - betText.getGlobalBounds().width / 2, 450);
-		window->draw(betText);
-	}
 	window->display();
 }
 
@@ -195,7 +188,7 @@ void Game::bettingRound() {
 		setStrategy(new BotBetStrategy());
 		strategy();
 		sf::sleep(sf::seconds(1));
-	} else std::cout << "dynamic cast error\n";
+	} else std::cout << "Dynamic cast error\n";
 }
 
 void Game::resetRound() {
@@ -229,7 +222,7 @@ void Game::displayHand() {
 			std::cout << "Error: Texture not found for card!" << std::endl;
 			continue;
 		}
-		sprite.setPosition(100 * i, 600);
+		sprite.setPosition(100 * i, 650);
 		sprite.setScale(0.25f, 0.25f);
 		cardSprites.push_back(sprite);
 		i++;
@@ -253,7 +246,7 @@ void Game::displayFlop() {
 		if (sprite.getTexture() == nullptr) {
 			std::cout << "Error: Texture not found for card!" << std::endl;
 		}
-		sprite.setPosition(100 * i, 500);
+		sprite.setPosition(100 * i, 400);
 		sprite.setScale(0.25f, 0.25f);
 		cardSprites.push_back(sprite);
 		window->draw(sprite);
@@ -274,7 +267,7 @@ void Game::displayTurn() {
 	if (sprite.getTexture() == nullptr) {
 		std::cout << "Error: Texture not found for card!" << std::endl;
 	}
-	sprite.setPosition(100 * 4, 500);
+	sprite.setPosition(100 * 5, 400);
 	sprite.setScale(0.25f, 0.25f);
 	cardSprites.push_back(sprite);
 	window->draw(sprite);
@@ -289,10 +282,9 @@ void Game::displayRiver() {
 	if (sprite.getTexture() == nullptr) {
 		std::cout << "Error: Texture not found for card!" << std::endl;
 	}
-	sprite.setPosition(100 * 5, 500);
+	sprite.setPosition(100 * 6, 400);
 	sprite.setScale(0.25f, 0.25f);
 	cardSprites.push_back(sprite);
-	window->draw(sprite);
 	window->display();
 }
 

@@ -33,7 +33,7 @@ void HumanBetStrategy::bet(sf::RenderWindow *window) {
 	playerBetText.setString("P1 Bet: " + std::to_string(playerBet));
 	playerBetText.setCharacterSize(30);
 	playerBetText.setFillColor(sf::Color::White);
-	playerBetText.setPosition(650 - playerBetText.getGlobalBounds().width / 2, 300);
+	playerBetText.setPosition(800, 400);
 
 	window->draw(playerBetText);
 	sf::sleep(sf::seconds(1));
