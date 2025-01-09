@@ -4,6 +4,8 @@
 #include <unordered_map>
 #include <string>
 
+#include "MapKeyIDNotFound.h"
+
 template<typename T>
 class Resources {
 	std::unordered_map<std::string, T> resources;
@@ -18,8 +20,7 @@ public:
 		if (it != resources.end()) {
 			return it->second;
 		}
-		throw std::runtime_error("Resource with ID '" + id + "' not found.");
-		// std::cout << "Resource with id " << id << " not found" << std::endl;
+		throw MapKeyIDNotFound("Resource with ID '" + id + "' not found.");
 	}
 };
 

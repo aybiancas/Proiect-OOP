@@ -2,6 +2,7 @@
 #include "headers/BetInputInvalidExcept.h"
 #include "headers/FileLoadFailureExcept.h"
 #include "headers/NotEnoughFundsExcept.h"
+#include "headers/MapKeyIDNotFound.h"
 
 int main() {
 
@@ -14,8 +15,7 @@ int main() {
         std::cout << "NotEnoughFundsExcept: " << e.what() << std::endl;
     } catch (BetInputInvalidExcept& e) {
         std::cout << "BetInputInvalidExcept: " << e.what() << std::endl;
-    } catch (std::runtime_error& e) {
-        std::cout << "runtime_error: " << e.what() << std::endl;
+    } catch (MapKeyIDNotFound& e) {
+        std::cout << "MapKeyIDNotFound: " << e.what() << std::endl;
     }
-
 }
