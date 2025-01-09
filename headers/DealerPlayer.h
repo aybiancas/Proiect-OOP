@@ -11,7 +11,6 @@
  * This class extends the Player class and defines behaviors specific to a dealer player
  */
 class DealerPlayer : public Player {
-    // Deck deck;
     int pot; ///< The game pot that is currently kept by the dealer player
 
 public:
@@ -44,12 +43,28 @@ public:
 	 */
     int getPot() override;
 
-    void addSum(int amount) override;
+	/**
+	 * @brief Adds a certain amount to the player's sum
+	 * @param amount The amount to add to the sum
+	 */
+	void addSum(int amount) override;
 
-    int getSum() override;
+	/**
+	 * @brief Retrieves the player's sum
+	 * @return The sum value of the player
+	 */
+	int getSum() override;
 
-    void subtractBet(int amount) override;
+	/**
+	 * @brief Subtracts a certain amount from the player's sum
+	 * @param amount The amount to subtract from the sum
+	 */
+	void subtractBet(int amount) override;
 
+	/**
+	 * @brief Sets the player sum to a certain value
+	 * @param amount the value to set the sum to
+	 */
 	void setSum(int amount) override;
 };
 

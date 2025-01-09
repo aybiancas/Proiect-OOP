@@ -88,6 +88,10 @@ public:
 	 */
     virtual void subtractBet(int amount) = 0;
 
+	/**
+	 * @brief Sets the player sum to a certain value
+	 * @param amount the value to set the sum to
+	 */
 	virtual void setSum(int amount) = 0;
 
 };

@@ -53,11 +53,17 @@ public:
 	*/
     void addSum(int amount) override;
 
-    int getPot() override;
+	/**
+	 * @brief Retrieves the pot (the total sum of the players' bets)
+	 * @return The pot value for the round
+	 */
+	int getPot() override;
 
+	/**
+	 * @brief Sets the player sum to a certain value
+	 * @param amount the value to set the sum to
+	 */
 	void setSum(int amount) override;
-
-    // void addPot(int amount) override;
 
 };
 

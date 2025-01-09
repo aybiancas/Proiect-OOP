@@ -14,7 +14,6 @@ class Deck {
 	std::vector<Card> cards; ///< A vector containing the cards in the deck
 	std::vector<std::string> suits; ///< A vector containing the suit names
 	std::vector<std::string> ranks; ///< A vector containing the rank names
-	std::vector<sf::Texture> textures;
 
 public:
 	/**
@@ -67,8 +66,16 @@ public:
 	 */
 	void resetDeck();
 
+	/**
+	 * @brief Retrieves all of the possible card suits
+	 * @return The string vector of suits
+	 */
 	[[nodiscard]] const std::vector<std::string> &getSuits() const;
 
+	/**
+	 * @brief Retrieves all of the possible card ranks
+	 * @return The string vector of ranks
+	 */
 	[[nodiscard]] const std::vector<std::string> &getRanks() const;
 };
 

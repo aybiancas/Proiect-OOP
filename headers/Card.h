@@ -72,20 +72,6 @@ public:
 	 */
     friend std::ostream& operator<<(std::ostream &os, const Card &card);
 
-	/**
-	 * @brief Gets the sprite associated with the card
-	 *
-	 * @return A constant reference to the sprite representing the card
-	 */
-    // const sf::Sprite &getSprite() const;
-
-	/**
-	 * @brief Gets the texture associated with the card
-	 *
-	 * @return A constant reference to the sprite representing the card
-	 */
-	// const sf::Texture &getTexture() const;
-
 };
 
 #endif //CARD_H
