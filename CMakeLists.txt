@@ -93,6 +93,8 @@ add_executable(${PROJECT_NAME}
         headers/ExitCommand.h
         sources/ExitCommand.cpp
         headers/Resources.h
+        headers/MapKeyIDNotFound.h
+        sources/MapKeyIDNotFound.cpp
 )
 
 include(cmake/CompilerFlags.cmake)
